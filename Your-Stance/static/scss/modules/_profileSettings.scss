@@ -1,0 +1,10 @@
+// - - - - - - - - - - - - - - - - - - -
+// - - profileSettings module
+
+.profileSettings-sidebar{
+	margin-right:10px;
+	@include flex-basis(200px);
+}
+.profileSettings-content{
+	width: 100%;
+}

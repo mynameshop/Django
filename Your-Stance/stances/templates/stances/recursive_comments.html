@@ -1,0 +1,53 @@
+{% load staticfiles %}
+{% load stance_tags %}
+{% for stance in stances %}
+    {% if stance.parent == parent %}
+        <div class="box flex">
+            <div style="margin-right:10px;">
+                {% if stance.user.profile.thumb50 %}
+                    <a href="{% url 'profiles:profile' stance.user.username %}"><img src="{{ stance.user.profile.thumb50.url }}" width="50"></a>
+                    {% endif %}
+                    {% if stance.choice == 'p' %}
+                    <div class="probg">Yes</div>
+                    {% elif stance.choice == 'c' %}
+                    <div class="conbg">No</div>
+                {% else %}
+                    <div class="nabg">n/a</div>
+                {% endif %}
+            </div>
+            <div class="thread-body">
+                <b><a href="{% url 'profiles:profile' stance.user.username %}">{{ stance.user.username }}</a></b>
+
+                <div class="thread-text with-mentions parsable">
+                    {{ stance.stance_text|linebreaksbr}}
+                </div>
+                <div class="thread-links">
+
+                    {{ stance.created|timesince }} |
+                    <span class="star-stance-counter">{{ stance.num_stars }}</span> 
+                    <span class="star-counter-label" data-plural="stars" data-single="star">
+                        {% if stance.num_stars == 1  %}
+                            star
+                        {% else %}
+                            stars
+                        {% endif %}
+                    </span> |
+                    <a href="{% url 'stances:star' stance.id %}" class="star-stance-trigger"
+                       data-notstarred-text="star"
+                       data-starred-text="unstar"
+                       >
+                        
+                        {%  mark_starred stance_pk=stance.pk stars=stars starred_text='unstar' unstarred_text='star' %}
+                        
+                    </a> |
+                    {{ stance.num_comments }} replies |
+                    <a href="{% url 'stances:reply' stance.id %}">reply</a>
+                </div>
+            </div>
+
+        </div>
+        <div>
+            {% include 'stances/recursive_comments.html' with parent=stance level=level|add:1 margin=margin|add:10 %}
+        </div>
+    {% endif %}
+{% endfor %}

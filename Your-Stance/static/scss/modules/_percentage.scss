@@ -1,0 +1,36 @@
+// - - - - - - - - - - - - - - - - - - -
+// - - percentage module
+// styles for the percentage module
+
+$percentageHeight: 35px;
+
+.percentage-text {
+    color: #333;
+    font-size: 220%;
+    font-family: $font1;
+}
+
+
+.percentage-out {
+    background-color: lighten($conColor, 20);
+    background-color: #ccc;
+    border-radius: 3px;
+    height: $percentageHeight;
+}
+
+
+.percentage-pro {
+    background-color: $proColor;
+    border-radius: 3px 0 0 3px;
+    height: $percentageHeight;
+
+
+}
+
+.percentage-con {
+    background-color: $conColor;
+    border-radius: 3px;
+    height: $percentageHeight;
+
+
+}

@@ -1,0 +1,39 @@
+<div class="box-mid flex box-hover" onclick="location.href = '{% url 'stances:stance' entry.user.username entry.question.slug entry.id %}';" style="cursor: pointer;">
+    <div class="box-figure">
+        {% if entry.user.profile.thumb50 %}
+            <a href="{% url 'profiles:profile' entry.user.username %}">
+                {% if entry.user.profile.is_proxy %}<i class="community"></i>{% endif %}
+                <img class="{% if entry.choice == 'p' %}pro-border{% elif entry.choice == 'c' %}con-border{% else %}unsure-border{% endif %}"
+                                                                            src="{{ entry.user.profile.thumb50.url }}" width="50">
+                
+            </a>
+            {% endif %}
+
+    </div>
+    <div class="box-body">
+
+        <div class="box-text">
+            <b><a href="{% url 'profiles:profile' entry.user.username %}">{{ entry.user.username }}</a></b>:
+                {% if entry.choice == 'p' %}
+                <span class="pro-color">{{ entry.question.pro_label }}</span>
+                {% elif entry.choice == 'c' %}
+                <span class="con-color">{{ entry.question.con_label }}</span>
+            {% else %}
+                <span class="unsure-color">No position</span>
+            {% endif %}
+            <span class="light">(<a href="{% url 'questions:question' entry.question.slug %}">#{{ entry.question }}</a>)</span>
+            <span class="small" style="color:#ccc;">{{ entry.created|timesince }}</span>
+            <br />
+            <span class="homeStanceContent with-mentions parsable">{{ entry.stance_text|linebreaksbr }}</span>
+            {% include 'stances/citation_link.html' with stance=entry %}
+        </div>
+
+
+        <div class="box-links">
+            <a href="">{{ entry.num_agree }} agree</a> |
+            <a href="{% url 'stances:stance' entry.user.username entry.question.slug entry.id %}">{{ entry.num_comments }} comments</a> |
+            <a href="{% url 'stances:reply' entry.id %}">reply</a>
+        </div>
+    </div>
+</div>
+<div class="box-link"></div>

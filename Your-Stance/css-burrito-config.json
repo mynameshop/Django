@@ -1,0 +1,67 @@
+{
+  "settings": {
+    "root": {
+      "pathToSassDirectory": "./",
+      "sassDirectory": "static/scss",
+      "sassImportFile": "application.scss"
+    },
+    "modules": {
+      "modulesDirectory": "modules",
+      "modulesImportFile": "_modules.scss",
+      "moduleFiles": [
+        "_badges.scss",
+        "_box.scss",
+        "_buttons.scss",
+        "_faq.scss",
+        "_gauntlet.scss",
+        "_homePage.scss",
+        "_icons.scss",
+        "_intro.scss",
+        "_lastStance.scss",
+        "_login.scss",
+        "_loginRegister.scss",
+        "_mentions.scss",
+        "_modal.scss",
+        "_myStance.scss",
+        "_percentage.scss",
+        "_profileBox.scss",
+        "_profileList.scss",
+        "_profileNumbers.scss",
+        "_profilePage.scss",
+        "_profileStance.scss",
+        "_questionFeedHead.scss",
+        "_questionItem.scss",
+        "_questionPage.scss",
+        "_questionSort.scss",
+        "_questionsPage.scss",
+        "_register.scss",
+        "_searchBar.scss",
+        "_smallBox.scss",
+        "_stanceEditForm.scss",
+        "_stanceFolding.scss",
+        "_stanceModal.scss",
+        "_stanceReplyForm.scss",
+        "_suggestQuestion.scss",
+        "_thread.scss",
+        "_topTen.scss",
+        "_unanswered.scss"
+      ]
+    }
+  },
+  "template": {
+    "directories": [
+      "global",
+      "libs"
+    ],
+    "files": [
+      "global/_base.scss",
+      "global/_layout.scss",
+      "global/_settings.scss",
+      "global/_skin.scss",
+      "global/_typography.scss",
+      "global/_utilities.scss",
+      "libs/_library-variable-overrides.scss",
+      "libs/_normalize.scss"
+    ]
+  }
+}

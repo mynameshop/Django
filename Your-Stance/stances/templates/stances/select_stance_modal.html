@@ -1,0 +1,67 @@
+{% load staticfiles %}
+<div class="stanceModalContainer" 
+     data-stance-set-url="{% url 'questions:ajax_set_stance' %}"
+     data-question-id="{{question.pk}}"
+     >
+
+    <div class="questionInfo">
+        <h2 class="slug">#{{question.slug}}</h2>
+        <div class="details">{{question.details}}</div>
+    </div>
+
+    <div class="stanceChoiceContainer">
+        <div class="stanceChoiceSortContainer">
+            <div class="stanceChoices">
+                <span class="choiceLabel">
+                    Choice:
+                </span>
+                <a href="#" class="choice pro-color" data-choice="p">For</a>
+                <span> / </span>
+                <a href="#" class="choice con-color" data-choice="c">Against</a>
+            </div>
+            <div class="stanceSorting">
+                Sort by: 
+                <a href="#" data-col="trending">Trending</a> / 
+                <a href="#" data-col="top">Top</a> / 
+                <a href="#" data-col="new">New</a> / 
+                <a href="#" data-col="random">Random</a>
+            </div>
+            <div style="clear: both; float: none">&nbsp</div>
+        </div>
+        <div class="stanceMode">
+            Select a <b>stance</b> or <a href="#" class="switchWrite" data-select="0">write your own</a>.
+        </div>
+        <div class="stanceList" data-url="{% url 'stances:stance_content_ajax' %}">
+            {% include 'stances/stances_content.html' %}
+        </div>
+    </div>
+    <div class="stanceModalFormContainer">
+        <form 
+            class="stanceModalForm" 
+            action="{% url 'questions:ajax_make_stance' %}"
+            method="POST"
+            >
+            {% csrf_token %}
+            <input type="hidden" name="question_id" value="{{question.pk}}" />
+            <div class="pro-color">
+                <input type="radio" class="radioChoice" name="choice[]" data-choice="p" value="p" />
+                <span>
+                    For
+                </span>
+            </div>
+            <div class="con-color">
+                <input type="radio" class="radioChoice" name="choice[]" data-choice="c" value="c" />
+                <span>
+                    Against
+                </span>
+            </div>
+            <textarea name="stance_text"></textarea>
+            <div class="formErrors">
+            </div>
+            <div class="formButtons">
+                <button type="submit">OK</button>
+                <button type="button" class="switchWrite" data-select="1">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>

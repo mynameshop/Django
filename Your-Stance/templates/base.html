@@ -1,0 +1,161 @@
+{% load social_tags  %}
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Your Stance - {% block title %}What?{% endblock %}</title>
+        
+        {% block stylesheets %}
+        <link rel="stylesheet" type="text/css" href="https://cloud.typography.com/6093712/7193552/css/fonts.css" />
+        <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'css/application.css' %}" />
+        <link rel="stylesheet" href="{% static 'js/lib/jquery.atwho.css' %}" />
+        <link rel="stylesheet" href="{% static 'js/lib/select2.min.css' %}" />
+        {% endblock %}
+
+        <!-- http://www.favicon-generator.org/ -->
+        <link rel="apple-touch-icon" sizes="57x57" href="{% static 'favicon/apple-icon-57x57.png?v=2' %}" />
+        <link rel="apple-touch-icon" sizes="60x60" href="{% static 'favicon/apple-icon-60x60.png?v=2' %}" />
+        <link rel="apple-touch-icon" sizes="72x72" href="{% static 'favicon/apple-icon-72x72.png?v=2' %}" />
+        <link rel="apple-touch-icon" sizes="76x76" href="{% static 'favicon/apple-icon-76x76.png?v=2' %}" />
+        <link rel="apple-touch-icon" sizes="114x114" href="{% static 'favicon/apple-icon-114x114.png?v=2' %}" />
+        <link rel="apple-touch-icon" sizes="120x120" href="{% static 'favicon/apple-icon-120x120.png?v=2' %}" />
+        <link rel="apple-touch-icon" sizes="144x144" href="{% static 'favicon/apple-icon-144x144.png?v=2' %}" />
+        <link rel="apple-touch-icon" sizes="152x152" href="{% static 'favicon/apple-icon-152x152.png?v=2' %}" />
+        <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicon/apple-icon-180x180.png?v=2' %}" />
+        <link rel="icon" type="image/png" sizes="192x192"  href="{% static 'favicon/android-icon-192x192.png?v=2' %}" />
+        <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon/favicon-32x32.png?v=2' %}" />
+        <link rel="icon" type="image/png" sizes="96x96" href="{% static 'favicon/favicon-96x96.png?v=2' %}" />
+        <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon/favicon-16x16.png?v=2' %}" />
+       
+        
+        <link rel="manifest" href="{% static 'favicon/manifest.json' %}" />
+        <meta name="msapplication-TileColor" content="#ffffff">
+        <meta name="msapplication-TileImage" content="{% static 'favicon/ms-icon-144x144.png?v=2' %}" />
+        <meta name="theme-color" content="#ffffff">
+        
+        {% block scripts %}
+        <script src="{% static 'js/lib/jquery-2.2.3.min.js' %}"></script>
+        <script src="{% static 'js/lib/jquery.caret.js' %}"></script>
+        <script src="{% static 'js/lib/jquery.atwho.js' %}"></script>
+        <script src="{% static 'js/lib/typeahead.bundle.min.js' %}"></script>
+        <script src="{% static 'js/lib/handlebars.js' %}"></script>
+        <script src="{% static 'js/lib/select2.full.min.js' %}"></script>
+        <script src="{% static 'js/ajax-helper.js' %}"></script>
+        <script src="{% static 'js/modal.js' %}"></script>
+        <script src="{% static 'js/ajax-spinner.js' %}"></script>
+        <script src="{% static 'js/stance.js' %}"></script>
+        <script src="{% static 'js/user-dropdown.js' %}"></script>
+        <script src="{% static 'js/mentions.js' %}"></script>
+        <script src="{% static 'js/search.js' %}"></script>
+        <script src="{% static 'js/stance-folding.js' %}"></script>
+        <script src="{% static 'js/follow.js' %}"></script>
+        <script src="{% static 'js/home-stance-scroll.js' %}"></script>
+        <script src="{% static 'js/parse-html.js' %}"></script>
+        <script src="{% static 'js/comparison.js' %}"></script>
+        <script src="{% static 'js/star.js' %}"></script>
+        <script src="{% static 'js/friendlist.js' %}"></script>
+        <script src="{% static 'js/citation.js' %}"></script>
+        <script src="{% static 'js/init.js' %}"></script>
+        {% endblock %}
+    </head>
+    <body>
+        {% load socialaccount %}
+        {% providers_media_js %}
+
+        <div id="header">
+            <div class="inner">
+                <nav id="main-nav">
+                    <ul>
+
+                        <li class="logo"><img src="{% static 'images/logolol.png' %}" style="margin-right:6px;" width="40" /><a href="{% url 'home' %}">Your&nbsp;Stance</a></li>
+
+                        <li class="searchBarItem">
+                            <form id="topSearchBar" action="{% url 'search_ajax' %}">
+                                <input type="text" name="search" placeholder="Search..." />
+                            </form>
+                        </li>
+                        <li><a href="{% url 'pages:faq' %}">FAQ</a></li>
+                        <li><a href="{% url 'questions:rankings' %}">Rankings</a></li>
+                        <li><a href="{% url 'forums:forums' %}">Forums</a></li>
+                            {% if request.user.is_authenticated %}
+                            <li><div class="flex"><div style="margin-right:4px;"><a href="{% url 'notif:notifications' %}">{% if request.user.profile.unread_notif_count != 0 %}<img src="{% static 'images/msg2.gif' %}" width="20" />{% endif %}</a></div><div><a href="{% url 'notif:notifications' %}">Notifications</a></div></li>
+                                {% endif %}
+
+                        {% if request.user.is_authenticated %}
+                            <li class="dropdown"><a href="{% url 'settings:profile' %}">{{ request.user.username }}</a>
+                                <div class="dropdown-content">
+                                    <a href="{% url 'profiles:profile' request.user.username %}">View My Profile</a>
+                                    <a href="{% url 'settings:profile' %}">Settings</a>
+                                    <a href="{% url 'account_logout' %}">Logout</a>
+                                </div>
+                            </li>
+                        {% else %}
+                            <li><a href="{% url 'pages:login' %}">Login</a></li>
+                            {% endif %}
+                    </ul>
+
+
+
+                </nav>
+            </div>
+        </div>
+
+        <div class="inner">
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                        {% endfor %}
+                </ul>
+            {% endif %}
+            {% if request.user.is_authenticated %}
+                {% if not hide_gauntlet_warning %}
+                    {% if request.user.profile.should_gauntlet %}
+                        {% include 'gauntlet_warning.html' %}
+                    {% endif %}
+                {% endif %}
+            {% endif %}
+
+        {% block content %}{% endblock %}
+    </div>
+
+
+    <script>
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+                a = s.createElement(o),
+                        m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+            ga('create', 'UA-78758915-1', 'auto');
+            ga('send', 'pageview');
+
+    </script>
+    
+    <script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '{% fb_appid %}',
+      xfbml      : true,
+      version    : 'v2.1'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+    
+</body>
+</html>

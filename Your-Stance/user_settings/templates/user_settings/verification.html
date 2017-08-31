@@ -1,0 +1,67 @@
+{% extends "user_settings/base.html" %}
+
+{% block title %}Verification{% endblock %}
+
+{% block settings_content %}
+        <h2>Verification</h2>
+        <div class="box-inner" style="float: none; clear: both">
+            {% if not request.user.profile.is_verified %}
+                <form class="verificationForm"
+                      method="post"
+                      action="{% url 'settings:verification' %}"
+                      enctype="multipart/form-data">
+
+                    {% csrf_token %}
+
+                    {% if verification.pk %}
+                        <table width="100%">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <img src="{{verification.thumb100.url}}" />
+                                    </td>
+                                    <td>
+                                        {{verification.get_status_display}}
+                                    </td>
+                                    <td>
+                                        {{verification.created}}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    {% endif %}
+
+                    <br />
+
+                    <div>
+                        <div>
+                            {% if verification.pk %}
+                                Change verification photo:
+                            {% else %}
+                                Upload verification photo:
+                            {% endif %}
+
+                        </div>
+                        <div>
+                            {{form.photo}}
+                        </div>
+                        <div>
+                            {{form.photo.errors}}
+                        </div>
+                    </div>
+
+                    <br />
+                    <button type="submit">
+                        {% if verification.pk %}
+                            Change
+                        {% else %}
+                            Apply
+                        {% endif %}
+                    </button>
+                </form>
+            {% else %}
+                &nbsp; <b>Account verified</b>
+            {% endif %}
+        </div>
+
+{% endblock %}

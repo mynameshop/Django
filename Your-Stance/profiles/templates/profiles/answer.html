@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Answer{% endblock %}
+
+{% block content %}
+    Profile: <a href="{% url 'profiles:profile' profile.slug %}">{{ profile.slug}}</a>
+    <br />
+    Question:  <a href="{% url 'questions:question' question.slug %}">{{ question.slug }}</a>
+
+    <br />
+    Answer: {{ answer.stance.choice }}
+    <br />
+    Stance: {{ answer.stance.stance_text }}
+
+    <hr />
+    <h2>Discussion</h2>
+
+    {% if answer.stance %}
+        <a class="pure-button pure-button-primary" href="{% url 'threads:new' %}?t=stance&id={{ answer.id }}">New thread</a>
+        {% if topics %}
+            {% for topic in topics %}
+                <div><b><a href="{% url 'profiles:profile' topic.author.slug %}">{{ topic.author.name }}</a></b>
+                    - <a href="{% url 'threads:thread' topic.id %}">{{  topic.title }}</a></div>
+            {% endfor %}
+        {% else %}
+            <p>No topics available.</p>
+        {% endif %}
+    {% endif %}
+
+{% endblock %}

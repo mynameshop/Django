@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Profiles{% endblock %}
+
+{% block content %}
+    <div class="profildeList">
+    {%  for user in users %}
+        <div class="profileListItem">
+            <a href="{% url 'profiles:profile' user.username %}"><img src="{{ user.profile.thumb100.url }}"></a>
+            <a href="{% url 'profiles:profile' user.username %}"><img src="{{ user.profile.thumb50.url }}"></a>
+            <img src="{{ user.profile.avatar.url }}" width="200">
+            <a href="{% url 'profiles:profile' user.username %}">{{ user.username }}
+        </div>
+    {%  endfor %}
+    </div>
+{% endblock %}

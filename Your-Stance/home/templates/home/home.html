@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}Home{% endblock %}
+{% load socialaccount %}
+{% load custom_filter %}
+{% block content %}
+
+    <div class="home">
+        <div style="margin-right:5px;">
+            {% if not request.user.is_authenticated %}
+                <div class="box flex">
+                    <div style="margin-right:10px;">
+                        <img width="200" src="{% static 'images/brandnew.png' %}">
+                    </div>
+                    <div >
+                        <h2>Fight the good fight!</h2>
+                        Welcome to <strong>Your Stance</strong>.  The site where you tell the world where you stand.  We're just getting off the ground, so there might be some bugs.  If anything is broken, please <a href="http://www.yourstance.com/thread/11">post here</a>.  Or just <a href="http://www.yourstance.com/f/newbie">say hi here</a>.  Or read more about <a href="{% url 'pages:faq' %}">the site here</a>.
+                    </div>
+
+                </div>
+                <div class="box-bot" style="margin-bottom:8px;"></div>
+                {% else %}
+                <div class="box">
+                  <b>bbbbbeta</b><br>
+                Please post bugs <a href="http://www.yourstance.com/thread/11">here</a>.
+                </div>
+                <div class="box-bot" style="margin-bottom:8px;"></div>
+            {% endif %}
+
+            <div>
+
+                <div class="box-top"></div>
+
+                <div id="home-stance-list"
+                     data-per-page="{{per_page}}"
+                     data-url="{% url 'home' %}"
+                     >
+                    
+                    {% include 'home/feed/feed.html' %}
+                    
+                </div>
+                <div id="stancelistLoading">
+                    Loading...
+                </div>
+                <div class="box-bot">
+
+                </div>
+
+
+
+            </div>
+        </div>
+
+        <div class="home-sidebar">
+
+            {% if not request.user.is_authenticated %}
+
+                <div style="margin-bottom:8px;">
+                        {% include 'pages/login_form.html' %}
+                </div>
+
+            {% endif %}
+
+            <div class="box-thinhead">
+              <b>Latest discussion...</b>
+            </div>
+            <div class="sbox">
+
+            {% for thread in threads %}
+            <div style="margin-bottom:3px;">
+              <a href="{% url 'forums:thread' thread.id %}">{{ thread.title }}</a>
+
+              {% if thread.last_comment %}
+              <div class=" no-link" style="color:#ccc"><a href="{% url 'profiles:profile' thread.author.username %}">{{ thread.last_comment.author.username }}</a> <span class="small">commented {{ thread.last_comment.created|timesince }} ago</span></div>
+              {% endif %}
+              </div>
+            {% endfor %}
+          </div>
+
+              <div class="box-thinhead">
+                <b>Trending</b>
+              </div>
+              <div class="sbox">
+
+                {% for question in questions %}
+                <div><a href="{% url 'questions:question' question.slug %}">#{{ question.slug }}</a></div>
+            {% endfor %}
+            <div class="small"><a href="{% url 'questions:questions' %}">all topics</a></div>
+
+          </div>
+        <div class="box-thinhead">  <b>New Members</b></div>
+            <div class="sbox">
+                {% for user in users %}
+                    <a href="{% url 'profiles:profile' user.username %}"><img src="{{ user.profile.thumb50.url }}"></a>
+                    {% endfor %}
+            <div class="small"><a href="{% url 'profiles:profiles' %}">all profiles</a></div>
+
+          </div>
+
+
+
+        </div>
+    </div>
+
+{% endblock %}

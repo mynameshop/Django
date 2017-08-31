@@ -1,0 +1,1 @@
+web: gunicorn yourstance.wsgi --log-file -

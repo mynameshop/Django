@@ -1,0 +1,21 @@
+// - - - - - - - - - - - - - - - - - - -
+// - - homePage module
+// styles for the homePage module
+.home {
+  @include flexbox;
+}
+
+.home-body{
+  margin-right: 20px;
+  @include flex-grow (1);
+}
+
+.home-sidebar {
+  @include flex-basis (280px);
+  @include flex-shrink (0);
+}
+
+#stancelistLoading {
+    display: none;
+    text-align: center;
+}

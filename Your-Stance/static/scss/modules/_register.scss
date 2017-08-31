@@ -1,0 +1,56 @@
+// - - - - - - - - - - - - - - - - - - -
+// - - register module
+// styles for the register module
+
+
+.register-label {
+    font-size: 90%;
+    font-weight: 700;
+    margin-top: 15px;
+}
+
+.register-sub {
+    // font-size: 90%;
+    color: #aaa;
+    margin-top: 1px;
+    margin-bottom: 4px;
+}
+
+
+.register-wide input {
+    width: 300px;
+}
+
+ul#id_gender {
+    margin: 0;
+    padding: 0;
+    clear: both;
+    margin-top: 6px;
+    li {
+        list-style-type: none;
+        float: left;
+        margin-left: 8px;
+    }
+}
+
+.register-example {
+    @include flexbox;
+}
+
+.register-example a {
+    margin-right: 10px;
+}
+
+.example-good {
+    margin-top: 5px;
+    color: $proColor;
+    font-weight: 700;
+    font-size: 150%;
+}
+
+.example-bad {
+    margin-top: 10px;
+    color: $conColor;
+    font-weight: 700;
+    font-size: 150%;
+}

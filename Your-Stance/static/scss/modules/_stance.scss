@@ -1,0 +1,8 @@
+.stance-head{
+	@include flex-grow(1);
+}
+
+.stance{
+	@include flex(0, 0, auto);
+	margin-right:10px;
+}

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}Holy Cow!{% endblock %}
+{% block content %}
+    <div class="flex">
+        <div style="margin-right: 20px;"><img src="{% static 'images/congrats2.jpg' %}" /></div>
+        <div>
+            <br><br><b>Hot damn!</b>  You did it.  You survived The Gauntlet (tm).
+            <br><br>Next up, <a href="{% url 'home' %}">write 20 comments</a>.
+        </div>
+    </div>
+
+
+{% endblock %}

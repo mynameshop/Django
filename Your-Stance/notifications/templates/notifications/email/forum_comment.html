@@ -1,0 +1,13 @@
+{% extends 'notifications/email/base.html' %}
+
+{% block content %}
+
+<img src="{{n.user_from.profile.thumb50.url}}" /> {{n.user_from.username}}
+replied to your comment on Your Stance. 
+Check it out 
+<a href="http://www.yourstance.com/{% url 'forums:thread' pk=n.comment.thread.pk %}">
+  here!
+</a>
+
+
+{% endblock %}

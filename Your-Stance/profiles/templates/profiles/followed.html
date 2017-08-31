@@ -1,0 +1,31 @@
+{% extends "profiles/profile_base.html" %}
+{% load custom_filter %}
+{% load staticfiles %}
+{% block title %}{{ user.username }} followers{% endblock %}
+{% block profile_content %}
+    <h4>
+        Followed
+    </h4>
+    {% if followed %}
+        <div class="followList">
+            {% for follow in followed %}
+                <div class="box">
+                    <div class="box-figure">
+                        <a href="{% url 'profiles:profile' follow.followed.user.username %}">
+                            <img src="{{follow.followed.thumb50.url}}" />
+                        </a>
+                    </div>
+                    <div class="box-body">
+                        <a href="{% url 'profiles:profile' follow.followed.user.username %}">
+                            {{follow.followed.user.username}}
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div>
+            No followed users.
+        </div>
+    {% endif %}
+{% endblock %}

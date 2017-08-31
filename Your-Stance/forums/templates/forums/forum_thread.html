@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Thread{% endblock %}
+
+{% block content %}
+<div class="box">
+        <a href="{% url 'forums:forums' %}">Forums</a> >
+        <a href="{% url 'forums:forum' thread.forum.slug %}">{{ thread.forum.name }}</a>
+  </div>
+  <div class="box">
+    <h4> {{ thread.title }}</h4>
+    </div>
+
+        {% if comments %}
+            {% for comment in comments %}
+                <div class="box">
+                    <div class="thread-comment-author">
+                        <a href="{% url 'profiles:profile' comment.author.username %}">{{ comment.author.username }}</a>
+                    </div>
+                    <div class="thread-comment-text with-mentions parsable">
+                        {{ comment.comment_text }}
+                    </div>
+                </div>
+            {% endfor %}
+            <div class="box-bot"></div>
+        {% else %}
+            <p>No comments.</p>
+        {% endif %}
+
+
+<div class="box">
+  {% if request.user.is_authenticated %}
+    <form method="post" action="{% url 'forums:reply_thread' thread.id %}">{% csrf_token %}
+        {{ reply_thread_form.as_p }}
+        <input type="submit" value="Reply" />
+    </form>
+    {% else %}
+    <a href="{% url 'pages:login' %}">Login to post</a>
+    {% endif %}
+  </div>
+  <div class="box-bot"></div>
+
+
+
+{% endblock %}

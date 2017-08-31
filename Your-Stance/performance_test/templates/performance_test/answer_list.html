@@ -1,0 +1,65 @@
+{% extends 'performance_test/base.html' %}
+{% block content %}
+    {% for answer in answers %}
+        <div class="box">
+            <div style="margin-bottom:1px;">
+                <a href="{% url 'questions:question' answer.stance.question.slug %}">#{{ answer.stance.question.slug }}</a><br>
+                <b>{{ answer.stance.question.details }}?</b>
+            </div>
+            <div class="flex">
+                <div class="profile-answer-left">
+                    {% if user.profile.thumb50 %}
+                        <div>
+                            <a href="{% url 'profiles:profile' user.username %}">
+                                <img src="{{ user.profile.thumb50.url }}" width="50">
+                            </a>
+                        </div>
+                    {% endif %}
+                    {% if answer.stance.choice == 'p' %}
+                        <div class="probg">Yes</div>
+                        {% elif answer.stance.choice == 'c' %}
+                        <div class="conbg">No</div>
+                    {% else %}
+                        <div class="nabg">n/a</div>
+                    {% endif %}
+                </div>
+
+
+                <div class="box-inner-card box-hover" onclick="location.href = '{% url 'stances:stance' answer.stance.user.username answer.stance.question.slug answer.stance.id %}';" >
+                    <div class="box-text">
+                        <span class="foldable with-mentions">
+                            {{ answer.stance.stance_text|linebreaksbr}}
+                        </span>
+                    </div>
+
+                    {% if answer.stance.user.profile.thumb50 %}
+                        <div class="flex profile-answer-info">
+                            <div class="box-links">
+                                {% if answer.stance.user == request.user %}
+                                    <a href="{% url 'stances:stance_edit' answer.stance.pk%}">edit</a> |
+                                {% endif %}
+                                {% if answer.stance.num_agree  %}
+                                    {{answer.stance.num_agree}} agree |
+                                {% endif %}
+
+                                {% if answer.stance %}
+                                    <a href="{% url 'stances:stance' user.username answer.stance.question.slug %}">
+                                        {{ answer.stance.num_comments}} comments
+                                    </a>
+                                {% endif %}
+                            </div>
+                            <div>
+                                <span class="small" style="color:#ccc;">{{ answer.stance.created|timesince }}</span>
+                                <a href="{% url 'profiles:profile' answer.stance.user.username %}">{{ answer.stance.user.username }}</a>
+                                <a href="{% url 'profiles:profile' answer.stance.user.username %}"><img src="{{ answer.stance.user.profile.thumb50.url }}" width="20"></a>
+                            </div>
+                        </div>
+
+                    {% endif %}
+                </div>
+
+
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

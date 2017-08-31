@@ -1,0 +1,6 @@
+{% extends 'performance_test/base.html' %}
+{% block content %}
+    {% for user in users %}
+        <a href="{% url 'profiles:profile' user.username %}"><img src="{{ user.profile.thumb50.url }}"></a>
+        {% endfor %}
+{% endblock %}

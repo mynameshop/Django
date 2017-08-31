@@ -1,0 +1,56 @@
+// - - - - - - - - - - - - - - - - - - -
+// - - buttons module
+// styles for the buttons module
+
+
+.answerButton {
+  width: 100px;
+  text-align: center;
+}
+
+
+.proSelected {
+  border-color:red;
+}
+
+.conSelected {
+  border-color:red;
+}
+
+.pro-button {
+  color: $proColor;
+}
+
+
+
+.pro-button:hover, .pro-button:active, .pro-button:focus {
+  color: darken($proColor, 10);
+
+}
+
+ .pro-button:focus {
+  border: solid 2px $proColor;
+
+}
+
+.con-button {
+  color: $conColor;
+
+}
+
+
+
+.con-button:hover, .con-button:active, .con-button:focus {
+  color: darken($conColor, 10);
+}
+.con-button:focus {
+ border: solid 2px $conColor;
+
+}
+
+.na-button {
+  color: #ccc;
+  background-color: white;
+  background-image: none;
+  border: 0px;
+}

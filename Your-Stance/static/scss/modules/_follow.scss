@@ -1,0 +1,15 @@
+.followList {
+    .box {
+        display: table;
+        
+        .box-figure {
+            display: table-cell;
+        }
+
+        .box-body {
+            display: table-cell;
+            vertical-align: middle; 
+            padding-left: 8px;
+        }
+    }
+}

@@ -1,0 +1,25 @@
+{% load comparison_tags %}
+{% for q in comparison_data.questions %}
+    <div class="sheet-item">
+        <div class="sheet-inner">
+            <div class="sheet-question">
+                <a href="">
+                    {{ q.stance__question__question }}
+                </a>
+            </div>
+            {% for u in comparison_data.users %}
+                <div class="sheet-col">
+                    {% if comparison_data.grouped|get_item:q.stance__question__pk|get_item:u.user__pk|get_answer == 'p' %}
+                        <div class="probg">Yes</div>
+                        {% elif  comparison_data.grouped|get_item:q.stance__question__pk|get_item:u.user__pk|get_answer == 'c' %}
+                        <div class="conbg">No</div>
+                    {% else %}
+                        <div class="nabg">n/a</div>
+                    {% endif %}
+                </div>
+
+            {% endfor %}
+
+        </div>
+    </div>
+{% endfor %}

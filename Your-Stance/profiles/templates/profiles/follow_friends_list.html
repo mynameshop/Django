@@ -1,0 +1,95 @@
+{% load staticfiles %}
+{% load socialaccount %}
+<div class="friendlistInner">
+    {% if is_connected %}
+        {% if friends %}
+            <table data-invite-url="{% url 'profiles:follow_friends_invite' %}"
+                   data-twitter-invite-url="{% url 'profiles:follow_friends_invite_twitter' %}"
+                   data-next="{{ next }}"
+                   >
+                <thead>
+                    <tr>
+                        <td colspan="3">
+                            <button class="friendListFollowAll">
+                                Follow All
+                            </button>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for friend in friends %}
+                        <tr>
+                            <td class="avatar">
+                                {% if friend.avatar %}
+                                    <img src="{{friend.avatar}}" />
+                                {% else %}
+                                    <img src="{% static 'images/google-avatar-placeholder.jpg' %}" />
+                                {% endif %}
+                                <input type="hidden" name="extra-data" value="{{friend.data}}" />
+                            </td>
+                            <td class="name">
+                                {{friend.name}}
+                            </td>
+                            <td class="actions">
+                                {% if friend.user %}
+                                    <button 
+                                        class="friendFollowBtn"
+                                        data-href="{% url 'profiles:follow' username=friend.user.username %}"
+                                        data-follow-label="Follow"
+                                        data-unfollow-label="Unfollow"
+                                        data-followed="{% if friend.followed %}1{%else%}0{%endif%}"
+                                        type="button"
+                                        >
+                                        {% if friend.followed %}
+                                            Unfollow
+                                        {% else %}
+                                            Follow
+                                        {% endif %}
+                                    </button>    
+                                {% else %}
+                                    {% if friend.invitable %}
+                                        <button data-uid="{{friend.invitable_uid}}" data-type="{{friend.type}}" class="invite-button">Invite</button>
+                                    {% endif %}
+                                {% endif %}
+
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <input type="hidden" name="hideMore" value="0" />
+        {% else %}
+            <div style="text-align: center">
+                You don't have any friends on {{service_name}}.
+            </div>
+            <input type="hidden" name="hideMore" value="1" />
+        {% endif %}
+    {% else %}
+        <input type="hidden" name="hideMore" value="1" />
+        {% if type == 'fb' %}
+            <div style="text-align: center">
+                <div class="fb-button">
+                    <a href="{% provider_login_url 'facebook' method='js_sdk' %}">
+                        <button type="button">Connect with facebook</button>
+                    </a>
+                </div>
+            </div>
+            {% elif type == 'gmail' %}
+            <div style="text-align: center">   
+                <a href="{% url 'profiles:follow_friends_google_connect' %}">
+                    <button type="button">
+                        Connect with Google
+                    </button>
+                </a>
+            </div>
+            {% elif type == 'twitter' %}
+            <div style="text-align: center">   
+                <a href="{% url 'profiles:follow_friends_twitter_connect' %}">
+                    <button type="button">
+                        Connect with Twitter
+                    </button>
+                </a>
+            </div>
+        {% endif %}
+    {% endif %}
+</div>

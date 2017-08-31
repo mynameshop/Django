@@ -1,0 +1,69 @@
+.friendlistInner {
+    table {
+        width: 100%;
+        thead {
+            tr {
+                td {
+                    text-align: right;
+                }
+            }
+        }
+
+        tbody {
+            tr {
+                td {
+                    &.avatar {
+                        width: 20%;
+                        text-align: left;
+                        img {
+                            width: 48px;
+                            margin: 2px;
+                            vertical-align: middle;
+                        }
+                    }
+                    
+                    &.name {
+                        width: calc(80%);
+                        text-align: center;
+                    }
+                    
+                    &.actions {
+                        text-align: right;
+                        width: 10%;
+                    }
+                    
+                }
+            }
+        }
+    }
+}
+
+.friendListSpinner {
+    text-align: center;
+    display: none;
+    img {
+
+    }
+}
+
+#firendlistServiceSelect {
+    clear: both;
+    float: none;
+    
+    a {
+        display: inline-block;
+        width: 32px;
+        height: 32px;
+        img {
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    a.active {
+        img {
+            border: 1px solid #ababab;
+            border-radius: 3px;
+        }
+    }
+}

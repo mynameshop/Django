@@ -1,0 +1,9 @@
+{% extends 'notifications/email/base.html' %}
+
+{% block content %}
+    <img src="{{n.user_from.profile.thumb50.url}}" /> 
+    {{n.user_from.username}} starred one of your posts. Check it out 
+    <a href="http://www.yourstance.com/{% url 'stances:stance' n.user_from.username n.stance.question.slug n.stance.id %}">
+        here!
+    </a>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+    #{{stance.question.slug}} - {{stance.user.username}}
+{% endblock %}
+
+{% block content %}
+    <strong>
+        #{{stance.question.slug}} - {{stance.user.username}}
+    </strong>
+   
+    <div class="parsable">
+        {{stance.citation}}
+    </div>
+{% endblock %}

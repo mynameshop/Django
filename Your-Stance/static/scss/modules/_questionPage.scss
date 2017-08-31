@@ -1,0 +1,88 @@
+// - - - - - - - - - - - - - - - - - - -
+// - - questionPage module
+// styles for the questionPage module
+
+
+
+.questionPage {
+  @include flexbox;
+  @include flex-basis(250px);
+}
+
+.questions-container{
+  margin-right:5px;
+}
+
+.write-stance-label{
+  @include flexbox;
+}
+
+.questionPage-side {
+  // margin-left: 20px;
+  @include flex-basis(250px);
+  @include flex-shrink(0);
+}
+
+.questionPage-body{
+  @include flex-grow(1);
+}
+
+.questionPage-slug {
+    font-size: 90%;
+    color: #ccc;
+}
+.questionPage-details {
+    font-weight: 700;
+    font-family: $font2;
+    font-size: 2.1rem;
+}
+
+
+.questionPage-or {
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  background-color: #fbfbfb;
+  // padding: 5px 0;
+  // margin-bottom: 10px;
+  // text-align: center;
+  margin-top: 5px;
+  padding: 6px 10px;
+}
+
+.questionPage-sort {
+  text-align: right;
+  // margin-top: 15px;
+}
+
+.write-stance textarea {
+    width: 90%;
+    height: 200px;
+}
+.questionPage-writeStance {
+
+    // display: none;
+    .select-wrapper{
+      @include flexbox;
+    }
+}
+
+.questionPage-writeStance textarea {
+    width: 100%;
+    height: 75px;
+}
+.questionPage-writeThread {
+    padding: 5px 20px;
+    display: none;
+}
+
+.questionPage-writeThread textarea {
+    width: 100%;
+    height: 250px;
+}
+
+
+.questionPage-next {
+    background-color: #f9f9f9;
+    padding: 10px;
+    margin-top: 5px;
+}

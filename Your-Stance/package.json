@@ -1,0 +1,27 @@
+{
+  "name": "yourstance",
+  "version": "1.0.0",
+  "description": "- clone the repo\r - import `db.dump` into your local postggres database\r - create a django superuser with `manage.py createsuperuser`\r - edit your user's profile model in the admin section",
+  "main": "index.js",
+  "dependencies": {
+    "jquery-modal": "^0.7.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-sass": "^2.3.1",
+    "gulp-sourcemaps": "^1.6.0"
+  },
+  "scripts": {
+    "test": "echo \"No test\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tylerwaitt/yourstance.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tylerwaitt/yourstance/issues"
+  },
+  "homepage": "https://github.com/tylerwaitt/yourstance#readme"
+}

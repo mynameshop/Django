@@ -1,0 +1,86 @@
+// - - - - - - - - - - - - - - - - - - -
+// - - myStance module
+// styles for the myStance module
+
+
+.myStance {
+  background-color: #fbfbfb;
+  @include flexbox;
+  padding: 10px;
+}
+
+.myStance-head {
+  font-size: 1.1rem;
+  font-family: $font1;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-top: 10px;
+
+}
+
+.myStance-figure {
+  margin-right: 7px;
+}
+
+.myStance-bottom {
+  @include flexbox;
+  @include justify-content(space-between);
+}
+.myStance-links {
+  font-size: 90%;
+}
+
+.myStance-topic {
+}
+
+.myStance-body {
+  width: 100%;
+}
+
+
+
+
+
+
+.myStance2 {
+  background-color: #fdfdfd;
+  // padding: 10px 5px 20px 5px;
+  padding: 10px;
+  border-bottom: solid 1px #ccc;
+  border-left: solid 1px #ccc;
+  border-right: solid 1px #ccc;
+  margin-top: 2px;
+
+}
+
+.myStance2-head {
+  font-size: 1.3rem;
+  font-family: $font1;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 5px;
+  text-align: center;
+  color: #333;
+
+}
+.myStance2-mid {
+  @include flexbox;
+}
+.myStance2-figure {
+  margin-right: 12px;
+}
+
+.myStance2-bottom {
+  @include flexbox;
+  @include justify-content (space-between);
+}
+.myStance2-links {
+  font-size: 90%;
+}
+
+.myStance2-topic {
+}
+
+.myStance2-body {
+  width: 100%;
+}

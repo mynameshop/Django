@@ -1,0 +1,22 @@
+<div class="sbox">
+    {% for answer in answers %}
+
+        {% if answer.stance.choice == 'p' %}
+            <span class="probg">
+                <a style="color:white;" href="{% url 'stances:stance' answer.user.username answer.stance.question.slug %}">
+                    {{ answer.stance.question.pro_label }}
+                </a>
+            </span>
+            <br />
+            {% elif answer.stance.choice == 'c' %}
+            <span class="conbg">
+                <a style="color:white;" href="{% url 'stances:stance' answer.user.username answer.stance.question.slug %}">
+                    {{ answer.stance.question.con_label }}
+                </a>
+            </span>
+            <br />
+        {% endif %}
+
+
+    {% endfor %}
+</div>

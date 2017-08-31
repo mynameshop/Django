@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}Settings{% endblock %}
+
+{% block content %}
+    <div class="flex">
+        <div class="profileSettings-sidebar">
+            <div class="box">
+                <div class="row">
+                    <div class="four columns">
+                        {% if request.user.profile.thumb100 %}
+                        <a href="{% url 'profiles:profile' request.user.username %}"><img src="{{ request.user.profile.thumb100.url }}" width="80"></a>
+                        {% endif %}
+<form id="frm" action="{% url 'settings:upload_avatar' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+                            <input id="image" type="file" name="image" style="display:none">
+                            <button type="button" class="btn" id="upfile1">Change Photo</button>
+                        </form>
+                    </div>
+                    <div class="eight columns">
+                        <div class="user-badge-box-full-name"><a href="{% url 'profiles:profile' request.user.username %}">{{ request.user.profile.name }}</a></div>
+                        <div class="user-badge-box-username"><a href="{% url 'profiles:profile' request.user.username %}">@{{ request.user.username  }}</a></div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <nav class="menu">
+                <div class="menu-head">Settings</div>
+                    <a class="menu-item {% if request.path == '/settings/profile' %}active{% endif %}" href="{% url 'settings:profile' %}">Edit Profile</a>
+                    <a class="menu-item {% if request.path == '/settings/notifications' %}active{% endif %}" href="{% url 'settings:notifications' %}">Notifications</a>
+                    <a class="menu-item {% if request.path == '/settings/badges' %}active{% endif %}" href="{% url 'settings:badges' %}">Badges</a>
+                    <a class="menu-item {% if request.path == '/settings/organizations' %}active{% endif %}" href="{% url 'settings:organizations' %}">Organizations</a>
+                    <a class="menu-item {% if request.path == '/settings/verification' %}active{% endif %}" href="{% url 'settings:verification' %}">Verification</a>
+            </nav>
+
+
+
+
+        </div>
+        <div class="profileSettings-content">
+            <div class="box" >
+                {% block settings_content %}{% endblock %}
+            </div>
+            <div class="box-bot"></div>
+        </div>
+
+    </div>
+
+
+
+
+    <script type="text/javascript">
+<!--
+  $(document).ready(function(){
+      $("#upfile1").click(function () {
+    $("#image").trigger('click');
+});
+     $('#image').change(function(){
+           $('#frm').submit();
+     });
+  });
+-->
+</script>
+{% endblock %}

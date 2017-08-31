@@ -1,0 +1,38 @@
+
+{% for stance in stances %}
+
+    <div class="box-mid flex box-hover" onclick="location.href = '{% url 'stances:stance' stance.user.username stance.question.slug stance.id %}';" style="cursor: pointer;">
+        <div class="box-figure">
+            {% if stance.user.profile.thumb50 %}
+                <a href="{% url 'profiles:profile' stance.user.username %}"><img class="{% if stance.choice == 'p' %}pro-border{% elif stance.choice == 'c' %}con-border{% else %}unsure-border{% endif %}"
+                    src="{{ stance.user.profile.thumb50.url }}" width="50">{% if stance.user.profile.is_proxy %}<i class="community"></i>{% endif %}</a>
+            {% endif %}
+
+        </div>
+        <div class="box-body">
+
+            <div class="box-text">
+                <b><a href="{% url 'profiles:profile' stance.user.username %}">{{ stance.user.username }}</a></b>:
+                    {% if stance.choice == 'p' %}
+                    <span class="pro-color">{{ stance.question.pro_label }}</span>
+                    {% elif stance.choice == 'c' %}
+                    <span class="con-color">{{ stance.question.con_label }}</span>
+                {% else %}
+                    <span class="unsure-color">No position</span>
+                {% endif %}
+                <span class="light">(<a href="{% url 'questions:question' stance.question.slug %}">#{{ stance.question }}</a>)</span>
+                <span class="small" style="color:#ccc;">{{ stance.created|timesince }}</span>
+                <br />
+                <span class="homeStanceContent with-mentions parsable">{{ stance.stance_text|linebreaksbr }}</span>
+            </div>
+
+
+            <div class="box-links">
+                <a href="">{{ stance.num_agree }} agree</a> |
+                <a href="{% url 'stances:stance' stance.user.username stance.question.slug stance.id %}">{{ stance.num_comments }} comments</a> |
+                <a href="{% url 'stances:reply' stance.id %}">reply</a>
+            </div>
+        </div>
+    </div>
+    <div class="box-link"></div>
+{% endfor %}

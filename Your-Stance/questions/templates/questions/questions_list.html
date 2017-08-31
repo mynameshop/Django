@@ -1,0 +1,50 @@
+<input id="q-is-user" 
+       type="hidden"
+       value="{% if user.is_authenticated %}1{%else%}0{%endif%}"
+       />
+{% for question in questions %}
+    <div class="questionItem" id="questionitem-{{question.pk}}">
+        <a id="anchor-{{ question.id }}" href="{% url 'questions:question' question.slug %}">#{{ question.slug }}</a>
+        <br />
+        {{ question.details }}
+        <br />
+        <b>I am:</b> 
+        <span class="forTextual"
+              data-context="AGAINST"
+              data-protext="FOR"
+              >
+            {%if question.user_choice == 'p' %}FOR{%else%}AGAINST{%endif%}
+        </span>
+        
+        <div class="question-btngroup questionroot-btngroup">
+            <button class="question-answer-trigger button answerButton {%if question.user_choice == 'p' %}proSelected{%endif%}"
+                    data-question-id="{{question.id}}"
+                    data-choice="p"
+                    >
+                <span class="pro-color">For</span>
+            </button>
+            <button class="question-answer-trigger button answerButton {%if question.user_choice == 'c' %}conSelected{%endif%}"
+                    data-question-id="{{question.id}}"
+                    data-choice="c"
+                    >
+                <span class="con-color">Against</span>
+            </button>
+        </div>
+
+        <div class="questionItem-myStance">
+            <b>My Stance:</b>
+            <span class="question-stance-text foldable with-mentions parsable" data-parse-urlonly="1" id="qstancetext-{{question.pk}}">
+                {% if question.user_stance %}
+                    {{question.user_stance}}
+                {% endif %}
+            </span>
+            <a href="#" 
+               class="question-answer-trigger" 
+               data-question-id="{{question.pk}}" 
+               data-choice="{{question.user_choice}}"
+               >
+                Change
+            </a>
+        </div>
+    </div>
+{% endfor %}

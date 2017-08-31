@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}Follow friends{% endblock %}
+
+{% block content %}
+    <h1>Follow friends</h1>
+
+
+    <div id="firendlistServiceSelect" data-service="{{selected_service}}">
+        <a href="fb" data-default="1">
+            <img src="{% static 'icons/social/facebook.jpg' %}"  title="Facebook" />
+        </a> 
+        <a href="gmail">
+            <img src="{% static 'icons/social/google.png' %}"  title="Google plus" />
+        </a>
+        <a href="twitter">
+            <img src="{% static 'icons/social/twitter.png' %}"  title="Twitter" />
+            
+        </a>
+    </div>
+    <div id="firendlistContainer" data-url="{% url 'profiles:follow_friends_list' %}">
+    </div>
+    <div class="friendListSpinner">
+        
+        <img src="{% static 'images/ajax-loader-big.gif' %}" />
+    </div>
+    <div style="text-align: center; margin: 10px; display: none">
+        <button type="button" id="moreFriends">
+            Load more
+        </button>
+    </div>
+    <script>
+        new FriendList();
+    </script>
+{% endblock %}

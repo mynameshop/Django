@@ -1,0 +1,9 @@
+<div class="sheet-col">
+    <a href="{% url 'profiles:profile' user.user__username %}">
+        <img src="{{ user.avatar }}" width="50">
+        {#{{user.user__pk}}#}
+    </a>
+</div>
+{% if not user.base %}
+    <input type="hidden" name="user_pk[]" class="sheet_field" value="{{user.user__pk}}" />
+{% endif %}

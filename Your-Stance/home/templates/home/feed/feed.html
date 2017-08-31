@@ -1,0 +1,14 @@
+<input type="hidden" value="{{ feed_data|length }}" class="feed-loaded-count" />
+{% for entry in feed_data %}
+    {#{{ entry.type }}#}
+    {% if entry.type == 'stance' %}
+        {% include 'home/feed/stance_block.html' %}
+    {% elif entry.type == 'thread' %}
+        {% include 'home/feed/thread_block.html' %}
+     {% elif entry.type == 'comment' %}
+        {% include 'home/feed/comment_block.html' %}
+     {% elif entry.type == 'agree' %}
+        {% include 'home/feed/agree_block.html' %}
+    {% endif %}
+    
+{% endfor %}

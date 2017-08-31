@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Forums{% endblock %}
+
+{% block content %}
+  <div class="box">
+    <h4>Forums</h4>
+  </div>
+
+    {%  for forum in forums %}
+        <div class="box">
+            <div class="forum-description">
+                <a href="{% url 'forums:forum' forum.slug %}">{{ forum.name }}</a>
+                <br />
+                {{ forum.details }}
+            </div>
+            <div class="forum-count">{{ forum.num_threads}}</div>
+            <div class="forum-count">{{ forum.num_comments}}</div>
+        </div>
+    {%  endfor %}
+  <div class="box-bot"></div>
+{% endblock %}

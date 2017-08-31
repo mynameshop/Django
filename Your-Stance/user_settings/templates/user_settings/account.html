@@ -1,0 +1,26 @@
+{% extends "user_settings/base.html" %}
+
+{% block title %}Account Settings{% endblock %}
+
+{% block settings_content %}
+        <div class="box-heading">Change password</div>
+        <div class="box-inner">
+            <form>
+                <div class="row">
+                    <div class="nine columns">
+                        <label for="old_password">Old password</label>
+                        <input type="password" name="old_password" id="old_password" class="u-full-width">
+                        <label for="new_password">New password</label>
+                        <input type="password" name="new_password" id="new_password" class="u-full-width">
+                        <label for="confirm_new_password">Confirm new password</label>
+                        <input type="password" name="confirm_new_password" id="confirm_new_password" class="u-full-width">
+                        <button type="submit" class="btn">Update password</button>
+                        <a href="" class="small">I forgot my password</a>
+                    </div>
+                    <div class="three columns">&nbsp;</div>
+                </div>
+            </form>
+        </div>
+
+
+{% endblock %}

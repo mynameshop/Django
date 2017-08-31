@@ -1,0 +1,24 @@
+{% extends 'performance_test/base.html' %}
+{% block content %}
+    <div class="box flex">
+        <div class="profileNumbers-item"><b>{{counter_answers}} of {{counter_questions}}</b> questions</div>
+        <div class="profileNumbers-item"><b>{{counter_posts}}</b> posts</div>
+        <div class="profileNumbers-item">
+            <a href="{% url 'profiles:followers'  username=user.username %}">
+                <b>{{counter_followers}}</b>
+                {% if counter_followers == 1 %}
+                    follower
+                {% else %}
+                    followers
+                {% endif %}
+
+            </a>
+        </div>
+        <div class="profileNumbers-item">
+            <a href="{% url 'profiles:followed'  username=user.username %}">
+                <b>{{counter_followed}}</b> following
+            </a>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "user_settings/base.html" %}
+{% load staticfiles %}
+{% block title %}Profile{% endblock %}
+
+{% block settings_content %}
+        <h3>Badges</h3>
+        <div class="box-inner">
+            {% if user_badges %}
+            <div class="profileBadgesContainer">
+            {% for user_badge in user_badges %}
+                <div class="badgeContainer">
+                    <div class="badgeImage">
+                        <img src="{% static 'icons/badges/' %}{{user_badge.badge.get_image_fn}}" />
+                    </div>
+                    <div class="badgeTitle">
+                        {{user_badge.badge.title}}
+                    </div>
+                    <div class="badgeDescription">
+                        {{user_badge.badge.details}}
+                    </div>
+                </div>
+            {% endfor %}
+            </div>
+            {% else %}
+                <div>
+                    This user doesn't have any badges.
+                </div>
+            {% endif %}
+        </div>
+
+{% endblock %}

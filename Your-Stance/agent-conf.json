@@ -1,0 +1,19 @@
+{
+   "metrics_hostname": "metrics-api.librato.com", 
+   "create": false, 
+   "hostname": "localhost", 
+   "stop": false, 
+   "app_id": "your-stance", 
+   "no_aggregate_counters": false, 
+   "integration": "django", 
+   "debug": false, 
+   "daemonize": false, 
+   "user": "app48938807@heroku.com", 
+   "expire": 0, 
+   "api_token": "0f563c5fadba8b7b908ce4c0ad509c4ebb1fac63c245f5916035fe", 
+   "flush_interval": 60000, 
+   "pidfile": "/var/run/solarwinds-python-statsd.pid", 
+   "pct": 95, 
+   "port": 8142, 
+   "restart": false
+}

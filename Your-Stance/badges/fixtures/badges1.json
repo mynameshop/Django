@@ -1,0 +1,1 @@
+[{"model": "badges.badge", "pk": 1, "fields": {"title": "Guru", "type": "guru", "details": "100 adherents on a single stance"}}, {"model": "badges.badge", "pk": 2, "fields": {"title": "Pioneer", "type": "pioneer", "details": "First 1000 people"}}]

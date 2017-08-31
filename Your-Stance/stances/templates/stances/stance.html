@@ -1,0 +1,67 @@
+
+
+{% extends "profiles/profile_base.html" %}
+{% load custom_filter %}
+{% load staticfiles %}
+{% block title %}{{ user.username }}{% endblock %}
+{% block profile_content %}
+
+
+{% if stance.user != user %}
+<p><centeR><b>{{ user }} is using {{ stance.user }}'s stance!</b></centeR></p>
+{% endif %}
+
+
+<div class="box">
+
+      <div class="flex" style="margin-bottom:5px;">
+        <div class="stance-head">
+          <div><a style="color:black;font-size:120%;font-weight:700;" href="{% url 'questions:question' stance.question.slug %}">{{ stance.question.question }}</a></div>
+        </div>
+        <div style="">
+
+
+          <div class="percentage-out">
+              <div class="percentage-pro" style="width:{{ stance.question.pro_percentage }}%">
+                  <div style="margin:0 4px;color:#fff;font-size:150%;">{{ stance.question.pro_percentage }}%&nbsp;YES</div>
+              </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="flex">
+        <div class="stance">
+          {% if stance.user.profile.thumb50 %}
+              <a href="{% url 'profiles:profile' stance.user.username %}"><img src="{{ stance.user.profile.thumb50.url }}" width="50"></a>
+          {% endif %}
+          {% if stance.choice == 'p' %}
+              <div class="probg">Yes</div>
+          {% elif stance.choice == 'c' %}
+              <div class="conbg">No</div>
+          {% else %}
+              <div class="nabg">n/a</div>
+          {% endif %}
+        </div>
+        <div>
+          <b><a href="{% url 'profiles:profile' stance.user.username %}">{{ stance.user.username }}</a></b>
+
+            <div class="thread-text with-mentions parsable">
+              {{ stance.stance_text|linebreaksbr}}
+            </div>
+          <div style="font-size:95%;color:#ccc;">
+            edit | star | reply | time | <a href="{% url 'stances:select' %}?id={{ stance.id }}">Make my stance</a>
+          </div>
+        </div>
+      </div>
+
+</div>
+
+
+    {% if stances %}
+        {% include 'stances/recursive_comments.html' with parent=None level=0 margin=0 %}
+        <div class="box-bot"></div>
+    {% else %}
+        No comments
+    {% endif %}
+
+{% endblock %}

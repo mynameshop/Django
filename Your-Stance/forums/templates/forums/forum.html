@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Forum{% endblock %}
+
+{% block content %}
+<div class="box flex forum-item">
+    <div><a href="{%  url 'forums:forums' %}">Forums</a> - {{ forum.name }}</div>
+
+
+  <div><b><a href="{% url 'forums:new_forum_thread' forum.slug%}">New thread</a></b></div>
+</div>
+
+    <div class="box">
+      <h4>Threads</h4>
+    </div>
+    {% for thread in threads %}
+        <div class="box flex forum-item">
+
+            <div><a href="{% url 'forums:thread' thread.id %}">{{  thread.title }}</a></div>
+            <div><b><a href="{% url 'profiles:profile' thread.author.username %}">{{ thread.author.username }}</a></b></div>
+
+        </div>
+    {% endfor %}
+    <div class="box-bot"></div>
+
+
+{% endblock %}

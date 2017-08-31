@@ -1,0 +1,511 @@
+a {
+  color: #0060B6;
+  color: #003569;
+  color: #262626;
+  color: #0060B6;
+  text-decoration: none; }
+
+a:hover {
+  color: #00A0C6;
+  text-decoration: underline; }
+
+.small {
+  font-size: 1.2rem; }
+
+.other-link a {
+  color: #003569; }
+
+.blue-link a {
+  color: #0060B6; }
+
+.black-link a {
+  color: #262626; }
+
+#header {
+  background-color: #fff;
+  margin-bottom: 1.4rem;
+  border-bottom: 1px solid #DBDBDB; }
+
+#main-nav ul {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: flex;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  align-items: center;
+  /*width: 100%;*/
+  /*font-weight: 500;*/ }
+
+#main-nav li {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 1 auto;
+  -moz-box-flex: 1;
+  -moz-flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  color: #666;
+  display: block;
+  text-align: center;
+  text-decoration: none; }
+
+#main-nav a {
+  color: #666;
+  display: block;
+  padding: 1rem 0; }
+
+#main-nav li:hover {
+  background-color: #ddd; }
+
+#main-nav a:hover {
+  color: #ff0052;
+  text-decoration: none; }
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block; }
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 2; }
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  /*padding: 12px 16px;*/
+  text-decoration: none;
+  display: block;
+  text-align: left;
+  padding-left: 14px !important; }
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+  background-color: #f1f1f1; }
+
+/*
+    'shown' class is set by user-dropdown.js
+*/
+.dropdown.shown .dropdown-content {
+  display: block; }
+
+.profile-switch .dropdown-content {
+  padding: 0.5rem;
+  text-align: center; }
+
+.profile-switch .dropdown-content .title {
+  padding: 1rem 0; }
+
+.dot {
+  width: 10px;
+  padding-right: 5px; }
+
+#main-nav .logo {
+  padding: 5px 20px;
+  font-size: 18px;
+  margin-right: 100px;
+  text-transform: uppercase;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  align-items: center;
+  /*font-family: "Gotham SSm A", "Gotham SSm B"; font-weight: 200;*/
+  /*font-family: "Gotham SSm A", "Gotham SSm B"; font-weight: 300;*/
+  /*font-family: "Gotham SSm A", "Gotham SSm B"; font-weight: 400;*/
+  /*font-family: "Gotham SSm A", "Gotham SSm B"; font-weight: 700;*/
+  /*font-family: "Gotham A", "Gotham B"; font-weight: 300;*/
+  /*font-family: "Gotham A", "Gotham B", verdana; font-weight: 400;*/
+  font-family: "Gotham A", "Gotham B";
+  font-weight: 700;
+  /*font-family: "Whitney SSm A", "Whitney SSm B"; font-weight: 300;*/
+  /*font-family: "Whitney SSm A", "Whitney SSm B"; font-weight: 400;*/
+  /*font-family: "Whitney SSm A", "Whitney SSm B"; font-weight: 700;*/
+  /*font-family: "Idlewild A", "Idlewild B"; font-weight: 200;*/
+  /*font-family: "Idlewild A", "Idlewild B"; font-weight: 400;*/
+  /*font-family: "Idlewild A", "Idlewild B"; font-weight: 500;*/
+  /*font-family: "Idlewild A", "Idlewild B"; font-weight: 600;*/
+  /*font-family: "Idlewild A", "Idlewild B"; font-weight: 800;*/
+  /*font-family: "Sentinel SSm A", "Sentinel SSm B"; font-weight: 400;*/
+  /*font-family: "Sentinel SSm A", "Sentinel SSm B"; font-weight: 700;*/
+  /*font-family: "Hoefler Text A", "Hoefler Text B"; font-weight: 400;*/
+  /*font-family: "Hoefler Text A", "Hoefler Text B"; font-weight: 700;*/
+  /*font-family: "Hoefler Text A", "Hoefler Text B"; font-weight: 800;*/
+  /*font-family: "Operator SSm A", "Operator SSm B"; font-weight: 400;*/
+  /*font-family: "Operator SSm A", "Operator SSm B"; font-weight: 700;*/
+  /*font-family: "Archer SSm A", "Archer SSm B"; font-weight: 500;*/
+  /*font-family: "Archer SSm A", "Archer SSm B"; font-weight: 800;*/
+  /*font-family: "Chronicle SSm A", "Chronicle SSm B"; font-weight: 400;*/
+  /*font-family: "Chronicle SSm A", "Chronicle SSm B"; font-weight: 600;*/ }
+
+#main-nav .logo a {
+  color: #ed5e72;
+  color: #333;
+  color: #333;
+  color: #333;
+  /*color: #ff0054;
+  color: #ff0052;*/ }
+
+.poll-detail {
+  background-color: lightblue;
+  padding: 10px 0; }
+
+.inner {
+  margin: 0 auto;
+  width: 950px; }
+
+.home-feed {
+  background-color: white; }
+
+/*.stance-comment {*/
+/*display: flex;*/
+/*align-items: flex-start;*/
+/*background-color: #efefef;*/
+/*margin-bottom: 15px;*/
+/*padding: 10px 10px;*/
+/*}*/
+/*.stance-comment-figure {*/
+/*font-weight: 700;*/
+/*margin-right: 15px;*/
+/*}*/
+/*.stance-comment-body {*/
+/*flex: 1;*/
+/*}*/
+/*input[type="file"]{*/
+/*font-size: 0px;*/
+/*}*/
+/*input[type="file"]::-webkit-file-input-button{*/
+/*font-size: 16px; !*normal size*!*/
+/*}*/
+.home-sidebar {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 0 220px;
+  -moz-box-flex: 1;
+  -moz-flex: 1 0 220px;
+  -ms-flex: 1 0 220px;
+  flex: 1 0 220px; }
+
+.home-box {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  -webkit-align-items: flex-start;
+  -moz-align-items: flex-start;
+  align-items: flex-start;
+  border-bottom: solid 1px lightblue;
+  padding: 20px 0 20px 0; }
+
+.home-box-left {
+  margin-right: 15px;
+  text-align: right;
+  width: 110px; }
+
+.home-box-right {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -moz-box-flex: 1;
+  -moz-flex: 1;
+  -ms-flex: 1;
+  flex: 1; }
+
+.small-link, .small-link a {
+  font-size: 12px; }
+
+.home-box-stance {
+  margin-top: 4px; }
+
+.home-box-stance a {
+  color: #ccc;
+  font-size: 13px; }
+
+.user-badge-box {
+  margin-bottom: 1em;
+  border: 1px solid #d8d8d8;
+  border-radius: 4px;
+  padding: 10px; }
+
+/*.user-badge-box a{
+    color: black;
+}*/
+.user-badge-box-full-name {
+  font-size: 2.4rem;
+  font-weight: 800;
+  margin-top: 1.4rem;
+  margin-bottom: 0; }
+
+.user-badge-box-username {
+  font-size: 90%;
+  color: #666; }
+
+input, select, textarea, button {
+  font: 13px / 1.4 Helvetica, arial, nimbussansl, liberationsans, freesans, clean, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; }
+
+button {
+  overflow: visible; }
+
+* {
+  box-sizing: border-box; }
+
+.btn {
+  position: relative;
+  display: inline-block;
+  padding: 6px 12px;
+  /*font-size: 13px;*/
+  font-weight: 700;
+  line-height: 20px;
+  color: #333;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-color: #eee;
+  background-image: -webkit-linear-gradient(#fcfcfc, #eee);
+  background-image: linear-gradient(#fcfcfc, #eee);
+  border: 1px solid #d5d5d5;
+  border-radius: 3px;
+  -webkit-appearance: none; }
+
+.btn-danger {
+  color: #900; }
+
+.menu {
+  margin-bottom: 15px;
+  list-style: none;
+  background-color: #fff;
+  border: 1px solid #d8d8d8;
+  border-radius: 3px; }
+
+.menu-head {
+  display: block;
+  padding: 8px 10px;
+  margin-top: 0;
+  margin-bottom: 0;
+  font-weight: 700;
+  line-height: 20px;
+  color: #555;
+  background-color: #f7f7f7;
+  border-bottom: 1px solid #eee; }
+
+.menu-item {
+  position: relative;
+  display: block;
+  padding: 8px 10px;
+  text-shadow: 0 1px 0 #fff;
+  border-bottom: 1px solid #eee; }
+
+.menu-item.active {
+  background-color: #eee; }
+
+.menu-item:hover {
+  text-decoration: none;
+  background-color: #f9f9f9; }
+
+.forum {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 15px; }
+
+.forum-description {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 1 0;
+  -moz-box-flex: 1;
+  -moz-flex: 1 1 0;
+  -ms-flex: 1 1 0;
+  flex: 1 1 0; }
+
+.forum-count {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 1 0;
+  -moz-box-flex: 1;
+  -moz-flex: 1 1 0;
+  -ms-flex: 1 1 0;
+  flex: 1 1 0; }
+
+.question-choice {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 5px; }
+
+.question-choice-button {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 1 auto;
+  -moz-box-flex: 0;
+  -moz-flex: 0 1 auto;
+  -ms-flex: 0 1 auto;
+  flex: 0 1 auto;
+  margin-right: 20px; }
+
+.question-choice-text {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 1 auto;
+  -moz-box-flex: 1;
+  -moz-flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto; }
+
+.question-choice-votes {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 1 auto;
+  -moz-box-flex: 0;
+  -moz-flex: 0 1 auto;
+  -ms-flex: 0 1 auto;
+  flex: 0 1 auto;
+  margin-right: 20px; }
+
+.thread-comment {
+  background-color: #efefef;
+  margin-bottom: 15px;
+  padding: 10px 10px; }
+
+.thread-comment-author {
+  font-weight: 700; }
+
+.thread-comment-links {
+  font-size: 1.2rem; }
+
+.choice-stance {
+  background-color: #efefef;
+  margin-bottom: 15px;
+  padding: 10px 10px; }
+
+.choice-stance-profile {
+  font-weight: 700; }
+
+.question-stance {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: flex;
+  background-color: #efefef;
+  margin-bottom: 15px;
+  padding: 10px 10px; }
+
+.question-stance-profile {
+  font-weight: 700;
+  margin-right: 10px; }
+
+.stance-stance {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: flex;
+  background-color: #efefef;
+  margin-bottom: 15px;
+  padding: 10px 10px; }
+
+.stance-stance-figure {
+  font-weight: 700;
+  margin-right: 15px; }
+
+.stance-stance-body {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -moz-box-flex: 1;
+  -moz-flex: 1;
+  -ms-flex: 1;
+  flex: 1; }
+
+.stance-stance-links {
+  color: #aaa;
+  /*font-weight: 500;*/
+  font-size: 1.3rem; }
+
+.stance-comment {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  -webkit-align-items: flex-start;
+  -moz-align-items: flex-start;
+  align-items: flex-start;
+  background-color: #efefef;
+  margin-bottom: 15px;
+  padding: 10px 10px; }
+
+.stance-comment-figure {
+  font-weight: 700;
+  margin-right: 15px; }
+
+.stance-comment-body {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -moz-box-flex: 1;
+  -moz-flex: 1;
+  -ms-flex: 1;
+  flex: 1; }
+
+.no-longer {
+  background-color: #f1f153;
+  margin-bottom: 15px;
+  padding: 10px 10px; }
+
+.question-choice.user-voted a.btn {
+  border-color: #555555; }
+
+.question-choice.unsure-choice.user-voted a {
+  font-weight: bold;
+  color: #000;
+  text-decoration: underline; }
+
+.no-link a {
+  text-decoration: none;
+  color: #000000; }
+
+.unsure-border {
+  border-bottom: 7px solid #999; }
+
+.pro-border {
+  border-bottom: 7px solid #a2d53b; }
+
+.con-border {
+  border-bottom: 7px solid #ff6666; }
+
+.pro-color {
+  color: #a2d53b; }
+
+.con-color {
+  color: #ff6666; }
+
+.unsure-color {
+  color: #999; }
+
+.fb-button img:hover {
+  opacity: 0.75;
+    filter: alpha(opacity=100); /* For IE8 and earlier */
+}
+
+/*# sourceMappingURL=style.css.map */

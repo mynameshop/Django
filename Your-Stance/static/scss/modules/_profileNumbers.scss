@@ -1,0 +1,16 @@
+// - - - - - - - - - - - - - - - - - - -
+// - - profileNumbers module
+// styles for the profileNumbers module
+
+.profileNumbers {
+  @include flexbox;
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+}
+
+.profileNumbers-item {
+  margin-right: 20px;
+  a {
+      color: #000;
+  }
+}

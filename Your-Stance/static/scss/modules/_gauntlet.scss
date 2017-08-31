@@ -1,0 +1,110 @@
+// - - - - - - - - - - - - - - - - - - -
+// - - gauntlet module
+// styles for the gauntlet module
+
+
+.gauntlet-slug {
+    color: #ccc;
+}
+
+.gauntlet-details {
+    font-weight: 700;
+    font-family: $font2;
+    font-size: 2.1rem;
+}
+
+
+.gauntlet-agree {
+    font-size: 85%;
+    text-align: center;
+    color: #666;
+    margin-top: 4px;
+}
+
+.gauntlet-double {
+    @include flexbox;
+}
+
+.gaunt-log {
+
+    flex: 0 0 240px;
+    margin-right: 6px;
+}
+
+.gaunt-textarea textarea {
+    width: 75%;
+    height: 200px;
+}
+
+.new-stance {
+  background-color: white;
+  padding: 10px;
+  border-bottom: solid 1px $border-color-3;
+  border-left: solid 1px $border-color-3;
+  border-right: solid 1px $border-color-3;
+  text-align: center;
+}
+
+
+.pro-side {
+  background-color: $proColor;
+  padding:5px;
+  text-align: center;
+color: white;
+font-weight: 700;
+}
+.con-side {
+  background-color: $conColor;
+  padding:5px;
+  text-align: center;
+  color: white;
+font-weight: 700;
+}
+.gauntlet-status {
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #999;
+    // display: inline-block;
+    margin-bottom: 20px;
+}
+
+.gaunt-select {
+    padding: 20px 0;
+    border-bottom: 1px dashed #ddd;
+}
+
+
+.gauntlet-warning {
+    padding: 10px;
+    background-color: #fff5e6;
+    border: 1px solid #ff9900;
+    width: 400px;
+    margin: auto;
+    margin-bottom: 10px;
+    // text-align: center;
+    @include flexbox;
+}
+
+.gauntlet-warning a {
+
+}
+
+.gauntlet-horse {
+    @include flex(0,0,auto);
+    margin-right: 7px;
+}
+
+
+.gauntlet-box-label {
+    font-size: %90;
+    // font-weight: 700;
+}
+
+
+.pro-select {
+  display: none;
+}
+
+.con-select {
+  display: none;
+}

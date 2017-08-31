@@ -1,0 +1,29 @@
+{% extends "user_settings/base.html" %}
+
+{% block title %}Profile{% endblock %}
+
+{% block settings_content %}
+    <h2>Notifications</h2>
+    <div class="box-inner">
+        <br />
+        <p><b>Select which actions you will receive notifications for via email.</b></p>
+        <br/>
+        <form action="{% url 'settings:notifications' %}" method="post">
+            {% csrf_token %}
+            {{form.question}} I would like to be notified of new questions on the site.
+            <br />
+            {{form.follower}} I would like to be notified when someone new follows me. 
+            <br />
+            {{form.agrees}} I would like to be notified when someone selects one of my stances as their own.
+            <br />
+            {{form.comment}} I would like to be notified when someone replies to my comments.
+            <br />
+            {{form.mention}} I would like to be notified when someone mentions me in a comment.
+            <br />
+            {{form.like}} I would like to be notified when someone stars one of my posts.
+            <br /><br />
+            <input type="submit" class="btn" value="Save" />
+        </form>
+    </div>
+
+{% endblock %}

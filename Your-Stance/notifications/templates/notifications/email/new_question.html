@@ -1,0 +1,9 @@
+{% extends 'notifications/email/base.html' %}
+
+{% block content %}
+    There is a new question to be answered on YourStance, let the world know where you stand!
+    <br/>
+    <br/>
+    <a href="http://{{ site.domain }}{{ question.get_absolute_url }}">{{ question.question }}?</a>
+
+{% endblock %}

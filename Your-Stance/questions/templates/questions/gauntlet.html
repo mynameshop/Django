@@ -1,0 +1,165 @@
+{% extends "base.html" %}
+{#{% load comments %}#}
+{% load staticfiles %}
+{% block title %}#{{ question.slug }}{% endblock %}
+
+{% block content %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".toggle-pro").click(function () {
+                $(".pro-select").show();
+                $(".con-select").hide();
+            });
+            $(".toggle-con").click(function () {
+                $(".con-select").show();
+                $(".pro-select").hide();
+            });
+        });
+    </script>
+
+
+<div class="flex">
+  <div class="gaunt-log">
+    <div class="box">
+      Answer Log<br>
+      <i>Coming soon</i>
+
+    </div>
+    <div class="box-bot"></div>
+  </div>
+  <div style="flex-grow:1;">
+
+            <div class="box" style="padding:32px 20px;">
+
+              <div style="color:#aaa;margin-bottom:9px;">{{answered_questions}} of {{total_questions}} questions</div>
+
+                <!-- <div class="gauntlet-slug"><a href="{% url 'questions:question' question.slug %}">#{{ question.slug }}</a></div> -->
+                <div class="gauntlet-details" style="margin-bottom:6px;">{{ question.details }}?</div>
+                <button class="pro-button toggle-pro">YES</button>
+                <button class="con-button toggle-con">NO</button>&nbsp;
+                <a href="{% url 'stances:skip_stance' %}?question_id={{ question.id }}" class="na-button">Skip question</a>
+
+            </div>
+            <div class="box-bot"></div>
+            <br>
+
+          <div class="pro-select">
+
+          <div class="box">
+
+<div style="font-size:140%;margin-bottom:5px;">Why did you choose <b><span class="pro-color">YES</span></b>?</div>
+
+<div style="font-size:110%;margin-bottom:5px;">Either write your own stance <b>OR</b> select one of the top stances below.</div>
+<br>
+<b><div style="font-size:130%;margin-bottom:5px;">Write your own</div></b>
+
+
+            <form method="POST" action="{% url 'stances:new_stance' %}">
+                {% csrf_token %}
+                <div class="gaunt-textarea">
+                {{ new_stance_form.stance_text }}
+                </div>
+                {{ new_stance_form.question }}
+
+                <input type="hidden" name="choice" value="p" >
+                <input type="hidden" name="n" value="1" >
+                <button type="submit">save Your Stance</button>
+            </form>
+            <br>
+            <br>
+            <b><div style="font-size:130%;">Or select a top stance</div></b>
+
+
+
+          {% for stance in pro_stances %}
+              <div class="gaunt-select flex">
+                  <div class="box-button">
+                      <form method="get" action="{% url 'stances:select' %}">
+                          <input type="hidden" name="id" value="{{ stance.id }}">
+                          <input type="hidden" name="n" value="1" >
+                          <button type="submit">Select</button>
+                          {% if stance.num_agree > 0 %}
+                          <div class="gauntlet-agree">({{ stance.num_agree }} agree)</div>
+                          {% endif %}
+                      </form>
+                  </div>
+                  <div class="box-figure">
+                      {% if stance.user.profile.thumb50 %}
+                          <a href="{% url 'profiles:profile' stance.user.username %}"><img {% if stance.choice == 'p' %}class="pro-border"{% else %}class="con-border"{% endif %} src="{{ stance.user.profile.thumb50.url }}" width="50"></a>
+                          {% endif %}
+
+                  </div>
+                  <div class="box-body">
+                      <div class="box-text">
+                          <div class="gauntlet-box-label pro-color">{{ stance.question.pro_label }}</div>
+                          <b><a href="{% url 'profiles:profile' stance.user.username %}">{{ stance.user.username }}</a></b>:
+                          <span class="with-mentions foldable">{{ stance.stance_text|linebreaksbr}}</span>
+
+
+                      </div>
+                  </div>
+              </div>
+          {% endfor %}
+            </div>
+        </div>
+
+
+        <div class="con-select">
+
+              <div class="box">
+
+
+                <div style="font-size:140%;margin-bottom:5px;">Why did you choose <b><span class="con-color">NO</span></b>?</div>
+
+                <div style="font-size:110%;margin-bottom:5px;">Either write your own stance <b>OR</b> select one of the top stances below.</div>
+                <br>
+                <b><div style="font-size:130%;margin-bottom:5px;">Write your own</div></b>
+
+              <form method="POST" action="{% url 'stances:new_stance' %}">
+                  {% csrf_token %}
+                  <div class="gaunt-textarea">
+                  {{ new_stance_form.stance_text }}
+                </div>
+                   {{ new_stance_form.question }}
+                  <input type="hidden" name="choice" value="c" >
+                  <input type="hidden" name="n" value="1" >
+                  <button type="submit">save Your Stance</button>
+              </form>
+              <br>
+              <br>
+              <b><div style="font-size:130%;">Or select a top stance</div></b>
+
+
+
+                {% for stance in con_stances %}
+                    <div class="gaunt-select flex">
+                        <div class="box-button">
+                            <form method="get" action="{% url 'stances:select' %}">
+                                <input type="hidden" name="id" value="{{ stance.id }}">
+                                <input type="hidden" name="n" value="1" >
+                                <button type="submit">Select</button>
+                            </form>
+                        </div>
+                        <div class="box-figure">
+                            {% if stance.user.profile.thumb50 %}
+                                <a href="{% url 'profiles:profile' stance.user.username %}"><img {% if stance.choice == 'p' %}class="pro-border"{% else %}class="con-border"{% endif %} src="{{ stance.user.profile.thumb50.url }}" width="50"></a>
+                                {% endif %}
+                        </div>
+                        <div class="box-body">
+                            <div class="box-text">
+                                <div class="gauntlet-box-label con-color">{{ stance.question.con_label }}</div>
+                                <b><a href="{% url 'profiles:profile' stance.user.username %}">{{ stance.user.username }}</a></b>:
+                                <span class="with-mentions foldable">{{ stance.stance_text|linebreaksbr }}</span>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                    </div>
+        </div>
+
+</div>
+</div>
+
+
+
+        {% endblock %}

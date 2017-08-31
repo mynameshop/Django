@@ -1,0 +1,31 @@
+{% load staticfiles %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <title>404 not found</title>
+    <style>
+        body, html{
+            width: 100%;
+            height: 100%;
+        }
+        .container{
+            display: flex;
+            width: 100%;
+            height: 100%;
+            align-content: center;
+            align-items: center;
+            justify-content: center;
+
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+    <img src="{% static 'images/david404.png' %}">
+
+</div>
+</body>
+</html>

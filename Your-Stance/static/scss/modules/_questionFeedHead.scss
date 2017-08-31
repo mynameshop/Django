@@ -1,0 +1,13 @@
+// - - - - - - - - - - - - - - - - - - -
+// - - questionFeedHead module
+// styles for the questionFeedHead module
+
+
+.questionFeedHead {
+  @include flexbox;
+  @include justify-content(space-between);
+}
+
+.questionFeedHead-newThread {
+  //text-align: right;
+}

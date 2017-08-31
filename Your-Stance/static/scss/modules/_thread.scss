@@ -1,0 +1,47 @@
+// - - - - - - - - - - - - - - - - - - -
+// - - thread module
+// styles for the thread module
+
+
+.thread {
+    @include flexbox;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+.thread-figure {
+    @include flex-shrink(0);
+    @include flex-basis(100px);
+    text-align: right;
+    margin-right: 20px;
+}
+
+.thread-body {
+    width: 100%;
+}
+
+
+.thread-text {
+    width: 100%;
+}
+
+  
+.thread-links {
+    // text-align: right;
+    padding-top: 7px;
+    font-size: 95%;
+    color: #ccc;
+}
+
+
+.thread-topic {
+margin-left: 120px;
+margin-bottom: 7px;
+font-size: 110%;
+}
+
+.thread-top {
+    border-bottom: 1px solid #eee;
+    margin-bottom: 20px;
+}

@@ -1,0 +1,37 @@
+<table class="">
+    {% for stance in stances %}
+        <tr class="stance {% if stance.choice == 'p' %}
+            stancePro
+            {% elif stance.choice == 'c' %}
+            stanceCon
+            {% endif %}">
+                <td class="stanceSelectContainer">
+                    <button 
+                        class="selectStance"
+                        data-stance-id="{{stance.pk}}"
+                        type="button">
+                        Select
+                    </button>
+                </td>
+                <td class="stanceProfile">
+
+                    {% if stance.user.profile.thumb50 %}
+                        <a href="{% url 'profiles:profile' stance.user.username %}">
+                            <img 
+                                {% if stance.choice == 'p' %}class="pro-border"{% else %}class="con-border"{% endif %} 
+                                src="{{ stance.user.profile.thumb50.url }}"  />
+                        </a>
+
+                    {% endif %}
+
+
+                </td>
+                <td class="stanceUsername">
+                    {{stance.user.username}}:
+                </td>
+                <td class="stanceText parsable">
+                    {{stance.stance_text}}
+                </td>
+            </tr>
+            {% endfor %}
+            </table>

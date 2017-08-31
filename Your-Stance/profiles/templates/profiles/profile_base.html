@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+
+    <div class="flex">
+      <div class="profileBox-wrapper">
+        <div class="sbox">
+          {% if not user.profile.is_verified %}
+          <!-- <div style="background-color:red;color:white;text-align:center;padding:3px;"></div> -->
+          {% endif %}
+            <a href="{% url 'profiles:profile' user.username %}"><img src="{{ user.profile.avatar.url }}" width="200"></a>
+            <!-- {% if not user.profile.is_verified %}
+            <div style="background-color:#ff6666;color:white;text-align:center;padding:3px;"><b>NOT VERIFIED</b><br><a style="color:white;text-decoration:underline;" href="{% url 'pages:whatthe' %}">What the?</a></div>
+            {% endif %} -->
+            <div class="profileBox-name">{{ user.profile.name }}</div>
+            <div class="profileBox-username">@{{ user.username }}</div>
+            <div class="profileBox-bio">{{ user.profile.bio }}</div>
+            {% if user.profile.age %}
+                <div class="profileBox-age">{{ user.profile.age }} years old</div>
+            {% endif %}
+            {% if user.profile.location %}
+                <div class="profileBox-location">{{ user.profile.location }}</div>
+            {% endif %}
+            <div class="profileBox-joined">Joined {{ user.profile.created|date:"M Y" }}</div>
+            {% if request.user.is_authenticated and user != request.user %}
+                <div>
+                    <button
+                        class="followBtn" href="#" data-href="{% url 'profiles:follow' username=user.username %}"
+                        data-follow-label="Follow"
+                        data-unfollow-label="Unfollow"
+                        type="button"
+                        >
+                        {% if is_followed %}
+                            Unfollow
+                        {% else %}
+                            Follow
+                        {% endif %}
+                    </button>
+                </div>
+            {% endif %}
+          </div>
+
+          <div class="sbox"><a href="">Compare</a></div>
+
+          <div class="sbox flex">
+              <div class="stats-col">
+                  <div class="stats-head">Stances</div>
+                  <div class="stats-num">67</div>
+              </div>
+              <div class="stats-col">
+                  <div class="stats-head"><a href="{% url 'profiles:followed'  username=user.username %}">Following</a></div>
+                  <div class="stats-num"><a href="{% url 'profiles:followed'  username=user.username %}">{{counter_followed}}</a></div>
+              </div>
+              <div class="stats-col">
+                  <div class="stats-head"><a href="{% url 'profiles:followers'  username=user.username %}">Followers</a></div>
+                  <div class="stats-num"><a href="{% url 'profiles:followers'  username=user.username %}">{{counter_followers}}</a></div>
+              </div>
+          </div>
+
+
+          <div class="sbox">
+
+              <span style="font-size:130%;font-weight:700;">Heroes</span>
+
+              {% for hero in heroes %}
+              <div class="flex" style="margin-top:10px;">
+                  <div style="margin-right:12px;">
+                      <a href="{% url 'profiles:profile' hero.followed.user.username %}"><img style="border-radius: 4px" src="{{hero.followed.thumb50.url}}" width="46"/></a>
+                  </div>
+                  <div>
+                    <div><b><a style="color:black;font-size:95%;" href="{% url 'profiles:profile' hero.followed.user.username %}">{{ hero.followed.user.profile.name }}</a></b></div>
+                    <div><button style="padding:5px 9px;">Follow</button></div>
+                </div>
+            </div>
+
+            {% endfor %}
+        </div>
+
+
+
+        </div>
+        <div class="profileContent">
+            <!-- <div class="box flex">
+                <div class="profileNumbers-item"><b>{{counter_answers}} of {{counter_questions}}</b> questions</div>
+                <div class="profileNumbers-item"><b>{{counter_posts}}</b> posts</div>
+                <div class="profileNumbers-item">
+                    <a href="{% url 'profiles:followers'  username=user.username %}">
+                    <b>{{counter_followers}}</b>
+                    {% if counter_followers == 1 %}
+                        follower
+                    {% else %}
+                        followers
+                    {% endif %}
+
+                    </a>
+                </div>
+                <div class="profileNumbers-item">
+                    <a href="{% url 'profiles:followed'  username=user.username %}">
+                        <b>{{counter_followed}}</b> following
+                    </a>
+                </div>
+            </div> -->
+        {% block profile_content %}{% endblock %}
+    </div>
+</div>
+
+{% endblock %}

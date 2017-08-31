@@ -1,0 +1,50 @@
+{% load staticfiles %}
+
+{% load socialaccount %}
+
+<div class="box" align="center">
+  <div style="text-align:center;">
+
+  <div style="margin-bottom:8px;">Login with Facebook</div>
+  <div class="fb-button">
+  <a href="{% provider_login_url 'facebook' method='js_sdk' %}"><img width="240" src="{% static 'images/fb.png' %}"></a>
+</div>
+  <div style="margin:5px 0;">or login with emailz</div>
+
+
+<form class="loginForm" name="LoginForm" action="{% url 'pages:login' %}" method="post">
+    {% csrf_token %}
+
+    {% if next %}
+        <input type="hidden" name="next" value="{{ next }}" />
+    {% endif %}
+
+
+        <div class="login-input" style="margin:5px 0;">
+            <input type="text" id="email" name="email"  placeholder="Email">
+        </div>
+
+
+        <div class="login-input" style="margin-bottom:5px;">
+            <input  type="password" name="password" id="password" placeholder="Password">
+        </div>
+
+    {% if error_message %}
+        <div class="loginError">
+            {{error_message}}
+        </div>
+    {% endif %}
+
+    <button type="submit" class="btn" style="width:100%;">Login</button>
+    <br>
+    <br>
+    <span style="font-size:120%;" class="">Not a member? <b><a href="{% url 'pages:register' %}">Join  here</a></b></span>
+    <br> 1. It only takes 42 seconds
+    <br> 2. We hate spam
+    <br> 3. You look very handsome today
+    <span style="font-size:90%;"><a style="color:#ccc;" href="{% url 'password_reset' %}">Retrieve password</a></span>
+
+</form>
+</div>
+</div>
+<div class="box-bot"></div>

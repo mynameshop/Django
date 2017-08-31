@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Thread Create{% endblock %}
+
+
+{% block content %}
+
+    <a href="{{ forum.slug }}">{{ forum.name }}</a>
+
+    <form method="POST" action="{% url 'forums:new_forum_thread' forum.slug %}">
+        {% csrf_token %}
+        {{ new_thread_form.as_p }}
+        <input type="submit" value="Submit" />
+    </form>
+
+
+{% endblock %}

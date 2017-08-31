@@ -1,0 +1,7 @@
+{% load staticfiles %}
+<div class="gauntlet-warning">
+    <div class="gauntlet-horse"><img width="60" src="{% static 'images/davids.png' %}" /></div>
+    <div><b>Hold your horses comrade</b>.
+    You need to answer some questions before you can participate.
+    <a href="{% url 'questions:gauntlet' %}">Answer them here.</a></div>
+</div>

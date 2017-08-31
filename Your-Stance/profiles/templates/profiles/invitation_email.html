@@ -1,0 +1,7 @@
+{% extends 'notifications/email/base.html' %}
+{% block content %}
+{{user.profile.name}} invites you to Yourstance. You can join 
+<a href="http://www.yourstance.com{% url 'pages:register' %}">
+here
+</a>.
+{% endblock %}

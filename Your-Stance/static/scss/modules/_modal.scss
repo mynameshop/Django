@@ -1,0 +1,93 @@
+#modal-overlay {
+    background-color: rgba(0,0,0, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+    z-index: 998;
+    overflow: auto;
+}
+
+.modal {
+    position: fixed;
+    display: none;
+    background: #ffffff;
+    z-index: 999;
+    border: 1px solid #eee;
+    border-radius: 6px;
+    padding: 0;
+    min-width: 500px;
+    max-width: 800px;
+    min-height: 200px;
+    height: 800px;
+}
+
+.modalform-label {
+    font-weight: bold;
+    margin-top: 6px;
+}
+
+textarea.stance-text {
+    width: 100%;
+    min-height: 100px;
+}
+
+.stance-radiogroup {
+    max-width: 800px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+body.noscroll {
+    height: 100%;
+    overflow: hidden;
+}
+
+
+.modal-stance {
+  @include flexbox;
+  margin-bottom: 5px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 5px;
+}
+
+.modal-text a {
+  color: black;
+}
+
+
+.modal-avatar {
+  margin: 0 6px;
+}
+
+
+.modal-button button {
+  width: 100px;
+}
+
+.modal-or {
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  background-color: #fbfbfb;
+  padding: 5px 0;
+  margin-bottom: 10px;
+  text-align: center;
+  margin-top: 5px;
+}
+
+.modal-question {
+
+}
+.modal-slug {
+  font-size: 140%;
+  font-weight: 700;
+  margin-top: 20px;
+}
+.modal-nav {
+  text-align: right;
+  margin-top: 15px;
+}
+
+.modal-padding {
+  padding: 0 20px;
+}

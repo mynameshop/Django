@@ -1,0 +1,12 @@
+{% extends 'performance_test/base.html' %}
+{% block content %}
+    {% for thread in threads %}
+        <div style="margin-bottom:3px;">
+            <a href="{% url 'forums:thread' thread.id %}">{{ thread.title }}</a>
+
+            {% if thread.last_comment %}
+                <div class=" no-link" style="color:#ccc"><a href="{% url 'profiles:profile' thread.author.username %}">{{ thread.last_comment.author.username }}</a> <span class="small">commented {{ thread.last_comment.created|timesince }} ago</span></div>
+            {% endif %}
+        </div>
+    {% endfor %}
+{% endblock %}

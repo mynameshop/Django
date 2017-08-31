@@ -1,0 +1,13 @@
+.idea/
+*.log
+*.egg-info
+*.pot
+*.py[cod]
+__pycache__
+venv
+*.pyc
+staticfiles
+/nbproject/private/
+/nbproject
+node_modules
+.DS_Store

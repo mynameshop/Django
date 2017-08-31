@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}FAQ{% endblock %}
+{% block content %}
+
+<div class="faq-page">
+    <div class="faq-faq">
+        <div class="faq-heading">FAQ</div>
+
+        <div class="faq-question">What is this place?</div>
+        <div class="faq-answer">We want to make the world transparent. We want you to know where everyone in the world stands on important issues.  We want to hold people accountable for their stances. We want to kill the taboo of not talking about important issues.  We want to keep track of the discussion, no more going in circles.</div>
+
+        <div class="faq-question">How does it work?</div>
+        <div class="faq-answer">You create a profile, answer some questions and vote for the best stances.</div>
+
+        <div class="faq-question">Why do I have to upload a verification photo?</div>
+        <div class="faq-answer">Because censorship sucks.  And anonymity leads to censored content.  Remove the anoymous troglodytes, and you remove the censorship.  We think people should stand up for what they believe in by throwing their reputation behind it.  So we feel the best way to have a censor-free community, is to have extreme transparency.</div>
+
+        <div class="faq-question">How do I upload a verification photo?</div>
+        <div class="faq-answer">Take a selfie with your username written somewhere, i.e. a piece of paper, sharpie on your forehead, sand at the beach, skittles on your counter, whip cream on..., etc.  Profit. </div>
+
+        <div class="faq-question">What is a community profile?</div>
+        <div class="faq-answer">What's better than seeing where everyone in the world stands?  Seeing where everyone throughout history stands.  Aka, famous dead people (i.e. Benjamin Franklin, Mother Teresa, Adolf Hitler, etc).  We are going to have a system where users can suggest famous figures and also provide stances for these figures.  We will use a wikipedia style system to govern the validity of these stances.  So the community controls these profiles.</div>
+
+        <div class="faq-question">What about famous people that are alive?</div>
+        <div class="faq-answer">We are going to use the same system for famous dead people for famous alive people.  The difference being, the famous alive people can claim their profile at any time.  If you're a famous person that would like to claim your profile, <a href="{% url 'pages:contact' %}">please contact us</a>.</div>
+
+        <div class="faq-question">How do I suggest a community profile?</div>
+        <div class="faq-answer">We will have a forum thread for these suggestions soon.</div>
+
+        <div class="faq-question">Can I suggest a question?</div>
+        <div class="faq-answer">Yes! We want any and all ideas for questions! You can <a href="{% url 'questions:suggest_question' %}" >suggest them here</a>.</div>
+
+        <div class="faq-question">How do I become a moderator?</div>
+        <div class="faq-answer">We will have a forum thread for these suggestions soon.</div>
+
+        <div class="faq-question">How do I get in touch with you guys?</div>
+        <div class="faq-answer">Check out <a href="{% url 'pages:contact' %}">the contact page</a>.</div>
+
+    </div>
+    <div class="faq-rules">
+        <div class="faq-heading">Rules</div>
+        <div class="faq-rule">- Be awesome.</div>
+        <div class="faq-rule">- Brush your teeth.</div>
+    </div>
+</div>
+
+
+{% endblock %}

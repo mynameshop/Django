@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Stance{% endblock %}
+
+{% block content %}
+    <form action="" method="post" class="stanceEditForm">
+        <div class="qInfo">
+            <a href="{% url 'questions:question' slug=stance.question.slug %}">
+                #{{stance.question.slug}}
+            </a>
+            
+            {% if stance.choice == 'p' %}
+                <span class="pro-color">For</span>
+            {% else %}
+                <span class="con-color">Against</span>
+            {% endif %}
+        </div>
+
+        {% csrf_token %}
+        {{ form.stance_text }}
+        {{ form.stance_text.errors}}
+        <p><button class="btn" type="submit">Save</button></p>
+    </form>
+{% endblock %}

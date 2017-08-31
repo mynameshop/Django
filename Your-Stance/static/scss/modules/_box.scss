@@ -1,0 +1,191 @@
+// - - - - - - - - - - - - - - - - - - -
+// - - box module
+// styles for the box module
+
+
+
+.box-thinhead {
+  background-color: white;
+  border: solid 1px $border-color-3;
+  padding: 5px $padding 2px $padding;
+  // padding-top: 6px;
+  margin-left: $margin;
+  margin-right: $margin;
+  // font-size: 110%;
+  // text-transform: uppercase;
+}
+
+.sbox {
+    background-color: white;
+    border-bottom: solid 1px $border-color-3;
+    border-left: solid 1px $border-color-3;
+    border-right: solid 1px $border-color-3;
+    padding: 5px 20px;
+    // padding: $padding;
+    margin-left: $margin;
+    margin-right: $margin;
+    margin-bottom: 5px;
+}
+
+
+
+.box {
+    background-color: white;
+    border-top: solid 1px $border-color-3;
+    border-left: solid 1px $border-color-3;
+    border-right: solid 1px $border-color-3;
+    // padding: 0 20px;
+    padding: $padding;
+    margin-left: $margin;
+    margin-right: $margin;
+}
+
+.box-top {
+  background-color: white;
+  border-top: solid 1px $border-color-3;
+  border-left: solid 1px $border-color-3;
+  border-right: solid 1px $border-color-3;
+  padding: 0 $padding;
+  margin-top: $margin;
+  margin-left: $margin;
+  margin-right: $margin;
+}
+
+.box-head {
+  background-color: white;
+  border: solid 1px $border-color-3;
+  padding: 4px $padding;
+  // padding-top: 6px;
+  margin-left: $margin;
+  margin-right: $margin;
+  font-size: 110%;
+  text-transform: uppercase;
+}
+
+
+.box-inner-card {
+  padding:8px;
+  margin-top:0;
+  @include flex-grow(1);
+  @include align-content(space-between);
+}
+
+.heading {
+    font-family: $font1;
+    font-size: 1.5rem;
+}
+
+.box-hover:hover {
+    background-color: #f5f8fa;
+}
+
+
+
+
+.box-link {
+    background-color: white;
+    border-bottom: solid 1px $border-color-3;
+    border-left: solid 1px $border-color-3;
+    border-right: solid 1px $border-color-3;
+    margin-left: $margin;
+    margin-right: $margin;
+}
+
+.box-hide {
+    background-color: white;
+    border: solid 1px $border-color-3;
+    margin-left: $margin;
+    margin-right: $margin;
+    margin-bottom: 10px;
+    padding: $padding;
+    display: none;
+}
+
+.box-mid {
+  background-color: white;
+  border-left: solid 1px $border-color-3;
+  border-right: solid 1px $border-color-3;
+  // padding: 0 20px;
+  padding: $padding;
+  margin-left: $margin;
+  margin-right: $margin;
+}
+
+.box-bot {
+  background-color: white;
+  border-bottom: solid 1px $border-color-3;
+  border-left: solid 1px $border-color-3;
+  border-right: solid 1px $border-color-3;
+  // padding: 5px 20px;
+  padding: 0 $padding;
+
+  margin-left: $margin;
+  margin-right: $margin;
+  margin-bottom: $margin;
+}
+
+.box-figure {
+  margin-right: 15px;
+  @include flex(0, 0, auto);
+  position: relative;
+  width: 50px;
+}
+
+.community{
+  display: block;
+  position: absolute;
+  top: 3px; left: 3px;
+  background-color: white;
+  -webkit-mask-image: url('../svg/community.svg');
+  mask-image: url('../svg/community.svg');
+  width: 15px; height: 15px;
+  content: ' '; 
+}
+
+.box-bottom {
+  @include flexbox;
+  @include justify-content(space-between);
+}
+.box-links {
+  font-size: 90%;
+  color: #ccc;
+  margin-top: 9px;
+}
+
+.box-links a {
+  color: #aab8c3;
+}
+
+.box-topic {
+}
+
+.box-body {
+  width: 100%;
+}
+
+.box-adherents {
+  background-color: #fcfcfc;
+  padding-bottom: 5px;
+  padding-top: 5px;
+}
+
+.box-adherentCount-big {
+    font-weight: bold;
+    font-size: 125%;
+}
+.box-adherentCount {
+    border: 1px solid #ccc;
+    background-color: #fcfcfc;
+    border-radius: 4px;
+    padding: 5px 20px;
+}
+.box-adherentCount a {
+    color: black;
+}
+
+
+.box-button {
+    margin-right: 10px;
+    // margin-top: 10px;
+    @include flex(0, 0, auto);
+}

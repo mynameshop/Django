@@ -1,0 +1,11 @@
+{% extends "admin/change_form.html" %}
+
+{% block form_top %}
+
+    {% if not original.is_approved %}
+        <a href="{% url 'admin:suggest_approve' id=original.pk %}">
+            <input type="button" class="default" value="Approve" />
+        </a>
+    {% endif %}
+
+{% endblock %}

@@ -1,0 +1,52 @@
+.authForm {
+    .field {
+        padding: 8px 0;
+        .label {
+            float: left;
+            font-weight: bold;
+            min-width: 20%;
+        }
+
+        .input {
+            float: left;
+            min-width: 80%;
+            .errors, ul.errorlist { 
+                margin: 2px 0;
+                padding: 0;
+                color: #ff0000;
+                li {
+                    list-style-type: none;
+                }
+            }
+
+            input {
+                width: 50%;
+            }
+        }
+        clear: both;
+    }
+    clear: both;
+    .btnContainer {
+        clear: both;
+        padding: 20px 0;
+    }
+}
+
+.registerForm {
+    @extend .authForm;
+}
+
+.loginForm {
+    @extend .authForm;
+
+    .loginError {
+        text-align: center;
+        clear: both;
+        padding-top: 10px;
+        color: #ff0000;
+    }
+}
+
+ul.errorlist {
+    color: #ff0000;
+}

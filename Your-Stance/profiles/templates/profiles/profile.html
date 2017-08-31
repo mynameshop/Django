@@ -1,0 +1,9 @@
+{% extends "profiles/profile_base.html" %}
+{% load custom_filter %}
+{% load staticfiles %}
+{% block title %}{{ user.username }}{% endblock %}
+{% block profile_content %}
+
+{% include 'profiles/profile_answers.html' %} 
+
+{% endblock %}

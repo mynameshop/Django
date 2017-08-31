@@ -1,0 +1,343 @@
+{% extends "base.html" %}
+{#{% load comments %}#}
+{% load staticfiles %}
+{% block title %}#{{ question.slug }}{% endblock %}
+
+{% block content %}
+    <script type="text/javascript" xmlns="http://www.w3.org/1999/html">
+        $(document).ready(function () {
+            $(".toggleProStance").click(function (e) {
+                e.preventDefault();
+                $(".pro-box-hide").toggle();
+                $(".pro-button-toggle").toggle();
+                if($(".con-box-hide").is(":visible")){
+                    $(".con-box-hide").toggle();
+                    $(".con-button-toggle").toggle();
+
+                }
+            });
+
+            $(".toggleConStance").click(function (e) {
+                e.preventDefault();
+                $(".con-box-hide").toggle();
+                $(".con-button-toggle").toggle();
+                 if($(".pro-box-hide").is(":visible")){
+                    $(".pro-box-hide").toggle();
+                     $(".pro-button-toggle").toggle();
+
+                }
+            });
+
+            $(".toggleThread").click(function () {
+                $(".questionPage-writeThread").toggle();
+            });
+        });
+    </script>
+
+    {% if last_stance %}
+        <div class="lastStance">
+            Your stance for <a href="{% url 'questions:question' last_stance.question.slug %}">
+            #{{ last_stance.question.slug }}</a> was <b>saved</b>.
+            You can view <a
+                href="{% url 'stances:stance' last_stance.user.username last_stance.question.slug last_stance.id %}">it
+            here</a>.
+        </div>
+    {% endif %}
+
+
+    <div class="box-top"></div>
+    <div class="box-mid">
+
+
+        <div class="flex">
+            <div>
+
+                <div class="gauntlet-slug"><a
+                        href="{% url 'questions:question' question.slug %}">#{{ question.slug }}</a></div>
+                <div class="questionPage-details">{{ question.details }}</div>
+                <div class="percentage-text">{{ question.pro_percentage }}%</div>
+                <div class="percentage-out">
+                    <div {% if question.pro_winning %}class="percentage-pro"{% else %}class="percentage-con"{% endif %}
+                         style="width:{{ question.pro_percentage }}%">
+                        &nbsp;
+                    </div>
+                </div>
+                <div>
+                    <span class="votes-against">{{ question.num_total_votes }}</span> votes
+                </div>
+
+            </div>
+            <div>
+                <div class="sbox">
+                    <div class="unaswered-head">Questions you might be interested in</div>
+                    {% for question in unanswered_questions %}
+                        <div><a href="{% url 'questions:question' question.slug %}">#{{ question.slug }}</a></div>
+                    {% endfor %}
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="box-bot"></div>
+
+
+
+    <div class="box-thinhead">
+        <b>Latest discussion...</b>
+    </div>
+    <div class="sbox">
+        <div align="center"><b><a href="{% url 'forums:new_question_thread' question.slug %}">New thread</a></b></div>
+
+        {% for thread in threads %}
+
+            <div style="margin-bottom:3px;">
+                <a href="{% url 'forums:thread' thread.id %}">{{ thread.title }}</a>
+                <span class="no-link"><a
+                        href="{% url 'profiles:profile' thread.author.username %}">{{ thread.author.username }}</a></span>
+                <span class="small" style="color:#ccc">{{ thread.created|timesince }}</span>
+            </div>
+        {% endfor %}
+    </div>
+
+
+    {% if my_stance %}
+        <div class="box-head">Your Stance</div>
+        <div class="box-mid">
+            <div class="myStance2-mid">
+                <div class="myStance2-figure">
+                    {% if my_stance.user.profile.thumb50 %}
+                        <a href="{% url 'profiles:profile' my_stance.user.username %}">
+                            <img
+                                    {% if my_stance.choice == 'p' %}class="pro-border"
+                                    {% elif my_stance.choice == 'c' %}class="con-border"
+                                    {% else %}class="unsure-border"{% endif %}
+                                    src="{{ my_stance.user.profile.thumb50.url }}"
+                                    width="50">
+                        </a>
+                    {% endif %}
+                </div>
+                <div class="myStance2-body">
+                    <div class="myStance2-text">
+                        <b>
+                            <a href="{% url 'profiles:profile' my_stance.user.username %}">
+                                {{ my_stance.user.username }}
+                            </a>
+                        </b>:
+                        {% if my_stance.choice == 'p' %}
+                            <span class="pro-color">{{ my_stance.question.pro_label }}</span>
+                        {% elif my_stance.choice == 'c' %}
+                            <span class="con-color">{{ my_stance.question.con_label }}</span>
+                        {% else %}
+                            <span class="unsure-color">Unsure</span>
+                        {% endif %}
+                        <span class="small" style="color:#ccc;">{{ my_stance.created|timesince }}</span>
+
+                        <br>
+                                <span class="with-mentions foldable parsable" data-word-limit="50">
+                                    {{ my_stance.stance_text|linebreaksbr }}
+                                </span>
+                    </div>
+
+                    <div class="box-links">
+                        <a href="{% url 'stances:stance' my_stance.user.username my_stance.question.slug my_stance.id %}">{{ my_stance.num_comments }}
+                            comments</a>
+                        |
+                        {% if my_stance.user == request.user %}
+                            <a href="{% url 'stances:stance_edit' my_stance.pk %}">edit</a> |
+                        {% endif %}
+                        <a href="{% url 'stances:remove' my_stance.pk %}">remove</a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="box-bot"></div>
+    {% endif %}
+
+
+
+    <br/>
+
+
+    <div class="box-head">
+        <div class="small">
+            <a href="{% url 'questions:question_top' question.slug %}"
+               class="{% if current_url == 'question' %}b{% endif %}">Top</a> /
+            <a href="{% url 'questions:question' question.slug %}"
+               class="{% if current_url == 'question_new' %}b{% endif %}">Newest</a> /
+            <a href="{% url 'questions:question_famous' question.slug %}"
+               class="{% if current_url == 'question_famous' %}b{% endif %}">Famous</a>
+        </div>
+    </div>
+
+
+    <div class="gauntlet-double">
+        <div class="gauntlet-side">
+            <div class="pro-side">YES</div>
+            {% if user.is_authenticated %}
+                <div class="new-stance">
+                <div class="pro-box-hide box-hide write-stance">
+                    <div class="form-title"><span>New Stance</span> <span><b><a href="javascript:void(0)"
+                                                                                class="toggleProStance">close</a></b></span>
+                    </div>
+                    <br/>
+
+                    <form method="POST" action="{% url 'stances:new_stance' %}">
+                        {% csrf_token %}
+                        {{ new_stance_form.question }}
+                        <input type="hidden" name="choice" value="p">
+                        {{ new_stance_form.stance_text }}
+                        <br/>
+                        <button type="submit">Submit</button>
+                    </form>
+                </div>
+                <button class="toggleProStance pro-button-toggle">New <span class="pro-color">PRO</span></button>
+                </div>
+
+            {% endif %}
+
+            {% for stance in pro_stances %}
+                <div class="box-mid flex box-hover"
+                     onclick="location.href='{% url 'stances:stance' stance.user.username stance.question.slug stance.id %}';"
+                     style="cursor: pointer;">
+                    {% if not my_stance %}
+                        <div class="box-button">
+                            <form method="get" action="{% url 'stances:select' %}">
+                                <input type="hidden" name="id" value="{{ stance.id }}">
+                                <button type="submit">Select</button>
+                            </form>
+                        </div>
+                    {% endif %}
+                    <div class="box-figure">
+                        {% if stance.user.profile.thumb50 %}
+                            <a href="{% url 'profiles:profile' stance.user.username %}"><img
+                                    {% if stance.choice == 'p' %}class="pro-border"
+                                    {% elif my_stance.choice == 'c' %}class="con-border"
+                                    {% else %}class="unsure-border"{% endif %}
+                                    src="{{ stance.user.profile.thumb50.url }}" width="50"></a>
+                        {% endif %}
+                    </div>
+                    <div class="box-body">
+                        <div class="box-text">
+                            <div class="question-label">
+                                <b><a href="{% url 'profiles:profile' stance.user.username %}">{{ stance.user.username }}</a></b>:
+
+                                {% if stance.choice == 'p' %}
+                                    <span class="pro-color">{{ stance.question.pro_label }}</span>
+                                {% elif stance.choice == 'c' %}
+                                    <span class="con-color">{{ stance.question.con_label }}</span>
+                                {% else %}
+                                    <span class="unsure-color">Unsure</span>
+                                {% endif %}
+                                <span class="small" style="color:#ccc;">{{ stance.created|timesince }}</span>
+
+                            </div>
+                            <span class="with-mentions foldable parsable">
+                                {{ stance.stance_text|linebreaksbr }}
+                            </span>
+                            {% include 'stances/citation_link.html' with stance=stance %}
+                        </div>
+                        <div class="box-links">
+                            <a href="{% url 'stances:stance' stance.user.username stance.question.slug stance.id %}">{{ stance.num_comments }}
+                                comments</a> |
+                            <a href="{% url 'stances:reply' stance.id %}">reply</a> |
+                            <a href="{% url 'stances:select' %}?id={{ stance.id }}">make my stance</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-link"></div>
+            {% endfor %}
+
+
+        </div>
+        <div class="gauntlet-side">
+            <div class="con-side">NO</div>
+            {% if user.is_authenticated %}
+
+                <div class="new-stance">
+                    <div class="con-box-hide box-hide write-stance">
+                        <div class="form-title"><span>New Stance</span> <span><b><a href="javascript:void(0)" class="toggleConStance">close</a></b></span>
+                        </div>
+                        <br/>
+
+                        <form method="POST" action="{% url 'stances:new_stance' %}">
+                            {% csrf_token %}
+                            {{ new_stance_form.question }}
+                            <input type="hidden" name="choice" value="c">
+                            {{ new_stance_form.stance_text }}
+                            <br/>
+                            <button type="submit">Submit</button>
+                        </form>
+                    </div>
+                    <button class="con-button-toggle toggleConStance">New <span class="con-color">CON</span></button>
+                </div>
+            {% endif %}
+
+
+            {% for stance in con_stances %}
+                <div class="box-mid flex box-hover"
+                     onclick="location.href='{% url 'stances:stance' stance.user.username stance.question.slug stance.id %}';"
+                     style="cursor: pointer;">
+                    {% if not my_stance %}
+                        <div class="box-button">
+                            <form method="get" action="{% url 'stances:select' %}">
+                                <input type="hidden" name="id" value="{{ stance.id }}">
+                                <button type="submit">Select</button>
+                            </form>
+                        </div>
+                    {% endif %}
+                    <div class="box-figure">
+                        {% if stance.user.profile.thumb50 %}
+                            <a href="{% url 'profiles:profile' stance.user.username %}"><img
+                                    {% if stance.choice == 'p' %}class="pro-border"
+                                    {% elif my_stance.choice == 'c' %}class="con-border"
+                                    {% else %}class="unsure-border"{% endif %}
+                                    src="{{ stance.user.profile.thumb50.url }}" width="50"></a>
+                        {% endif %}
+                    </div>
+                    <div class="box-body">
+                        <div class="box-text">
+                            <div class="question-label">
+                                <b><a href="{% url 'profiles:profile' stance.user.username %}">{{ stance.user.username }}</a></b>:
+
+                                {% if stance.choice == 'p' %}
+                                    <span class="pro-color">{{ stance.question.pro_label }}</span>
+                                {% elif stance.choice == 'c' %}
+                                    <span class="con-color">{{ stance.question.con_label }}</span>
+                                {% else %}
+                                    <span class="unsure-color">Unsure</span>
+                                {% endif %}
+                                <span class="small" style="color:#ccc;">{{ stance.created|timesince }}</span>
+
+                            </div>
+                  <span class="with-mentions foldable parsable">
+                      {{ stance.stance_text|linebreaksbr }}
+                  </span>
+                            {% include 'stances/citation_link.html' with stance=stance %}
+                        </div>
+                        <div class="box-links">
+                            <a href="{% url 'stances:stance' stance.user.username stance.question.slug stance.id %}">{{ stance.num_comments }}
+                                comments</a> |
+                            <a href="{% url 'stances:reply' stance.id %}">reply</a> |
+                            <a href="{% url 'stances:select' %}?id={{ stance.id }}">make my stance</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-link"></div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+
+
+
+
+    <br><br>
+
+{% endblock %}

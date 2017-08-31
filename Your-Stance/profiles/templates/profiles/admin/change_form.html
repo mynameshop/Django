@@ -1,0 +1,8 @@
+{% extends "admin/change_form.html" %}
+
+
+{% block form_top %}
+    <a href="{% url 'admin:verify_approve' id=original.pk %}">
+        <input type="button" class="default" value="Approve" />
+    </a>
+{% endblock %}

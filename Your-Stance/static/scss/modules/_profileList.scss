@@ -1,0 +1,15 @@
+// - - - - - - - - - - - - - - - - - - -
+// - - profileList module
+// styles for the profileList module
+
+
+.profileList {
+  @include flexbox;
+  @include flex-wrap(wrap);
+}
+
+.profileListItem {
+  margin-right: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+}

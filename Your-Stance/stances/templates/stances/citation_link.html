@@ -1,0 +1,20 @@
+{% if stance.citation %}
+    <div class="citationLinkContainer">
+        <a href="{% url 'stances:citation' stance_id=stance.pk %}" 
+           data-citation="{{stance.citation}}"
+           class="citationLink">
+            (c)
+        </a>
+        <div class="citationDropdown">
+            <ul>
+                <li class="pageCitation">
+                    Go to citation page
+                </li>
+                <li class="linkCitation">
+                    Go to link
+                </li>
+            </ul>
+        </div>
+    </div>
+      
+{% endif %}

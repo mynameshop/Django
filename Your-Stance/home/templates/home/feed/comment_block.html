@@ -1,0 +1,35 @@
+<div class="box-mid flex box-hover" onclick="location.href = ''" style="cursor: pointer;">
+    <div class="box-figure">
+        {% if entry.author.profile.thumb50 %}
+            <a href="{% url 'profiles:profile' entry.author.username %}">
+                {% if entry.author.profile.is_proxy %}<i class="community"></i>{% endif %}
+                <img src="{{ entry.author.profile.thumb50.url }}" width="50" />
+            </a>
+            {% endif %}
+
+    </div>
+    <div class="box-body">
+
+        <div class="box-text">
+            <b><a href="{% url 'profiles:profile' entry.author.username %}">{{ entry.author.username }}</a></b>:
+               
+            <span class="light">{{entry.thread.title}} 
+                {% if entry.thread.question %}
+                (<a href="{% url 'questions:question' slug=entry.thread.question.slug %}">#{{ entry.thread.question.slug }}</a>)
+                {% endif %}
+            </span>
+            <span class="small" style="color:#ccc;">{{ entry.created|timesince }}</span>
+            <br />
+            <span class="homeStanceContent with-mentions parsable">
+                {{entry.comment_text}}
+            </span>
+        </div>
+
+
+        <div class="box-links">
+            <a href="{% url 'forums:thread' pk=entry.thread.pk %}">reply</a>
+        </div>
+    </div>
+</div>
+<div class="box-link"></div>
+

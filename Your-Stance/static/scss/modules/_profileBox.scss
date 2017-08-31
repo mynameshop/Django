@@ -1,0 +1,27 @@
+// - - - - - - - - - - - - - - - - - - -
+// - - profileBox module
+// styles for the profileBox module
+
+
+.profileBox-wrapper{
+	margin-right: 5px;
+	// @include flex(1,0,240px);
+	flex-shrink: 1;
+	flex-basis: 240px;
+
+}
+.profileBox-avatar {
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #EFEFEF;
+  margin-bottom: 5px;
+}
+
+.profileBox-name {
+  font-size: 2.2rem;
+  font-weight: $font-weight-bold;
+}
+
+.profileBox-username {
+  color: #8E9EAA;
+}

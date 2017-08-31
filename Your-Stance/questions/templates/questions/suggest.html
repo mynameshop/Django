@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}New Question{% endblock %}
+
+{% block content %}
+    <h2>
+        Suggest your question
+    </h2>
+    <form class="suggestQuestionForm" method="POST">
+        {% csrf_token %}
+        <div> 
+            <label>Slug:</label>
+            {{form.slug}}
+            <div class="suggestErrors">
+                {{form.slug.errors}}
+            </div>
+        </div>
+        <div>
+            <label>Description:</label>
+            {{form.details}}
+            <div class="suggestErrors">
+                {{form.details.errors}}
+            </div>
+        </div>
+        <button type="submit">
+            Submit
+        </button>
+    </form>
+
+{% endblock %}

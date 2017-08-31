@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}New Stance{% endblock %}
+
+{% block content %}
+    NEW
+    {% if is_answered %}
+    <form action="{%url 'stances:new' %}?id={{ question.id }}" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <p><button class="btn" type="submit">Post</button></p>
+    </form>
+ 
+    {% else %}
+    <div>You need to answer the question first.</div>
+    {% endif %}
+{% endblock %}

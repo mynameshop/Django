@@ -1,0 +1,18 @@
+{% extends "user_settings/base.html" %}
+{% load staticfiles %}
+
+{% block title %}Profile Settings{% endblock %}
+
+{% block settings_content %}
+        <h3>Profile</h3>
+        <div class="box-inner">
+            <form action="{% url 'settings:profile' %}" method="post">
+                {% csrf_token %}
+                {{ form }}
+                <br />
+                <input type="submit" class="btn" value="Submit" />
+            </form>
+        </div>
+        
+
+{% endblock %}

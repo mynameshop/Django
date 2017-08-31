@@ -1,0 +1,16 @@
+{% extends "pages/reset/base.html" %}
+{% block reset_content %}
+
+    <form method="post">{% csrf_token %}
+        <label for="id_email">
+            Email address:
+        </label> {{ form.email }} 
+        <br />
+        {{ form.email.errors }}
+        <br />
+        <input type="submit" value="Reset my password" />
+        <br />
+        <br />
+    </form>
+
+{% endblock %}

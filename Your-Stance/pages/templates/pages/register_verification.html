@@ -1,0 +1,23 @@
+{% load staticfiles %}
+<div style="width:600px;" class="register-sub">
+Upload a verification photo.  Simply upload a selfie with the words "Your Stance" written on a piece of paper.  Or a sharpie on your forehead, or sand on the beach, or skittles on your counter, etc.  Grab a friend and get creative with it.  <b>Note!</b> We need the words "Your Stance" written somewhere physical!  Not computer generated.  See the examples below.
+
+
+</div>
+<div class="example-good">GOOD</div>
+<div class="register-example">
+    <a href="{% static 'images/good1-b.jpg' %}"><img src="{% static 'images/good1-s.jpg' %}"></a>
+    <a href="{% static 'images/good2-b.jpg' %}"><img src="{% static 'images/good2-s.jpg' %}"></a>
+</div>
+<div class="example-bad">BAD</div>
+<div class="register-example">
+    <a href="{% static 'images/bad1-b.jpg' %}"><img src="{% static 'images/bad1-s.jpg' %}"></a>
+    <a href="{% static 'images/bad2-b.jpg' %}"><img src="{% static 'images/bad2-s.jpg' %}"></a>
+</div>
+<br>
+<div style="width:600px;" class="register-sub">
+<b>Why do we need a verification photo?</b><br>
+Because censorship sucks.  And anonymity leads to censorship.  We want people to stand up for what they belive in by throwing their reputation on the line.</div>
+<br>
+<b>Select file for upload: </b><br>
+{{field}}

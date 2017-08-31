@@ -1,0 +1,57 @@
+{% load staticfiles %}
+<br>
+<div class="sheet">
+    <div class="sheet-inner">
+        <div class="sheet-question">&nbsp;</div>
+
+        <div class="sheet-users">
+            {% for user in comparison_data.users %}
+                <div class="sheet-col">
+                    <a href="{% url 'profiles:profile' user.user__username %}">
+                        <img src="{{ user.avatar }}" width="50">
+                    </a>
+                </div>
+                {% if not user.base %}
+                    <input type="hidden" name="user_pk[]" class="sheet_field" value="{{user.user__pk}}" />
+                {% else %}
+                    <input type="hidden" name="base_user_pk" class="sheet_field" value="{{user.user__pk}}" />
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        <input type="hidden" class="sheet_field" name="more" value="{{more}}"/>
+        <input type="hidden" class="sheet_field" name="type" value="comparision"/>
+
+
+        <div class="sheet-col">
+
+            <a href="#" class="addComparable">
+                <img src="{% static 'icons/plus.png' %}" />
+            </a>
+
+            <div class="comparableContainer">
+                <select class="comparableSelect">
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="sheet">
+
+    <div class="sheet-items">
+        {% include 'profiles/profile_sheet_inner.html' %}
+    </div>
+    <div class="sheet-item sheetMore" style="text-align: center">
+        <a href="#" data-more-text="View more" data-less-text="View less">
+            {% if more %}
+                View less
+            {% else %}
+                View more
+            {% endif %}
+        </a>
+    </div>
+
+</div>
+

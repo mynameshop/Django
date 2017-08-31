@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+    <form action="{% url 'profiles:wedge' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="register-label">
+            Username
+        </div>
+        <div class="register-sub">No spaces or special characters. Used for @username. Example: <em>@taylorswift13</em></div>
+        @ {{form.username}}
+        {{form.username.errors}}
+        <div class="register-label">
+            Password
+        </div>
+        <div class="register-sub">Password you can use to login without Facebook</div>
+        <div class="register-wide">{{form.password}}</div>
+        {{form.password.errors}}
+        <div  class="register-label">
+            Full name
+        </div>
+        <div class="register-sub">Your full name.  Example: <em>Taylor Swift</em></div>
+        <div class="register-wide">{{ form.display_name }}</div>
+        {{form.display_name.errors}}
+
+        <div class="register-label">
+            Verification Photo
+        </div>
+       
+        {% include 'pages/register_verification.html' with field=form.verification %}
+
+        {{form.verification.errors}}
+
+        <div style="clear: both; float: none"></div>
+        <br />
+        <button type="submit">Save</button>
+    </form>
+{% endblock %}

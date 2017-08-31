@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}Notifications{% endblock %}
+
+{% block content %}
+<div style="width:600px">
+    <div class="box-head"><h4>Notifications</h4>
+
+    </div>
+    {% for n in notifications %}
+        <div class="box-mid flex" style="align-items: center;">
+        {% if n.is_read == False %}
+            <div style="margin-right: 5px;"><object class="dot" type="image/svg+xml" data="{% static 'svg/0926-circle.svg' %}"></object></div>
+        {% endif %}
+        {% if n.user_from.profile.thumb50 %}
+            <div style="margin-right: 10px;"><a href="{% url 'profiles:profile' n.user_from.username %}"><img src="{{ n.user_from.profile.thumb50.url }}" width="40"></a></div>
+        {% endif %}
+        <div>
+            <div style="color:#ccc;"> {{ n.created|timesince }}</div>
+
+            {% if n.notification_type == 'RS' %}
+              
+                <a  href="{% url 'profiles:profile' n.user_from.username %}">
+                    {{ n.user_from.username }}
+                </a>
+                replied to your 
+                #{{n.stance.question.slug}}
+                comment on Your Stance. 
+                Check it out 
+                
+                {% if n.user_from.username and n.stance.question.slug and n.stance.id %}
+                    <a href="{% url 'stances:stance' n.user_from.username n.stance.question.slug n.stance.id %}">
+                        here! 
+                    </a>
+                {% endif %}
+            {% elif n.notification_type == 'MT' or  n.notification_type = 'FM' %}
+                Someone is talking about you on Your Stance. 
+                They go by the name 
+                <a  href="{% url 'profiles:profile' n.user_from.username %}">
+                    
+                    {{n.user_from.username}}
+                </a>. 
+                 I’m not sure if I trust them.
+            {% elif n.notification_type = 'RF' %}
+                 <a href="{% url 'forums:thread' pk=n.comment.thread.pk %}">
+                    {{n.user_from.username}}
+                 </a>
+                    replied to your comment on Your Stance. 
+                    Check it out 
+                    <a href="{% url 'forums:thread' pk=n.comment.thread.pk %}">
+                      here!
+                    </a>
+            {% elif n.notification_type = 'FW' %}
+                 <a  href="{% url 'profiles:profile' n.user_from.username %}">
+                    {{n.user_from.username}} 
+                 </a>
+                 is now following you on Your Stance! I always knew they liked you.
+            {% elif n.notification_type = 'NQ' %}
+                There is a new question to be answered on YourStance, let the world know where you stand!
+            {% elif n.notification_type = 'LI' %}                 
+                <a  href="{% url 'profiles:profile' n.user_from.username %}">
+                        {{n.user_from.username}} 
+                </a>
+                    starred one of your posts. Check it out 
+               {% if  n.user_from.username and n.stance.question.slug and n.stance.id %}
+                <a href="http://www.yourstance.com/{% url 'stances:stance' n.user_from.username n.stance.question.slug n.stance.id %}">
+                     here!
+                </a>
+              {% endif %}
+            {% elif n.notification_type = 'AG' %}
+                <a  href="{% url 'profiles:profile' n.user_from.username %}">
+                    {{n.user_from.username}} 
+                </a>
+                selected Your Stance on 
+                #{{n.stance.question.slug}} 
+                to be used as their stance.  
+                That’s a pretty big deal!  
+                Check it out 
+                {% if n.stance.question.slug %}
+                    <a href="{% url 'questions:question' slug=n.stance.question.slug %}">
+                        here.
+                    </a>
+                {% endif %}
+            {% endif %}
+        </div>
+
+
+        </div>
+        <div class="box-link"></div>
+    {% endfor %}
+    <div class="box-bot"></div>
+
+</div>
+    <br><br>
+
+
+{% endblock %}

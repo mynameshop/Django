@@ -1,0 +1,38 @@
+.suggestQuestionForm {
+    label {
+        margin-top: 10px;
+        font-size: 14px;
+    }
+
+    #id_slug {
+        width: 350px;
+    }
+
+    #id_details {
+        width: 100%;
+        height: 350px;
+    }
+
+    .suggestErrors {
+        padding: 5px 0;
+        color: #ff0000;
+        ul {
+            margin: 0;
+            padding: 0;
+            li {
+                margin: 0;
+                padding: 0;
+                list-style-type: none;
+            }
+        }
+    }
+
+    button[type=submit] {
+
+    }
+}
+
+.suggestButtonContainer {
+    display: block; 
+    margin-bottom: 10px;
+}

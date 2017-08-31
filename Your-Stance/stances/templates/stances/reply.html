@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Reply{% endblock %}
+
+{% block content %}
+
+
+{% if parent.user.profile.thumb50 %}
+<a href="{% url 'profiles:profile' parent.user.username %}"><img {% if parent.choice == 'p' %}class="pro-border"{% else %}class="con-border"{% endif %} src="{{ parent.user.profile.thumb50.url }}" width="25"></a>
+{% endif %}
+<b><a href="{% url 'profiles:profile' parent.user.username %}">{{ parent.user.username }}</a></b>
+
+{% if parent.choice == 'p' %}<span class="pro-color">for</span>{% else %}<span class="con-color">against</span>{% endif %}
+<span class="other-link"><a href="{% url 'questions:question' parent.question.slug %}">#{{ parent.question.slug }}</a></span>
+<br>
+{{ parent.stance_text }}<br>
+
+      <form action="{%url 'stances:reply' parent.id %}" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <p><input type="submit" value="Reply" /></p>
+      </form>
+
+
+{% endblock %}

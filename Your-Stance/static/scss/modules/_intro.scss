@@ -1,0 +1,71 @@
+// - - - - - - - - - - - - - - - - - - -
+// - - intro module
+// styles for the intro module
+
+
+.intro {
+  @include flexbox;
+  // justify-content: space-between;
+}
+
+
+.intro-fb {
+  // margin-left: 50px;
+  text-align: center;
+  background-color: #fafafa;
+  // padding: 5px;
+  // border: 1px solid #ccc;
+  margin-bottom: 12px;
+  // background-color: white;
+  // border: solid 1px $border-color-3;
+
+  // padding: $padding;
+  // margin-left: $margin;
+  // margin-right: $margin;
+}
+
+
+.intro-brandnew  {
+    margin-left: 10px;
+    @include flex-basis(110px);
+}
+.intro-brandnew img {
+    width: 220px;
+}
+
+
+// .fb img:hover {
+//   border: 1px solid red;
+// }
+
+
+
+// .fb {
+// 	background: #1abc9c;
+// }
+// .fb img {
+// 	opacity: 1;
+// 	-webkit-transition: .3s ease-in-out;
+// 	transition: .3s ease-in-out;
+// }
+// .fb a:hover img {
+// 	opacity: .5;
+// }
+
+.fb img {
+	opacity: 1;
+	-webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out;
+    width: 100%;
+}
+.fb a:hover img {
+	opacity: .5;
+}
+
+
+.intro-fbMsg {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 90%;
+  font-family: 'Courier New', Courier, 'Lucida Sans Typewriter', 'Lucida Typewriter', monospace;
+}

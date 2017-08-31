@@ -1,0 +1,79 @@
+// - - - - - - - - - - - - - - - - - - -
+// - - profileStance module
+// styles for the profileStance module
+
+
+.profileStance {
+  background-color: #fafafa;
+  // border-bottom: solid 1px lightblue;
+  padding: 10px 20px;
+
+  margin-bottom: 10px;
+  border-radius: 2px;
+}
+
+.profileStance-top {
+    padding-bottom: 10px;
+    @include flexbox;
+    @include justify-content(space-between);
+}
+
+.profileStance-middle {
+    @include flexbox;
+}
+
+.profileStance-figure {
+  margin-right: 15px;
+}
+
+.profileStance-bottom {
+  text-align: right;
+  font-size: 90%;
+  color: #ccc;
+}
+.profileStance-bottom a {
+  color: #ccc;
+}
+.profileStance-links {
+  font-size: 90%;
+}
+
+.profileStance-question {
+    // font-weight: 700;
+}
+
+.profileStance-choice {
+    font-size: 95%;
+    color: #444;
+    text-align: right;
+}
+
+.profileStance-body {
+  width: 100%;
+}
+
+.profileStance-adherents {
+  background-color: #fcfcfc;
+  padding-bottom: 5px;
+  padding-top: 5px;
+}
+
+.profileStance-adherentCount-big {
+    font-weight: bold;
+    font-size: 125%;
+}
+.profileStance-adherentCount {
+    border: 1px solid #ccc;
+    background-color: #fcfcfc;
+    border-radius: 4px;
+    padding: 5px 20px;
+}
+.profileStance-adherentCount a {
+    color: black;
+}
+
+
+.profileStance-button {
+    margin-right: 10px;
+    // margin-top: 10px;
+}

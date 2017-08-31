@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Questions{% endblock %}
+
+{% block content %}
+
+    <h1>Questions</h1>
+
+    <div class="suggestButtonContainer">
+        <a href="{% url 'questions:suggest_question' %}" >
+            <button type="button">
+                Suggest your own
+            </button>
+        </a>
+    </div>
+
+    <div class="questionSort">
+        <form>
+            Answer status: <select>
+                <option>All</option>
+                <option>Answered</option>
+                <option>Unanswered</option>
+            </select>
+
+            Sort by: <select>
+                <option>Trending</option>
+                <option>New</option>
+                <option>Most popular</option>
+                <option>Least popular</option>
+            </select>
+        </form>
+    </div>
+
+    <div id="questionsTableList">
+        {% include 'questions/questions_list.html' %}
+
+    </div>
+
+
+{% endblock %}

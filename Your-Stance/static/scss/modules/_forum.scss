@@ -1,0 +1,5 @@
+// Forum partial
+
+.forum-item{
+	@include justify-content(space-between);
+}

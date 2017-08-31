@@ -1,0 +1,57 @@
+// - - - - - - - - - - - - - - - - - - -
+// - - lastStance module
+// styles for the lastStance module
+// - - - - - - - - - - - - - - - - - - -
+// - - lastStance module
+// styles for the lastStance module
+
+
+.lastStance {
+  background-color: #f9f9f9;
+  padding: 10px;
+
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  background-color: #fbfbfb;
+  padding: 5px 0;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.lastStance-head {
+  padding-bottom: 5px;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.lastStance-mid {
+  @include flexbox;
+
+}
+
+.lastStance-figure {
+  margin-right: 15px;
+}
+
+.lastStance-bottom {
+  @include flexbox;
+  @include justify-content(space-between);
+}
+.lastStance-links {
+  font-size: 90%;
+}
+
+.lastStance-topic {
+}
+
+.lastStance-body {
+  width: 100%;
+}
+
+
+
+
+.lastStance-button {
+    margin-right: 10px;
+    // margin-top: 10px;
+}

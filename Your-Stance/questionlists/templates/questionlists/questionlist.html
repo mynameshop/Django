@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{#{% load comments %}#}
+{% load staticfiles %}
+{% block title %}#{{ list.slug }}{% endblock %}
+
+{% block content %}
+    <h1>{{ qlist.name }}</h1>
+    {% for i in items %}
+      <div><a href="{% url 'questions:question' i.question.slug %}">{{ i.question.slug }}</a></div>
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}Register{% endblock %}
+
+{% block content %}
+    <form action="" method="POST" enctype="multipart/form-data" class="registerForm">
+        {% csrf_token %}
+        
+        <div class="register-label">Email</div>
+        <div class="register-wide">{{ form.email }}</div>
+        
+        {{form.email.errors}}
+        <div class="register-label">Password</div>
+        {{ form.password }}
+        
+        {{form.password.errors}}
+
+        <div class="register-label">Username</div>
+        <div class="register-sub">No spaces or special characters. Used for @username. Example: <em>@taylorswift13</em></div>
+        @ {{ form.username }}
+        {{form.username.errors}}
+        <div class="register-label">Full Name</div>
+        <div class="register-sub">Your full name.  Example: <em>Taylor Swift</em></div>
+        <div class="register-wide">{{ form.display_name }}</div>
+        {{form.display_name.errors}}
+        <div class="register-label">Birthday</div>
+        {{ form.birthday }}
+        {{form.birthday.errors}}
+        <div class="register-label">Gender</div>
+        {{ form.gender }}
+        <div style="clear: both; float: none"></div>
+        {{form.gender.errors}}
+        
+        <div class="register-label">Verification Photo</div>
+        
+        {% include 'pages/register_verification.html' with field=form.avatar %}
+        {{form.avatar.errors}}
+
+
+
+        <div class="btnContainer">
+            <button type="submit">
+                JOIN!
+            </button>
+        </div>
+    </form>
+    <br><br>
+
+{% endblock %}

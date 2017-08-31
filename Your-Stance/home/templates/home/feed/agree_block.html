@@ -1,0 +1,50 @@
+<div class="box-mid flex box-hover" onclick="location.href = '{% url 'stances:stance' entry.user.username entry.question.slug entry.stance.id %}'" style="cursor: pointer;">
+    <div class="box-figure">
+        {% if entry.user.profile.thumb50 %}
+            <a href="{% url 'profiles:profile' entry.user.username %}">
+                <img 
+                    class="{% if entry.stance.choice == 'p' %}pro-border{% elif entry.stance.choice == 'c' %}con-border{% else %}unsure-border{% endif %}"
+                    src="{{ entry.user.profile.thumb50.url }}" width="50">
+            </a>
+        {% endif %}
+
+    </div>
+    <div class="box-body">
+
+        <div class="box-text">
+            <b><a href="{% url 'profiles:profile' entry.user.username %}">{{ entry.user.username }}</a></b>:
+
+            <span class="light">{{entry.thread.title}} 
+                {% if entry.question %}
+                    (<a href="{% url 'questions:question' entry.stance.question.slug %}">#{{ entry.question }}</a>)
+                {% endif %}
+            </span>
+            <span class="small" style="color:#ccc;">{{ entry.created|timesince }}</span>
+            <br />
+            <div>
+                <div class="box-figure">
+                    {% if entry.stance.user.profile.is_proxy %}<i class="community"></i>{% endif %}
+                    <img 
+                        class="{% if entry.stance.choice == 'p' %}pro-border{% elif entry.stance.choice == 'c' %}con-border{% else %}unsure-border{% endif %}"
+                        src="{{ entry.stance.user.profile.thumb50.url }}" width="50" />
+                </div>
+                <div class="box-text">
+                    <span class="homeStanceContent with-mentions parsable">
+                        {{ entry.stance.stance_text|linebreaksbr }}
+                    </span>
+                    {% include 'stances/citation_link.html' with stance=entry.stance %}
+                </div>
+            </div>
+        </div>
+
+
+        <div class="box-links">
+            <a href="">{{ entry.stance.num_agree }} agree</a> |
+            <a href="">{{ entry.stance.num_comments }} comments</a> |
+            <a href="{% url 'stances:reply' entry.stance.pk %}">reply</a>
+        </div>
+    </div>
+</div>
+<div class="box-link"></div>
+
+

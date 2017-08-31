@@ -1,0 +1,19 @@
+// - - - - - - - - - - - - - - - - - - -
+// - - smallBox module
+// styles for the smallBox module
+.smallBox {
+  background-color: white;
+  @include flexbox;
+  border-bottom: solid 1px #f3f3f3;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  margin-bottom: 10px;
+}
+
+.smallBox-figure {
+  margin-right: 10px;
+  margin-right: 15px;
+  text-align: right;
+  //flex-basis: 150px;
+  @include flex-shrink(0);
+}
