@@ -1,0 +1,19 @@
+.modal-dialog-cg{
+	& .modal-content{
+		border-radius: 0;
+		border: 2px solid $color-orange;
+	}
+	
+	& .close {
+	    position: absolute;
+	    top: -12px;
+	    right: -12px;
+	    z-index: 1000;
+	    opacity: 1;
+	    
+	    & img{
+	    	width: 24px;
+	    	height: 24px;
+	    }
+	}
+}

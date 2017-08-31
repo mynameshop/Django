@@ -1,0 +1,2 @@
+SITE_ID = 1
+SITE_ABSOLUTE_URL_PATTERT = 'https://{0}{1}'

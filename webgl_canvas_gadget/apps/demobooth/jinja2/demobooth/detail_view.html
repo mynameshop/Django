@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en-US">
+	<head>
+		<meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    {% block META_VIEW_PORT %}
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+	    {% endblock %}
+	    <link rel="icon" type="image/png" href="{{ static('img/favicon.png') }}" />
+	    {% block EXTRA_META %}{% endblock %}
+	    
+		<title>{% block TITLE_PAGE %}Canvas Gadget{% endblock %}</title>
+</head>
+	
+<body>
+	<div style="position: relative">
+		<img src="{{ object.website_screenshot.url }}" style="width: 100%;">
+		{{ object.website_extra_html|safe }}
+	</div>
+</body>
+</html>

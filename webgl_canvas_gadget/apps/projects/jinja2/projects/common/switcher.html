@@ -1,0 +1,12 @@
+{% if model_type == 'model3d' and object_list|length > 1 %}
+{% else %}
+	<ul id="switcher-{{ model_type }}" style="padding: 0px 8px; display: block;">
+		{% for model in object_list %}
+		<li>
+			<a id="model-{{ model.pk }}" data-index="{{ loop.index0 }}" href="#" class="{% if not HIDE_UI and loop.first %}active{% endif %}">
+				<img src="{% if model.thumbnail %}{{ model.thumbnail.small.url }}{% endif %}" alt="img" class="model-thumb">
+			</a>
+		</li>
+		{% endfor %}
+	</ul>
+{% endif %}

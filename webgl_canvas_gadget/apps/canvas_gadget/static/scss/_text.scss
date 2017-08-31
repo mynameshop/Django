@@ -1,0 +1,33 @@
+.text-{
+	&xs{
+		font-size: 0.5rem;
+	}
+	&sm{
+		font-size: 0.8rem;
+	}
+	&md{
+		font-size: 1.2rem;
+	}
+	&lg{
+		font-size: 1.4rem;
+	}
+	&xl{
+		font-size: 2.2rem;
+	}
+}
+
+@media (max-width: 768px){
+	.text-{
+		&xl{
+			font-size: 1.8rem;
+		}
+		
+		&center-xs{
+			text-align: center;
+		}
+	}
+}
+
+code {
+    color: #2d6bbb;
+}

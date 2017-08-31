@@ -1,0 +1,159 @@
+{% extends "canvas_gadget/base.html" %}
+
+{% block BODY_CLASS %}feedback{% endblock %}
+
+{% block BODY %}
+	{% if SITESETTINGS.feedbackpage_header_image %}
+		<section>
+			<img src="{{ SITESETTINGS.feedbackpage_header_image.url }}" alt="canvas gadget location" style="width: 100%;">
+		</section>
+	{% endif %}
+	
+	<section id="socials" class="bg-dark {% if message or form.errors %}scroll_to{% endif %}">
+		<div class="container">
+			<div class="row">
+				<div class="text-center col-sm-4 col-sm-offset-4">
+					<h1 class="text-xl" style="margin-top: 13px;">
+						{{ SITESETTINGS.feedbackpage_social_text }}
+					</h1>
+				</div>
+				<div class="col-sm-4">
+					<ul class="list-inline text-right text-center-xs" style="margin-top: 13px;">
+	                	<li>
+	                		<a href="https://www.pinterest.com/canvasgadget/">
+	                			<img src="{{ static('img/social/pintarest.png') }}" alt="pintarest" style="width:30px;">
+	                		</a>
+	                	</li>
+	                	<li>
+	                		<a href="https://twitter.com/canvasgadget">
+	                			<img src="{{ static('img/social/twi.png') }}" alt="twi" style="width:30px;">
+	                		</a>
+	                	</li>
+	                	<li>
+	                		<a href="https://www.facebook.com/canvasgadget/">
+	                			<img src="{{ static('img/social/fb.png') }}" alt="fb" style="width:30px;">
+	                		</a>
+	                	</li>
+	                </ul>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="text-center col-xs-12">
+					<h2 class="text-lg">
+						{{ SITESETTINGS.feedbackpage_form_text | safe }}
+					</h2>
+				</div>
+			</div>
+			
+			<div class="row brd-bottom-gray" style="padding-bottom: 40px;margin-bottom: 40px;">
+				<form method="post" enctype="multipart/form-data" class="text-gray">
+					{{ csrf_input }}
+					<div class="col-sm-6">
+						<div class="form-group {% if form.name.errors %}has-error{% endif %}">
+							<input type="text" name="name" class="form-control" value="{{ form.instance.name or '' }}" placeholder="Name">
+						</div>
+						<div class="form-group {% if form.email.errors %}has-error{% endif %}">
+							<input type="email" name="email" class="form-control" value="{{ form.instance.email or '' }}" placeholder="Email">
+						</div>
+					</div>
+					
+					<div class="col-sm-6">
+						<div class="form-group {% if form.phone.errors %}has-error{% endif %}">
+							<input type="text" name="phone" class="form-control" value="{{ form.instance.phone or '' }}" placeholder="Phone (optional)">
+						</div>
+						<div class="form-group {% if form.website.errors %}has-error{% endif %}">
+							<input type="url" name="website" class="form-control" value="{{ form.instance.website or '' }}" placeholder="Website (optional)">
+						</div>
+					</div>
+					
+					<div class="col-sm-12">
+						<div class="form-group {% if form.text.errors %}has-error{% endif %}">
+							<textarea  name="text" class="form-control" rows="8" placeholder="What's on your mind?"></textarea>
+						</div>
+					</div>
+					
+					<div class="col-sm-12">
+						<div class="form-group form-group-captcha">
+							{{ form.captcha }}
+							{% if form.captcha.errors %}
+								<span class="text-danger">Incorrect value. Try again</span>
+							{% endif %}
+						</div>
+					</div>
+					
+					{% if message %}
+						<div class="col-sm-12">
+							<div class="alert alert-warning alert-dismissible fade in" role="alert">
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+									<span aria-hidden="true">×</span>
+								</button>
+								<center>
+									<strong>{{ message }}</strong>
+								</center>
+							</div>
+						</div>
+					{% endif %}
+					
+					<div class="col-sm-4 col-sm-offset-4">
+						<button id="submitBtn" type="submit" class="btn btn-orange text-md" disabled="disabled" style="width: 100%;">
+							<b>{{ SITESETTINGS.feedbackpage_submit_button_text }}</b>
+						</button>
+					</div>
+				</form>
+			</div>
+			
+			<div class="row">
+				<div class="row address_section">
+		            <div class="col-xs-12 col-sm-4 col-md-4">
+		                <div class="text-center" style="border: 2px solid #ebeff0; height: 190px; margin-bottom: 15px;  background-color: #fbfbfb;">
+		                    <img src="{{ static('img/contacts/address_icon.png') }}" alt="canvas gadget address" style="padding-top: 15px; width: 42px;">
+		                    <h2>Address</h2>
+		                    <p>P.O. Box 582 <br>Mountain View CA</p>
+		                </div>
+		            </div>
+		            <div class="col-xs-12 col-sm-4 col-md-4">
+		                <div class="text-center" style="border: 2px solid #ebeff0; height: 190px; margin-bottom: 15px;  background-color: #fbfbfb;">
+		                    <img src="{{ static('img/contacts/phn_icon.png') }}" alt="canvas gadget phone number" style="padding-top: 15px; width: 42px;">
+		                    <h2>Phone</h2>
+		                    <p>415-636-8802</p>
+		                </div>
+		            </div>
+		            <div class="col-xs-12 col-sm-4 col-md-4">
+		                <div class="text-center" style="border: 2px solid #ebeff0; height: 190px; margin-bottom: 15px;  background-color: #fbfbfb;">
+		                    <img src="{{ static('img/contacts/msg_icon.png') }}" alt="canvas gadget email address" style="padding-top: 15px; width: 42px;">
+		                    <h2>Email</h2>
+		                    <p>support@canvasgadget.com<br>www.canvasgadget.com</p>
+		                </div>
+		            </div>
+		    	</div>
+			</div>
+			
+		</div>
+	</section>
+	
+	<section class="bg-dark" style="padding: 180px 0 50px 0; margin-top: -140px;">
+		<div class="container">
+			<div class="row">
+				<div class="text-left col-xs-12">
+					<h3 class="text-xl">
+						{{ SITESETTINGS.feedbackpage_message_label }}
+					</h3>
+					<div class="text-lg">
+						{{ SITESETTINGS.feedbackpage_message_text }}
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+{% endblock %}
+
+{% block JS_EXTRA %}
+	{{ super() }}
+	<script type="text/javascript" src="{{ static('js/feedback.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,74 @@
+{
+  "build": {
+  	"apiFilename": "canvasgadget.js",
+    "appFilename": "app.js",
+    "editorFilename": "appEditor.js",
+    "pbrEditorFilename": "pbrEditor.js",
+    "outputDirectory": "../../static/js/",
+    "srcOutputDirectory": "src_output/"
+  },
+  "api": {
+  	"files": [
+  		"src_output/app/Tools.js",
+		"src_output/app/Environment.js",
+		"src_output/app/Material.js",
+		"src_output/app/MaterialManager.js",
+		"src_output/app/Animation.js",
+		"src_output/app/AnimationManager.js",
+		"src_output/app/Card.js",
+		"src_output/app/CardManager.js",
+		"src_output/app/LensFlareSystem.js",
+  		
+  		"src_output/api/UploadManager.js",
+  		"src_output/api/App.js",
+  		
+  		"src_output/api/RestApiEndpointManager.js",
+  		"src_output/api/RestApiDataLoader.js",
+  		"src_output/api/RestApiManager.js",
+  		"src_output/api/Model2D.js",
+  		"src_output/api/Model3D.js",
+  		"src_output/api/Project.js",
+  		"src_output/api/Canvasgadget.js"
+  	],
+  	"typescript": [
+      "src/**/*.ts",
+      "!src/app/App.ts",
+      "!src/app/UploadManager.ts",
+      "typings/**/*.d.ts"
+    ]
+  },
+  "core": {
+    "typescript": [
+      "src/**/*.ts",
+      "!src/api/*.ts",
+      "typings/**/*.d.ts"
+    ],
+    "files": [
+      "src_output/app/Tools.js",
+      "src_output/app/Environment.js",
+      "src_output/app/UploadManager.js",
+      "src_output/app/Material.js",
+      "src_output/app/MaterialManager.js",
+      "src_output/app/Animation.js",
+      "src_output/app/AnimationManager.js",
+      "src_output/app/Card.js",
+      "src_output/app/CardManager.js",
+      "src_output/app/LensFlareSystem.js",
+      "src_output/app/App.js"
+    ]
+  },
+  "editor": {
+    "files": [
+      "src_output/editor/Editor.js",
+      "src_output/editor/EnvironmentEditor.js",
+      "src_output/editor/MaterialEditor.js",
+      "src_output/editor/LensFlareEditor.js",
+      "src_output/editor/CardEditor.js"
+    ]
+  },
+  "pbrEditor": {
+    "files": [
+      "src_output/PBREditor/PBREditor.js"
+    ]
+  }
+}

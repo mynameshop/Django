@@ -1,0 +1,183 @@
+{% macro checked(f) %}
+	{% if f %}checked{% endif %}
+{% endmacro %}
+
+{% macro environmentTab(object, SKYBOXES, GROUNDPLANE) %}
+	<ul style="padding: 0; list-style: none;">
+		<li>
+			<select id="select-skybox" class="hidden" name="skybox">
+				{% for item in SKYBOXES %}
+					<option value="{{ item.id }}" 
+					data-model='{"id":{{ item.id }}, "url": "{{ item.media_url }}", "thumbnail": "{{ thumbnail(item.thumbnail, size=(85, 85), crop='center', quality=90) }}"}'
+					{% if object.skybox_id == item.id %}selected{% endif %}>{{ item.id }}</option>
+				{% endfor %}
+			</select>
+			<div class="scrollable-horizontal-select" style="width: 100%; overflow: auto;">
+				<ul id="jselect-skybox" jmodel="#select-skybox" style="padding: 0; list-style: none;"></ul>
+			</div>
+		</li>
+		
+		<li>
+			<label>
+				<input id="checkbox-show-background" type="checkbox" data-toggle=".showBackground" 
+					class="editor-control" name="show_background" style="margin-right: 8px;" 
+					{{ checked(object.show_background) }}>Background
+			</label>
+		</li>
+		
+		<li class="jvisible" jmodel="#checkbox-show-background" janimation="height">
+			<label style="width: 100%;">
+				Gradient Top
+				<input type="range" class="editor-control range-hue" name="gradient_top_hue" min="0" max="1" step="0.01" 
+					value="{{ object.gradient_top_hue }}">
+				<input type="range" class="editor-control range-lightness" name="gradient_top_lightness" min="0" max="1" step="0.01"
+					value="{{ object.gradient_top_lightness }}">	
+			</label>
+			<label style="width: 100%;">
+				Gradient Bottom
+				<input type="range" class="editor-control range-hue"  name="gradient_bottom_hue" min="0" max="1" step="0.01" 
+					value="{{ object.gradient_bottom_hue }}">
+				<input type="range" class="editor-control range-lightness" name="gradient_bottom_lightness" min="0" max="1" step="0.01" 
+					value="{{ object.gradient_bottom_lightness }}">
+			</label>
+			<label class="inline-control">
+				<span class="control-container">
+					<input type="range" class="editor-control range-thin" name="gradient_offset" min="-1" max="1" step="0.01"
+						value="{{ object.gradient_offset }}">
+				</span>
+				<span class="label-container">Gradient Offset</span>
+			</label>
+		</li>
+		
+		<li>
+			<label>
+				<input id="checkbox-show-ground-plane" type="checkbox" class="editor-control" name="show_ground_plane" 
+					style="margin-right: 8px;" 
+					{{ checked(object.show_ground_plane) }}>Ground Plane
+			</label>
+		</li>
+		
+		<li class="jvisible" jmodel="#checkbox-show-ground-plane" janimation="height">
+			<select id="select-groundplane" class="hidden" name="ground_plane">
+				{% for item in GROUNDPLANE %}
+					<option value="{{ item.id }}" 
+					data-model='{"id":{{ item.id }}, "url": "{{ item.image.url }}", "thumbnail": "{{ thumbnail(item.image, size=(85, 85), crop='center', quality=90) }}"}'
+					{% if object.ground_plane_id == item.id %}selected{% endif %}>{{ item.id }}</option>
+				{% endfor %}
+			</select>
+			<div class="scrollable-horizontal-select" style="width: 100%; overflow: auto;">
+				<ul id="jselect-groundplane" jmodel="#select-groundplane" style="padding: 0; list-style: none;"></ul>
+			</div>
+			<label class="inline-control">
+				<span class="control-container">
+					<input type="range" class="editor-control range-thin" name="ground_plane_scale" min="0" max="10" step="0.01" 
+						value="{{ object.ground_plane_scale }}">
+				</span>
+				<span class="label-container">Plane Ground Scale</span>
+			</label>
+		</li>
+		
+		<li>
+			<label>
+				<input type="checkbox" class="editor-control" name="show_shadow" style="margin-right: 8px;" 
+				{{ checked(object.show_shadow) }}>Shadow
+			</label>
+		</li>
+		
+		<li>
+			<label>
+				<input id="checkbox-show-reflective" type="checkbox" class="editor-control" name="show_reflective" 
+				style="margin-right: 8px;" 
+				{{ checked(object.show_reflective) }}>Reflective
+			</label>
+		</li>
+		
+		<li>
+			<label class="inline-control jvisible" jmodel="#checkbox-show-reflective" janimation="height">
+				<span class="control-container">
+					<input type="range" class="editor-control range-thin" name="reflective_amount" min="0" max="1" step="0.01"
+						value="{{ object.reflective_amount }}">
+				</span>
+				<span class="label-container">Reflective amount</span>
+			</label>
+		</li>
+	</ul>
+{% endmacro %}
+
+{% macro materialsTab(materials) %}
+	{{ selectGridBlock(materials, 'draggable') }}
+{% endmacro %}
+
+{% macro lenseflaresTab(lenseflares) %}
+	{{ selectGridBlock(lenseflares, 'draggable') }}
+{% endmacro %}
+
+{% macro anchorTab(ANCHOR_STYLE, LINE_STYLE, CALLOUT_STYLE) %}
+	<ul style="padding: 0; list-style: none;">
+		<li>Anchor Type</li>
+		<li>
+			<select id="select-anchor-style" class="hidden">
+				{% for item in ANCHOR_STYLE %}
+					<option value="{{ item.id }}" data-model='{"id":{{ item.id }}, "image": "{{ item.image.url }}"}'>{{ item.id }}</option>
+				{% endfor %}
+			</select>
+			<ul id="jselect-anchor-style" jmodel="#select-anchor-style" style="padding: 0; list-style: none;"></ul>
+		</li>
+		
+		<li><hr></li>
+		
+		<li>Line Type</li>
+		<li>
+			<select id="select-line-style" class="hidden">
+				{% for item in LINE_STYLE %}
+					<option value="{{ item.id }}" 
+					data-model='{"id":{{ item.id }}, "image": "{{ item.image.url }}", "thumbnail": "{{ item.thumbnail.url }}"}'>
+					{{ item.id }}
+					</option>
+				{% endfor %}
+			</select>
+			<ul id="jselect-line-style" jmodel="#select-line-style" style="padding: 0; list-style: none;"></ul>
+		</li>
+		
+		<li><hr></li>
+		
+		<li>Callout Content</li>
+		<li>
+			<ul style="padding: 0; list-style: none;">
+				<li style="padding: 8px 4px;">
+					<input id="callout-label" type="text" placeholder="Label" style="width: 100%; color: #000; border-radius: 4px;" maxlength="40">
+				</li>
+				<li style="padding: 8px 4px;">
+					<textarea id="callout-text" type="text" placeholder="Content"  style="width: 100%; resize:none; color: #000; border-radius: 4px;" maxlength="80"></textarea>
+				</li>
+			</ul>
+		</li>
+		
+		<li><hr></li>
+		
+		<li>Callout Style</li>
+		<li>
+			<select id="select-callout-style" class="hidden">
+				{% for item in CALLOUT_STYLE %}
+					<option value="{{ item.id }}" data-model='{"id":{{ item.id }}, "image": "{{ item.image.url }}"}'>{{ item.id }}</option>
+				{% endfor %}
+			</select>
+			<ul id="jselect-callout-style" jmodel="#select-callout-style" style="padding: 0; list-style: none;"></ul>
+		</li>
+	</ul>
+{% endmacro %}
+
+{% macro selectGridBlock(list, class='') %}
+	<div class="select">
+	{% for item in list%}
+		<div class="col-xs-6 select-item {{ class }}" style="padding: 2px;" data-model="{{ item.json_model|safe }}">
+			<a href="#" class="select-item-link">
+				<img src="{{ thumbnail(item.thumbnail, size=(128, 152), crop='center', quality=90) }}" alt="image" style="width: 100%">
+				<div class='item-label text-center'>
+					{{ item.name }}
+				</div>
+			</a>
+		</div>
+	{% endfor %}
+	</div>
+{% endmacro %}

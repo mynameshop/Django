@@ -1,0 +1,115 @@
+@import "variables";
+@import "colors";
+@import "base";
+@import "buttons";
+@import "panels";
+@import "grid";
+@import "navbar";
+@import "carousel";
+@import "tabs";
+@import "page_homepage";
+@import "page_submitproject";
+@import "blockquote";
+@import "inputrange";
+@import "project";
+@import "modal";
+@import "text";
+@import "glyphicon";
+@import "editor_page";
+@import "pricing";
+
+@import "../../../projects/static/scss/project_list_page.scss";
+
+.img-shadow{
+	-webkit-box-shadow: 2px 3px 6px 2px rgba(50, 50, 50, 0.25);
+	-moz-box-shadow: 2px 3px 6px 2px rgba(50, 50, 50, 0.25);
+	box-shadow: 2px 3px 6px 2px rgba(50, 50, 50, 0.25);
+}
+
+
+.link-block{
+	display: block;
+	-webkit-box-shadow: 6px 6px 8px 0px rgba(50, 50, 50, 0.25);
+	-moz-box-shadow:    6px 6px 8px 0px rgba(50, 50, 50, 0.25);
+	box-shadow:         6px 6px 8px 0px rgba(50, 50, 50, 0.25);
+}
+
+
+.brd-bottom-gray{
+	border-bottom: 1px solid $color-gray;
+}
+
+.bg-dark{
+	background: $color-slate;
+	color: #fff;
+}
+
+.bg-gray{
+	background: $color-gray;
+	color: #fff;
+}
+
+.bg-very-dark{
+	background: $color-slate-darken;
+	color: #fff;
+}
+
+.text-orange{
+	color: $color-orange;
+}
+
+.link-share{
+	color: $color-orange;
+	&:hover {
+		color: $color-orange-lighten;
+	}
+}
+
+.text-gray{
+	color: $color-gray;
+}
+
+.text-gray-lighten{
+	color: $color-gray-lighten;
+}
+
+.text-dark-gray{
+	color: $color-gray-darken;
+}
+
+.explore-item{
+	margin-bottom: 32px;
+}
+
+.hr-thin{
+	margin: 0;
+}
+
+.nowrap{
+	white-space: nowrap;
+}
+
+.required:after{
+	content:" *";
+	color: red;
+}
+
+.form-control-expdate{
+	width: auto;
+	display: inline-block;
+}
+
+code {
+    padding: 8px;
+    background: inherit;
+    border: 1px solid $color-gray-lighten;
+    display: block;
+}
+
+.form-group-captcha{
+	text-align: center;
+	
+	& .g-recaptcha{
+		display: inline-block;
+	}
+}

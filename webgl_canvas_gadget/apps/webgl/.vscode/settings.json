@@ -1,0 +1,12 @@
+// Place your settings in this file to overwrite default and user settings.
+{
+    "files.exclude": {
+        "**/.git": true,
+        "./apps/webgl/src/**/*.js": true,
+        "./apps/webgl/typings": true
+    },
+    "files.autoSave": "onFocusChange",
+    "editor.formatOnType": true,
+    "editor.tabCompletion": true,
+    "editor.trimAutoWhitespace": true
+}

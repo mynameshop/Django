@@ -1,0 +1,334 @@
+{% extends "base/basesite.html" %}
+
+{% block GOOGLE_ANALYTICS %}{% endblock %}
+
+{% block META_VIEW_PORT %}
+	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
+{% endblock %}
+
+{% block TITLE_PAGE %}{{ object.name }}{% endblock %}
+
+{% block JS_LIBS %}
+	{{ super() }}
+	<script type="text/javascript" src="{{ static('js/lib/hand.minified-1.3.7.js') }}"></script>
+	<script type="text/javascript" src="{{ static('js/lib/babylon-2.3.js') }}"></script>
+	<script type="text/javascript" src="{{ static('js/jquery-ui.min.js') }}"></script>
+	<script type="text/javascript" src="{{ static('js/jquery.slimscroll.min.js') }}"></script>
+{% endblock %}
+
+{% block EXTRA_META %}
+	{% if object.thumbnail %}
+	<link rel="prefetch" href="{{ object.thumbnail.url }}">
+	<meta name="og:image" content="{{ object.thumbnail.url }}">
+	{% endif %}
+	<meta name="description" content="{{ object.description }}">
+{% endblock %}
+
+{% block WRAPPER %}
+	<div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; width:100%;height:100%; overflow: hidden;">
+		<canvas id="renderCanvas" style="width:100%;height:100%; overflow: hidden;"></canvas>
+	</div>
+	<input id="model-3dmodels" type="hidden" value="{{ json_stringify(MODELS3D_MODEL) }}">
+	<input id="model-project" type="hidden" value="{{ json_stringify(PROJECT_MODEL) }}">
+	<input id="model-materials" type="hidden" value="{{ json_stringify(MATERIALS_MODEL) }}">
+	<input id="model-animations" type="hidden">
+	
+	<div id="model-switcher" class="model-switcher noselect {% if HIDE_UI %}hidden{% endif %}">
+		<div class="slim-scrollbar">
+			<select id="select-model-switcher" class="hidden" jmodel="#model-3dmodels"></select>
+			<ul id="jselect-model-switcher" jmodel="#select-model-switcher" 
+			style="padding: 0 8px; list-style: none;"></ul>
+			
+			<select id="select-animation-switcher" class="hidden" jmodel="#model-animations"></select>
+			<ul id="jselect-animation-switcher" jmodel="#select-animation-switcher" 
+			style="padding: 0 8px; list-style: none;"></ul>
+		</div>
+	</div>
+	
+	{% block COMPACT %}{% endblock %}
+	
+	{% if not HIDE_UI and object.logo_image and object.logo_url %}
+		<a id="logo-link" href="{{ object.logo_url }}" target="_parent" class="noselect">
+			<img src="{{ object.logo_image.url }}" alt="logo">
+		</a>
+	{% endif %}
+	
+	{% if object.thumbnail and MODELS3D %}
+		<div id="loading-overlay" class="play" 
+			style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; background: #fff; overflow: hidden;">
+			<img src="{{ object.thumbnail.url }}" alt="img" 
+			style="height: 100%; position: absolute; top: 50%; left: 50%; -webkit-transform: translate(-50%, -50%); transform: translate(-50%, -50%);">
+			<div class="text-loading" {% if request.GET.get('autoplay', 'true')=='true' %}style="display:none;"{% endif %}>
+				Click here to view in 3D<span class="dots"></span>
+			</div>
+		</div>
+	{% endif %}
+	
+	<div id="popup-post-loading" style="display: none;" class="noselect">
+		<div class="text-center">
+			Click or swipe to interact with the product
+		</div>
+		<div class="img-container text-center">
+			<img src="{{ static('img/arrow-rotation.png') }}">
+		</div>
+	</div>
+	
+	<div style="position: absolute; bottom: 8px; left: 0; right: 0; 
+		text-align:center; pointer-events:none;">
+		<a href="http://canvasgadget.com/" target="blank" style="color: rgba(200, 200, 200, 0.4);  pointer-events:all;">
+			Powered by Canvas Gadget
+		</a>
+	</div>
+{% endblock %}
+
+{% block JS_TEMPLATE %}
+	<script type="application/vertexShader" id="cardVertexShader">
+		precision mediump float;
+
+		attribute vec3 position;
+		attribute vec2 uv;
+
+		uniform mat4 worldViewProjection;
+
+		varying vec2 vUV;
+
+		void main(void){
+			gl_Position = worldViewProjection * vec4(position, 1.0);
+			vUV = uv;
+		}
+	</script>
+  
+	<script type="application/fragmentShader" id="cardFragmentShader">
+		precision mediump float;
+
+		varying vec2 vUV;
+
+		uniform sampler2D backgroundImage;
+		uniform sampler2D textImage;
+
+		void main(void){
+			vec4 textFragmentColor = texture2D(textImage, vUV);
+			vec4 backgroundFragmentColor = texture2D(backgroundImage, vUV);
+
+			if(textFragmentColor.a >= 0.45){
+				textFragmentColor.a = 1.0;
+				textFragmentColor.r = 1.0;
+				textFragmentColor.g = 1.0;
+				textFragmentColor.b = 1.0;
+			}
+
+			if(textFragmentColor.a < 0.45){
+				textFragmentColor.a = 0.0;
+			}
+                
+			gl_FragColor = mix(backgroundFragmentColor, textFragmentColor, textFragmentColor.a);
+		}
+	</script>
+{% endblock %}
+
+{% block JS_EXTRA %}
+	<script type="text/javascript" src="{{ static('js/jquery.jview.js') }}"></script>
+	<script type="text/javascript" src="{{ static('js/jquery.jselect.js') }}"></script>
+	<script type="text/javascript" src="{{ static('js/jquery.inactivitytime.js') }}"></script>
+	
+	{% block BABYLON_JS %}
+	<script type="text/javascript" src="{{ static('js/app.js') }}"></script>
+	{% endblock %}
+	
+	{% block INIT_PROJECT %}
+	<script type="text/javascript" src="{{ static('js/cg_app.js') }}"></script>
+	<script type="text/javascript">
+		var initProject = function(){
+			var data = $.parseJSON($('#model-project').val())[0]['fields'];
+			data['materials'] = $.parseJSON($('#model-materials').val());
+			
+			var app_cg = new CanvasGadget(data, $select_model_switcher, false);
+			$select_model_switcher.change();
+		}
+	</script>
+	{% endblock %}
+	
+	<script type="text/javascript">
+		function checkSwitcherState(){
+			var is_show = $('#model-switcher #select-model-switcher').children().length > 1;
+			is_show = is_show || $('#model-switcher #select-animation-switcher').children().length > 0;
+			if(is_show){
+				$('#model-switcher').show();
+			}else{
+				$('#model-switcher').hide();
+			}
+		}
+		var $select_model_switcher = $('#select-model-switcher').jView({
+			'delegate': function(i, data){
+				var model = {
+					"id": data.pk,
+					"model": data.file,
+    				"textures": data.textures,
+    				"thumbnail": data.thumbnail,
+    				"materials": data.materials,
+    				"flares": data.flares,
+    				"callouts": data.callouts,
+    				"camera_pos": data.camera_pos,
+    				"camera_upper_beta_limit": data.camera_upper_beta_limit,
+    				"rotate_camera": data.rotate_camera,
+    				"animations": data.animation,
+    				"camera_min_distance": data.camera_min_distance,
+    	            "camera_max_distance": data.camera_max_distance,
+				};
+				return "<option value='"+data.pk+"' data-model='" + JSON.stringify(model) + "'>" + data.pk + "</option>";
+			},
+			'refreshed': function(self){
+				checkSwitcherState();
+				self.$element.trigger('optionChanged');
+			},
+		}).change(function(){
+			var model = $(this).children(':selected').data('model');
+			sync_model();
+			if(model){
+				try{
+					var d = model.animations.animations;
+					$('#model-animations').val(JSON.stringify(d)).change();
+				}catch(err){
+					$('#model-animations').val('').change();
+				}
+				
+				$("body").trigger({
+					type: "modelChanged",
+					tab: "models",
+					id: model.id,
+					model: model.model,
+					textures: model.textures,
+					materials: model.materials,
+					flares: model.flares,
+					callouts: model.callouts,
+					default_material: {id: 9, name: 'Matte Finish'},
+					camera_pos: model.camera_pos,
+					animations: model.animations,
+					rotate_camera: model.rotate_camera,
+					camera_min_distance: model.camera_min_distance,
+		            camera_max_distance: model.camera_max_distance,
+		            camera_upper_beta_limit: model.camera_upper_beta_limit,
+				});
+			}
+		});
+		var flareSelected = function(data){};
+		// синхронизация данных модели и отображения
+		// пустая реализация для режима просмотра
+		var sync_model = function(){}
+		
+		// таймер для оверлея прогресса загрузки
+		$('#loading-overlay img').height($('#loading-overlay').height());
+		var loadingTimer;
+		function sceneReady(){
+			clearTimeout(loadingTimer);
+			$('#loading-overlay').remove();
+			$('#popup-post-loading').show();
+		}
+		function getUrlVars() {
+		    var vars = {};
+		    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+		    	vars[key] = value;
+		    });
+			return vars;
+		}
+		{% if object.thumbnail and MODELS3D %}
+		$(document).on('click', '#loading-overlay.play', function(){
+			$('#loading-overlay').removeClass('play');
+			$('#loading-overlay .text-loading').html('Loading<span class="dots"></span>');
+			loadingTimer = setInterval(function(){
+				var d = $('#loading-overlay .text-loading .dots');
+				if(d.text().length > 2){
+					d.text('');
+				}else{
+					d.text(d.text() + '.');	
+				}
+				$('#loading-overlay img').height($('#loading-overlay').height());
+			}, 400);
+			initProject();
+		})
+		{% else %}
+			initProject();
+		{% endif %}
+		//==================================
+		
+		$(document).ready(function(){
+			$('#renderCanvas').on('mousedown touchstart', function(){
+				$('#popup-post-loading').remove();
+			})
+			
+			$('#jselect-model-switcher').jSelect({
+				'delegate': function($option){
+					var model = $option.data('model');
+					var html = '<li>';
+					html += '<a href="#" data-value="' + model.id + '" class="select-item" style="padding: 4px;">';
+					html += '<img src="' + model.thumbnail.small.url + '" alt="img" class="model-thumb">';
+					html += '</a>';
+					html += '</li>';
+					return html;
+				},
+				'refreshed': function(self){
+					if(self.$element.children().length < 2){
+						self.$element.hide();
+					}else{
+						self.$element.show();
+					}
+					if(self.$element.children().length > 0){
+						$('#model-switcher').show();
+					}else{
+						$('#model-switcher').hide();
+					}
+				},
+			});
+			
+			{% block ANIMATION_SWITCHER %}
+			$('#select-animation-switcher').jView({
+				'delegate': function(i, data){
+					return "<option value='"+i+"' data-model='" + JSON.stringify(data) + "'>" + i + "</option>";
+				},
+				'refreshed': function(self){
+					checkSwitcherState();
+					self.$element.trigger('optionChanged');
+				},
+			});
+			
+			$('#jselect-animation-switcher').jSelect({
+				'delegate': function($option){
+					if($option.is(':disabled')){
+						return '';
+					}
+					var model = $option.data('model');
+					var html = '<li>';
+					html += '<a href="#" data-value="' + $option.attr('value') + '" class="select-item" style="padding: 4px;" '+
+					'onclick="CG.App.Instance.animationManager.animate('+$option.attr('value')+');">';
+					html += '<img src="' + model.thumbnail.small.url + '" alt="img" class="model-thumb">';
+					html += '</a>';
+					html += '</li>';
+					return html;
+				},
+			});
+			{% endblock %}
+			
+
+			$('.slim-scrollbar').slimScroll({
+		        height: '100%',
+		        color: '{{ object.slim_scroll_color }}',
+		        alwaysVisible: true,
+		        disableFadeOut: true,
+		    });
+			
+			function onResize(){
+				$('#jselect-model-switcher, #jselect-animation-switcher').css('max-height', $(window).height()-30+'px');
+			};
+			
+			$(window).resize(function() {
+				onResize();
+			});
+			onResize();
+			
+			if(getUrlVars()["autoplay"] === "true" || getUrlVars()["autoplay"] === undefined){
+				$('#loading-overlay.play').click();
+			}
+			$('#loading-overlay .text-loading').show();
+		})
+	</script>
+{% endblock %}

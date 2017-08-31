@@ -1,0 +1,58 @@
+{% extends "canvas_gadget/base.html" %}
+
+{% macro projectAddItem(class = 'col-sm-6 col-md-4') %}
+	<div class="{{ class }} project-item">
+		<p class="text-center project-item-name"><br></p>
+		<p class="text-center project-item-status"><br></p>
+		<p>
+			<a href="{{ url('canvas_gadget:submitproject') }}" class="bg-gray link-block">
+				<img src="{{ static('img/project_create.png') }}" class="img-responsive center-block project-item-img" alt="Image"></img>
+			</a>
+		</p>
+		<p class="text-center">
+			<a href="{{ url('canvas_gadget:submitproject') }}" class="btn btn-orange">Submit New Project</a>
+		</p>
+		<br>
+	</div>
+{%- endmacro %}
+
+{% block BODY %}
+
+<br>
+<div class="container-fluid">
+	<div id="project-list" class="row row-gap-sm project-list">
+		{% for project in object_list %}
+			{% with project=project, class='col-sm-6 col-md-4' %}
+				{% include "projects/common/project_item.html" %}
+			{% endwith %}
+		{% endfor %}
+		
+		{{ projectAddItem() }}
+	</div>
+</div>
+
+<div id="modal" class="modal fade" tabindex="-1" role="dialog"></div>
+
+
+{% endblock %}
+
+{% block JS_EXTRA %}
+	{{ super() }}
+	<script type="text/javascript" src="{{ static('js/project_list.js') }}"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			Stripe.setPublishableKey('{{ STRIPE_PUBLIC_KEY }}');
+			$('#project-list').cgProjectList({
+				'card_list_view': '{{ url('billing:card_list_view') }}', 
+				'card_add_view': '{{ url('billing:card_add_view') }}',
+				'card_change_active_view': '{{ url('billing:change_active_card_view') }}',
+				'csrf_token': '{{ csrf_token }}'
+			});
+		});
+	</script>
+{% endblock %}
+
+{% block JS_LIBS %}
+	{{ super() }}
+	{{ form_add_card.media }}
+{% endblock %}

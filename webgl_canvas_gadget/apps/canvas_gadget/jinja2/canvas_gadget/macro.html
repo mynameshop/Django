@@ -1,0 +1,23 @@
+{% macro menuitem(href, label) %}
+	<li>
+		<a href="{{ href }}">{{ label }}</a>
+	</li>
+{%- endmacro %}
+
+{% macro info_item(src, label, text, class='col-sm-6')%}
+	<div class="{{ class }}">
+		<img alt="" src="{{ src }}" class="pull-left" style="width:15%;">
+		<div class="pull-left" style="width:80%; padding-left: 16px;">
+			<h4>{{ label }}</h4>
+			<p>{{ text }}</p>
+		</div>
+	</div>
+{% endmacro %}
+
+{% macro feedback_item(title, text, name, class='col-sm-6')%}
+	<div class="{{ class }}">
+		<blockquote style="color: #757170;">
+			<p>{{ title }} <br><br> {{ text }} <br><br> -{{ name }}</p>
+		</blockquote>
+	</div>
+{% endmacro %}

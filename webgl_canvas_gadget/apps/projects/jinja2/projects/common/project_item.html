@@ -1,0 +1,32 @@
+<div class="{{ class or 'col-sm-6 col-md-4' }} project-item" data-id="{{ project.id }}" 
+	data-order-detail="Order details: ${{ project.plan_amount_per_month }} / mo (paid annually)"
+	data-payment="/billing/project/{{ project.id }}">
+	<p class="text-center project-item-name">{{ project.name }}</p>
+	<p class="text-center project-item-status">
+		<small>{{ project.subscription_status_display_text }}</small>
+	</p>
+	<p>
+		<a href="#" class="bg-gray link-block link-project-detail">
+			{% if project.thumbnail and project.thumbnail.url %}
+				<img src="{{ project.thumbnail.url }}" class="img-responsive center-block project-item-img" alt="Image"></img>
+			{% else %}
+				<img src="/static/img/project_default.png" class="img-responsive center-block project-item-img" alt="Image"></img>
+			{% endif %}
+		</a>
+	</p>
+	
+	<p class="text-center">
+		{% if project.projectrequest_status == 0 %}
+			<button type="button" class="btn btn-gray" disabled="disabled">Under Review</button>
+		{% elif  project.projectrequest_status == 1 %}
+			<button type="button" class="btn btn-gray" disabled="disabled">Processing</button>
+		{% elif  project.projectrequest_status == 2 %}
+			{% if project.subscription_is_active and project.subscription.cancel_at_period_end == 0 %}
+				<button type="button" class="btn btn-orange btn-unpublish" data-loading-text="Make Private">Make Private</button>
+			{% else %}
+				<button type="button" class="btn btn-orange btn-publish" data-loading-text="Publish">Publish</button>
+			{% endif %}
+		{% endif %}
+	</p>
+	<br>
+</div>

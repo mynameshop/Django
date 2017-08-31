@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:ror="http://rorweb.com/0.1/" >
+<channel>
+  <title>ROR Sitemap for https://canvasgadget.com/</title>
+  <link>https://canvasgadget.com/</link>
+
+<item>
+     <link>https://canvasgadget.com/</link>
+     <title>Canvas Gadget</title>
+     <description>Canvas Gadget</description>
+     <ror:updatePeriod></ror:updatePeriod>
+     <ror:sortOrder>0</ror:sortOrder>
+     <ror:resourceOf>sitemap</ror:resourceOf>
+</item>
+<item>
+     <link>https://canvasgadget.com/pricing/</link>
+     <title>Canvas Gadget | Pricing</title>
+     <description>Canvas Gadget | Pricing</description>
+     <ror:updatePeriod></ror:updatePeriod>
+     <ror:sortOrder>1</ror:sortOrder>
+     <ror:resourceOf>sitemap</ror:resourceOf>
+</item>
+<item>
+     <link>https://canvasgadget.com/feedback/</link>
+     <title>Canvas Gadget</title>
+     <description>Canvas Gadget</description>
+     <ror:updatePeriod></ror:updatePeriod>
+     <ror:sortOrder>1</ror:sortOrder>
+     <ror:resourceOf>sitemap</ror:resourceOf>
+</item>
+<item>
+     <link>https://canvasgadget.com/submitproject/</link>
+     <title>Canvas Gadget | Submit Project</title>
+     <description>Canvas Gadget | Submit Project</description>
+     <ror:updatePeriod></ror:updatePeriod>
+     <ror:sortOrder>2</ror:sortOrder>
+     <ror:resourceOf>sitemap</ror:resourceOf>
+</item>
+</channel>
+</rss>
+  

@@ -1,0 +1,16 @@
+$darken-val: 5%;
+$lighten-val: 10%;
+
+$color-orange : #f2650d;
+$color-orange-lighten : lighten($color-orange, $lighten-val);
+$color-orange-darken : darken($color-orange, $darken-val);
+
+$color-gray: #d7dadb;
+$color-gray-lighten : lighten($color-gray, $lighten-val);
+$color-gray-darken : darken($color-gray, $darken-val);
+
+$color-slate: #314448;
+$color-slate-lighten : lighten($color-slate, $lighten-val);
+$color-slate-darken : darken($color-slate, $darken-val);
+
+$color-gray-text: #394b4e;

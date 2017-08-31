@@ -1,0 +1,99 @@
+.submitprojectpage{
+	& h1{
+		font-size: 2.7rem;
+		font-weight: bold;
+	}
+	& .form-control{
+		font-size: 1.4rem;
+	}
+	& .text-gray{
+		color: #606060;
+	}
+	& #jselect-pricing-template{
+		padding: 0;
+		margin: 0;
+		list-style: none;
+		
+		& a {
+			color: $color-gray-text;
+			text-decoration: none;
+			padding: 8px 0;
+		}
+		
+		& .subscription_cost{
+			font-size: 1.8rem;
+		}
+	}
+	
+	& #active-subscription-template{
+		padding: 0;
+		margin: 12px 0;
+		list-style: none;
+		
+		& li{
+			position: relative;
+		}
+		
+		& a {
+			color: #fff;
+			text-decoration: none;
+			padding: 8px 0;
+		}
+		
+		& .subscription_cost{
+			font-size: 1.8rem;
+		}
+		& .subscription_cost_text{
+			font-size: 25%;
+		}
+		
+		& .dropdown_icon{
+			position: absolute;
+		    top: 0;
+		    right: 0;
+		    bottom: 0;
+		    
+		    & img{
+		    	position: absolute;
+		    	height: 100%;
+			    top: 0;
+			    right: 0;
+			    border-left: 1px solid $color-slate-darken;
+		    }
+		}
+	}
+	
+	& .step-item{
+		& .title{
+			font-weight: bold;
+			font-size: 1.5rem;
+		}
+		& .action{
+			font-size: 1.2rem;
+		}
+		& .description{
+			font-size: 1.1rem;
+			padding-top: 16px;
+			color: #606060;
+		}
+		& .image-container{
+			& img{
+				width: 80%;
+				margin: 0 10%;
+			}
+		}
+	}
+	
+	& .file-counter{
+		white-space: nowrap;
+		margin-top: 8px;
+	}
+	
+	& .remove-files{
+		color: $color-orange;
+	}
+	
+	& .btn-upload{
+		margin-right: 1.4rem;
+	}
+}

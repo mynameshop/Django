@@ -1,0 +1,27 @@
+Django==1.10
+django-debug-toolbar
+django_compressor==2.0
+django-affiliate
+django-cleanup
+django-recaptcha
+django-ckeditor==5.0.3
+django-tabbed-admin
+django-tinymce
+django-cors-headers
+django-tastypie
+defusedxml
+lxml
+csscompressor
+slimit
+Jinja2
+psycopg2
+gunicorn
+pygments
+#pinax-stripe
+easy_thumbnails
+Pillow==3.1.1
+
+google-api-python-client
+
+-e git+https://github.com/Chive/django-multiupload.git#egg=multiupload
+-e git+https://github.com/pinax/pinax-stripe#egg=pinax-stripe

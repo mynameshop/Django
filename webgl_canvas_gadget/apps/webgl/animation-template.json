@@ -1,0 +1,54 @@
+{
+    "type": "cascade", // cascade or individual
+    "animations": [
+        {
+            "name": "animation_1",
+            "target": "skeleton1",
+            "forward": {
+                "startFrame": 0,
+                "endFrame": 50,
+                "events": [
+                    {
+                        "type": "textureSwap",
+                        "atFrame": 10,
+                        "subCompNum": 1,
+                        "component": "Component_1",
+                        "texture": "/textures/texture_2.png"
+                    },
+                    {
+                        "type": "skipFrames",
+                        "atFrame": 20,
+                        "skipTo": 44
+                    },
+                    {
+                        "type": "animation",
+                        "target": "Skeleton2",
+                        "atFrame": 0,
+                        "from": 0,
+                        "to": 10
+                    },
+                    {
+                        "type": "loop",
+                        "target": "Skeleton1",
+                        "atFrame": 0,
+                        "from": 0,
+                        "to": 10
+                    }
+                ]
+            },
+            "reverse": {
+                "startFrame": 51,
+                "endFrame": 100,
+                "events": [
+                    {
+                        "type": "animation",
+                        "target": "Skeleton1",
+                        "atFrame": 0,
+                        "from": 20,
+                        "to": 30
+                    }
+                ]
+            }
+        }
+    ]
+}

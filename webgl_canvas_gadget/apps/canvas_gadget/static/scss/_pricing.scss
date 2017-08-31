@@ -1,0 +1,118 @@
+@media (min-width: 768px){
+	.col-pricing {
+	    margin-left: 5%;
+	    width: 90%;
+	    float: left;
+	}
+}
+
+.pricing-item{
+	border: 1px solid #ccc;
+	margin-bottom: 16px;
+	
+	& .pricing-title{
+		background: $color-slate;
+		color: #fff;
+		font-size: 1.8rem;
+	}
+	
+	& .pricing-info{
+		padding-bottom: 32px;
+		
+		& hr{
+			width: 86%;
+			border-color: rgba(0, 0, 0, 0.17);
+		}
+	}
+	
+	&.pricing-item-silver{
+		& .pricing-info{
+			color: #fff;
+			background: #aab1a6;
+		}
+	}
+	
+	&.pricing-item-gold{
+		& .pricing-info{
+			color: #fff;
+			background: #bbbc9f;
+		}
+	}
+	
+	&.pricing-item-platinum{
+		& .pricing-info{
+			color: #fff;
+			background: #adac8e;
+		}
+	}
+	
+	& .invoice-amount{
+		font-size: 3.6rem;
+	}
+	
+	& .subscription-cost{
+		font-size: 1.8rem;
+		margin-left: -8px;
+	}
+	
+	& .pricing-description{
+		font-size: 1.3rem;
+	}
+	
+	& .pricing-footer{
+		& ul{
+		    list-style-type: none;
+		    margin: 0;
+    		padding: 0;
+    		& li{
+    			color: #6f6f6f;
+    			border-top: 1px solid #ccc;
+    			font-size: 1.3rem;
+    			padding: 8px;
+    		}
+		}
+	}
+	
+	& .pricing-btn-container{
+		position: relative;
+		height: 36px;
+		& .btn-orange{
+			width: 80%;
+			font-size: 18px;
+			position: absolute;
+			top: -18px;
+			left: 10%;
+		}
+	}
+}
+
+.question-item{
+	margin-bottom: 16px;
+	& *{
+		font-size: 1rem;
+	}
+	& .question{
+		color: $color-slate-darken;
+		font-weight: bold;
+	}
+}
+
+.info-item{
+	margin-bottom: 16px;
+	& *{
+		font-size: 1rem;
+	}
+	& .title{
+		color: $color-slate-darken;
+		font-weight: bold;
+		font-size: 1.5rem;
+		border-bottom: 1px solid #f4f4f4;
+	}
+	& .info-text{
+		padding-top: 12px; 
+	}
+	& .icon-browser{
+		margin: 1% 5%;
+		width: 15%;
+	}
+}

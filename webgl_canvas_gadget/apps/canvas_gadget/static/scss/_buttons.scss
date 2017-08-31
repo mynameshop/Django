@@ -1,0 +1,75 @@
+.btn-orange{
+	background: $color-orange;
+	color: #fff;
+	padding-left: 32px;
+    padding-right: 32px;
+    
+    &:hover {
+        background: $color-orange-lighten;
+        color: #fff;
+    }
+    
+    &:active, &:focus{
+    	color: #fff;
+    }
+}
+
+.btn-darkest{
+	background: $color-slate;
+	color: #fff;
+	padding-left: 32px;
+    padding-right: 32px;
+    
+    &:hover {
+        background: $color-slate-lighten;
+        color: #fff;
+    }
+}
+
+.btn-gray{
+	background: #8c8c8c;
+	color: #fff;
+	padding-left: 32px;
+    padding-right: 32px;
+    
+    &:hover {
+        background: lighten(#8c8c8c, 5%);
+        color: #fff;
+    }
+    
+    &:active, &:focus{
+    	color: #fff;
+    }
+}
+
+.btn-upload{
+	background: $color-orange;
+	color: #fff;
+	padding: 8px 0 8px 32px;
+	text-decoration: none !important;
+	border-radius: 6px;
+	overflow: hidden;
+	white-space: nowrap;
+    
+    &:hover {
+        background: $color-orange-lighten;
+        color: #fff;
+        
+        & .glyphicon{
+	    	background: $color-orange;
+	    }
+    }
+    
+    &:active, &:focus{
+    	color: #fff;
+    }
+    
+    & .glyphicon{
+    	padding: 0 8px 0 8px;
+	    background: $color-orange-darken;;
+	    line-height: 32px;
+	    margin: 0 0 0 16px;
+	    top: 3px;
+	    border-radius: 0 6px 6px 0;
+    }
+}

@@ -1,0 +1,19 @@
+{% import 'canvas_gadget/macro.html' as header %}
+
+<footer id="footer" class="navbar navbar-static-top" style="font-color: red"> 
+	<div class="container brd-bottom-gray">
+		<nav>
+			<ul class="nav navbar-nav">
+				{{ header.menuitem(url('canvas_gadget:homepage'), 'Home') }}
+				{{ header.menuitem(url('canvas_gadget:pricingpage'), 'Pricing') }}
+				{{ header.menuitem(url('feedback:create_view'), 'Contact Us') }}
+			</ul>
+		</nav>
+	</div>
+	<div class="container">
+		<section class="text-center">
+			<br>
+			<p class="text-gray">&copy; 2016 Canvas Gadget LLC, All Rights Reserved<p>
+		</section>
+	</div>
+</footer>

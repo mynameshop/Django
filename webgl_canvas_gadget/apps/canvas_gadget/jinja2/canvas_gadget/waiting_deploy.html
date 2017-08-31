@@ -1,0 +1,35 @@
+{% extends "base/basesite.html" %}
+
+{% block BODY %}
+<div class="container-fluid">
+	<div class="row text-center" style="margin-top: 20%;">
+		<span style="position: relative;">Waiting<span id="text-salt" data-n="3" style="position: absolute">...</span></span>
+	</div>
+</div>
+{% endblock %}
+
+{% block JS_EXTRA%}
+	<script type="text/javascript">
+		var timerId = setInterval(function() {
+		  var s = $('#text-salt');
+		  var n = s.attr('data-n') + 1;
+		  if( n > 3 ) {
+			  n = n % 3;
+		  }
+		  s.attr('data-n', n);
+		  s.text('.'.repeat(n))
+		}, 1000);
+		
+		var timerId1 = setInterval(function() {
+			$.ajax({
+				url: '/',
+				success: function(result) {
+					window.location = '/admin/';
+				},     
+				error: function(result) {
+					console.log(result)
+				}
+			});
+		}, 5000);
+	</script>
+{% endblock %}

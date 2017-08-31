@@ -1,0 +1,206 @@
+{% extends "canvas_gadget/base.html" %}
+{% import 'canvas_gadget/macro.html' as macro %}
+
+{% block TITLE_PAGE %}{{ super() }} - 3D Interactive Sales & Marketing Solutions{% endblock %}
+{% block BODY_CLASS %}homepage{% endblock %}
+
+{% block EXTRA_META %}
+	<meta name="description" content=“Canvas Gadget offers affordable, interactive 3d product marketing solutions for online business and e-commerce. ”>
+	<meta name="keywords" content=“content marketing, digital marketing, engaging content, product models">
+{% endblock %}
+
+{% block BODY %}
+	<div class="container-fluid" style="background: #eee;">
+		<div class="row text-center" style="position: relative;">
+			<img src="{{ SITESETTINGS.homepage_header_image.url }}" alt="interactive marketing example" style="width: 100%;">
+			
+			<div class="header-message-box">
+				<h1 style="margin: 0;" class="text-xl">
+					<b>{{ SITESETTINGS.homepage_header_text_first | safe | upper }}</b>
+				</h1>
+				<div style="padding: 4% 0 0 0;" class="text-lg hidden-xs">
+					<i>
+						{{ SITESETTINGS.homepage_header_text_second | safe }}
+					</i>
+				</div>
+				<div style="padding: 4.5% 0 0 0;">
+					<button type="button" class="btn btn-orange" style="padding: 1% 15%; font-size: 1.1rem" 
+						data-toggle="modal" data-target="#modal-signin"
+						onclick="_gaq.push(['_trackEvent', 'sign_up_orange_button', 'clicked']);">
+							{{ SITESETTINGS.homepage_header_text_button | upper }}
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container-fluid" style="border-top: 6px solid #dadbdd;">
+		<div class="row row-gap">
+			<div class="col-xs-12 col-sm-6" style="margin-bottom: 8px;">
+				<b class="text-xl">{{ SITESETTINGS.homepage_label_how_it_work }}</b>
+				<br>
+				<div class="text-md">
+					{{ SITESETTINGS.homepage_text_how_it_work | safe }}
+				</div>
+			</div>
+			<div class="clearfix visible-xs-block"></div>
+			<div class="col-xs-4 col-sm-2 text-center">
+				<img src="/static/img/submit_project/step-1.png" alt="create marketing content step 1" class="img-shadow" style="width: 100%; margin-bottom: 8px;">
+				<div>
+					<b class="text-lg">Step 1</b>
+					<br>
+					<div class="text-md">
+						{{ SITESETTINGS.homepage_text_step_1 }}
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-4 col-sm-2 text-center">
+				<img src="/static/img/submit_project/step-2.png" alt="create 360 product step 2" class="img-shadow" style="width: 100%; margin-bottom: 8px;">
+				<div>
+					<b class="text-lg">Step 2</b>
+					<br>
+					<div class="text-md">
+						{{ SITESETTINGS.homepage_text_step_2 }}
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-4 col-sm-2 text-center">
+				<img src="/static/img/submit_project/step-3.png" alt="market online step 3" class="img-shadow" style="width: 100%; margin-bottom: 8px;">
+				<div>
+					<b class="text-lg">Step 3</b>
+					<br>
+					<div class="text-md">
+						{{ SITESETTINGS.homepage_text_step_3 }}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	{% with random_samples = get_random_samples(2) %}
+	<div class="container-fluid bg-dark" style="border-top: 6px solid #dadbdd;">
+		<div class="row row-gap homepage-item">
+			<div class="col-sm-6 col-sm-push-6">
+				<div>
+					<h2 class="text-xl"><b>{{ SITESETTINGS.homepage_first_sample_label | safe }}</b></h2>
+					<div class="text-md">
+				 		{{ SITESETTINGS.homepage_first_sample_text | safe }}
+				 	</div>
+			 	</div>
+			</div>
+			
+			<div class="col-sm-6 col-sm-pull-6">
+				<div>
+			 		<a href="{{ url('projects:detail_view', kwargs={'pk': random_samples[1].project_id}) }}" class="link-popup-iframe">
+			 			<img alt="360 product example 1" 
+			 			src="{{ thumbnail(random_samples[1].project.thumbnail, size=(530,300), crop='center', quality=90) }}" 
+			 			class="img-shadow item-image">
+		 			</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container-fluid" style="border-top: 6px solid #dadbdd;">
+		<div class="row row-gap homepage-item">
+			<div class="col-sm-6">
+				<div>
+			 		<h2 class="text-xl"><b>{{ SITESETTINGS.homepage_second_sample_label | safe }}</b></h2>
+					<div class="text-md">
+				 		{{ SITESETTINGS.homepage_second_sample_text | safe }}
+				 	</div>
+				</div>
+			</div>
+			
+			<div class="col-sm-6">
+				<div>
+					<a href="{{ url('projects:detail_view', kwargs={'pk': random_samples[0].project_id}) }}" class="link-popup-iframe">
+			 			<img alt="360 product example 2" 
+			 			src="{{ thumbnail(random_samples[0].project.thumbnail, size=(530,300), crop='center', quality=90) }}" 
+			 			class="img-shadow item-image">
+		 			</a>
+		 		</div>
+			</div>
+		</div>
+	</div>
+	{% endwith %}
+	
+	
+	{% for item in SITESETTINGS.homepagerowitem_set.all() %}
+	<div class="container-fluid bg-dark" style="border-bottom: 2px solid #fff;">
+		<div class="row row-gap homepage-item">
+			{% if loop.index % 2 %}
+				<div class="col-sm-8">
+					<h2 class="text-xl"><b>{{ item.label }}</b></h2>
+					<div class="text-md">{{ item.text | safe }}</div>
+				</div>
+				<div class="col-sm-4">
+					<img src="{{ item.image.url }}" alt="ecommerce marketing on all devices" style="width: 100%;">
+				</div>
+			{% else %}
+				<div class="col-sm-4">
+					<img src="{{ item.image.url }}" alt="ecommerce marketing on all devices" style="width: 100%;">
+				</div>
+				<div class="col-sm-8">
+					<h2 class="text-xl"><b>{{ item.label }}</b></h2>
+					<div class="text-md">{{ item.text | safe }}</div>
+				</div>
+			{% endif %}
+		</div>
+	</div>
+	{% endfor %}
+{% endblock %}
+
+{% block JS_TEMPLATE %}
+<div id="modal-iframe" class="modal fade" role="dialog" style="overflow: hidden;">
+	<div class="modal-dialog modal-lg modal-dialog-cg" style="height: 90%;">
+		<div class="modal-content" style="height: 100%;">
+			<a type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<img src="{{ static('img/close.png') }}">
+			</a>
+			<iframe src="" frameborder="0" class="canvasgadget-iframe" style="width:100%; height: 100%;" onload="this.contentWindow.focus()"></iframe>
+		</div>
+	</div>
+</div>
+<div id="modal-signin" class="modal fade" role="dialog">
+	<div class="modal-dialog modal-dialog-cg">
+		<div class="modal-content text-center">
+			<a type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<img src="{{ static('img/close.png') }}">
+			</a>
+			<img src="{{ static('img/tablet.jpg') }}" alt="image" style="width: 70%; margin: 0 15%;">
+			<h3><b>Subscribe now for updates<br>and exclusive offers.</b></h3>
+			<i>
+				Don't get left out! Learn how our current<br>
+				clients are benefiting from Canvas Gadget's 3D marketing.
+			</i>
+			<hr>
+			
+			<form id="contact-form" method="post" action="{{ url('seesoon:subscribe')}}" style="width: 70%; margin: 0 15%;">
+				{{ csrf_input }}
+				<div class="form-group">
+					<input type="text" class="form-control" name="name" placeholder="Name">
+				</div>
+				<div class="form-group">
+					<input type="email" class="form-control" name="email" placeholder="Email">
+				</div>
+				<div class="form-group">
+					<button type="submit" class="btn btn-orange" style="width: 100%; padding-top: 12px; padding-bottom: 12px;">
+						SIGN ME UP!
+					</button>
+				</div>
+				<p class="" style="font-size: 10px;">
+					<img src="{{ static('img/lock.png') }}" alt="lock" style="margin-bottom: 4px;">
+					We hate SPAM and promise to keep your email address safe.
+				</p>
+			</form>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
+
+{% block JS_EXTRA %}
+	<script type="text/javascript" src="{{ static('js/jquery.jajaxform.js') }}"></script>
+	<script type="text/javascript" src="{{ static('js/homepage.js') }}"></script>
+{% endblock %}

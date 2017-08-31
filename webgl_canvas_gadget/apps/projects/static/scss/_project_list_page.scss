@@ -1,0 +1,13 @@
+.project-list{
+	& .project-item{
+		& .project-item-name{
+			margin-bottom: 2px;
+		}
+		& .project-item-status{
+			margin-bottom: 2px;
+		}
+		& .project-item-img{
+			width: 100%;
+		}
+	}
+}

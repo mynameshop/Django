@@ -1,0 +1,18 @@
+.row{
+	&.row-gap{
+		padding: 16px 20px;
+	}
+}
+
+@media (min-width: 768px) { 
+    .row{
+    	&.vertical-align {
+	        display: flex;
+	        align-items: center;
+        }
+        
+        &.row-gap{
+			padding: 16px -15px;
+		}
+    }
+}

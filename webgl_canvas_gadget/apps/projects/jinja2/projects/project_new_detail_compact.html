@@ -1,0 +1,11 @@
+{% extends "projects/project_new_detail.html" %}
+
+{% block MODEL_SWITCHER %}
+	{{ super() }}
+	<a href="#" class="animation-fliper animation-prev noselect">
+		<img src="/static/img/arrow-left.png">
+	</a>
+	<a href="#" class="animation-fliper animation-next noselect">
+		<img src="/static/img/arrow-right.png">
+	</a>
+{% endblock %}

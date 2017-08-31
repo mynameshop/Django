@@ -1,0 +1,47 @@
+blockquote {
+    margin: 0;
+    border-left: 25px solid #dcdcdc;
+    padding: 5px 5px 5px 10px;
+    position: relative;
+    background: #fff;
+    -webkit-border-radius: 0 3px 3px 0;
+    -moz-border-radius: 0 3px 3px 0;
+    border-radius: 0 3px 3px 0;
+    margin-bottom: 10px;
+}
+
+blockquote:before {
+    content: "\201C";
+    position: absolute;
+    top: 0;
+    left: -24px;
+    color: #fff;
+    font-size: 58px;
+    font-family: georgia,serif;
+    line-height: 1;
+}
+
+q:before {
+    content: "\201C";
+    font-family: georgia,serif;
+}
+q:after {
+    content: "\201D";
+    font-family: georgia,serif;
+}
+
+q.big:before, q.big:after{
+    font-size:58px;
+    position: relative;
+    top: 24px;
+    line-height: 20px;
+    color:  #ccc;
+}
+
+q.big:before{
+	padding-right: 16px;
+}
+
+q.big:after{
+	padding-left: 16px;
+}

@@ -1,0 +1,45 @@
+{% extends "canvas_gadget/submitproject.html" %}
+
+{% block TITLE_PAGE %}{{ super() }} | Submission Successful{% endblock %}
+{% block BODY_CLASS %}submission_success{% endblock %}
+
+{% block BODY %}
+<div class="container">
+	<div class="row">
+		<div class="col-sm-12 text-center">
+			<img src="{{ static('img/success.png') }}" alt="img" style="margin-top: 32px; margin-bottom: 16px;">
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-sm-6 col-sm-offset-3 text-center">
+			<p style="font-size: 30px;">Submission Successful</p>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-sm-6 col-sm-offset-3 text-center">
+			<p>
+				Thank you for submitting your project. If this is your first project a 
+				follow up email has already been sent to your email to confirm account details. 
+				Thank you for thinking of us for your 3D marketing needs.
+				<br>
+			</p>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-sm-6 col-sm-offset-3 text-center">
+			{% if request.user.is_authenticated() %}
+				<a href="{{ url('projects:list_view') }}" class="btn btn-orange">Track Your Project</a>
+			{% else %}
+				<a href="{{ url('accounts:signup') }}?next={{ url('projects:list_view') }}{% if e_key %}&e={{ e_key }}{% endif %}" class="btn btn-orange">Track Your Project</a>
+			{% endif %}
+			<br><br>
+		</div>
+	</div>
+	
+</div>
+{% endblock %}
+
+{% block JS_EXTRA %}{% endblock %}

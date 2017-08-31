@@ -1,0 +1,109 @@
+.inline-control{
+	width: 100%; 
+	position: relative;
+	
+	& .control-container{
+		position: absolute; 
+		left: 0; 
+		right: 100px;
+	}
+	
+	& .label-container{
+		float: right;
+		line-height: 15px;
+		display: inline-block;
+	}
+}
+	
+.panel-body{
+	& div[role="tab-content"]{
+		padding-left: 4px;
+		padding-right: 4px;
+	}
+}
+
+.scrollable-horizontal-select{
+	width: 100%; 
+	overflow: auto;
+	&>ul{
+		display: inline-flex; 
+		list-style: none; 
+		padding: 0;
+		
+		&>li{
+			float: left;
+			position: relative;
+			padding: 4px;
+		}
+	}
+}
+
+.select{
+	&>.select-item{
+		&>.select-item-link{
+			display: block;
+			border: 2px solid rgba(255, 255,255, 0.4);
+			border-radius: 6px;
+			overflow: hidden;
+			position: relative;
+			&:hover{
+				border: 2px solid rgba(255, 255,255, 0.6);
+			}
+			&>.item-label{
+				position: absolute;
+				bottom: 0;
+				right: 0;
+				left: 0;
+				color: #fff;
+			    padding: 2px;
+			    border: 0 solid transparent;
+				border-radius: 0 0 4px 4px;
+    			background: rgba(255, 255,255, 0.3);
+			}
+		}
+		&.active{
+			&>.select-item-link{
+				border-color: #fff !important;
+			}
+		}
+	}
+}
+
+[jmodel]{
+	& .select-item{
+		display: block;
+		border-radius: 4px;
+		
+		&.active{
+			background: rgba(200, 200, 200, 0.3);
+		}
+	}
+}
+
+.model-switcher{
+	padding: 0; 
+	margin-bottom: 0; 
+	position: absolute; 
+	right: 16px; 
+	top: 16px;
+	
+	& ul{
+		list-style-type: none;
+		&>li{
+			margin-bottom: 2px;
+			
+			& .model-thumb{
+				width: 54px;
+				height: 54px;
+			}
+		}
+	}
+}
+
+.rotate90 {
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+}

@@ -1,0 +1,38 @@
+.projects_page{
+	& #loading-overlay{
+		position: absolute; 
+		top: 0; 
+		right: 0; 
+		bottom: 0; 
+		left: 0; 
+		background: #fff; 
+		overflow: hidden;
+		
+		& img{
+			height: 100%; 
+			position: absolute; 
+			top: 50%; 
+			left: 50%; 
+			-webkit-transform: translate(-50%, -50%); 
+			transform: translate(-50%, -50%);
+		}
+		
+		& .text-loading{
+			position: absolute;
+			top: 50%;
+		    left: 50%;
+		    -webkit-transform: translate(-50%, -50%);
+		    transform: translate(-50%, -50%);
+			background: rgba(100, 100, 100, 0.5);
+			color: #fff;
+			border-radius: 6px;
+			border: 1px solid #fff;
+			padding: 8px 64px;
+			white-space: nowrap;
+			
+			& .dots{
+				position: absolute;
+			}
+		}
+	}
+}

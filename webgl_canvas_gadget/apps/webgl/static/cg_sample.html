@@ -1,0 +1,105 @@
+<!doctype html>
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Test</title>
+		<script src="https://canvasgadget.com/static/js/canvasgadget.js"></script>
+		
+		<style>
+			#model_navigator > li {
+				float: left;
+			}
+			#wait_overlay {
+				position: absolute;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				z-index: 1000;
+				background: rgba(1,1,1, 0.6);
+			}
+			.hidden {
+				visibility: hidden;;
+			}
+		</style>
+	</head>
+
+<body class="parent" style="width: 100%; height: 100%; margin: 0; padding:0;">
+	<div style="height: 400px;">
+		<canvas id="renderCanvas" style="width: 400px; height: 400px; float: left;"></canvas>
+		<ul id="model_navigator" style="float: left;"></ul>
+	</div>
+
+	<div>
+		<ul id="animation_navigator"></ul>
+	</div>
+
+	<div id="wait_overlay"></div>
+	
+	<script>
+		var model_navigator = document.getElementById('model_navigator');
+		var animation_navigator = document.getElementById('animation_navigator');
+		var wait_overlay = document.getElementById('wait_overlay');
+		var no_image_src = "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcS5IdMWV5lqQ-47Eu0XgjR4clszkPOeoo8cZpc3LnwPAnj7m6mEllY0ow";
+		
+		var project_loaded = function(project){
+			model_navigator.innerHTML = "";
+			//clean navigators
+			
+			var models = project.model3d_set;
+			//get list of 3d models for current project
+			
+			for(var index_model = 0; index_model < models.length; index_model++) {
+				//iterate over 3d models
+				
+				var thumbnail_3dmodel = models[index_model].thumbnail.small.url;
+				//get thumbnail of 3d model
+				
+				//render model navigator ==========================
+				var li_model = document.createElement('li');
+				var a_model = document.createElement('a');
+				a_model.innerHTML = '<img src="' + (thumbnail_3dmodel || no_image_src)  + '">';
+				a_model.onclick = function(i){
+					return function(){
+						project.set_model3d_active_index(i);
+						animation_navigator.innerHTML = "";
+
+						var animations = models[i].get_animations();
+						//get list of animations for model
+						
+						for(var index_animation = 0; index_animation < animations.length; index_animation++) {
+							//iterate over animations of model
+							
+							var thumbnail_animation = animations[index_animation].thumbnail.small.url;
+							//get thumbnail of animation
+							
+							//render model navigator ==========================
+							var li_animation = document.createElement('li');
+							li_animation.style.display = 'inline';
+							var a_animation = document.createElement('a');
+							a_animation.innerHTML = '<img src="' + (thumbnail_animation || no_image_src)  + '">';
+							a_animation.onclick = function(j, k){
+								return function(){
+									models[j].animate(k);
+								}
+							}(i, index_animation);
+							li_animation.appendChild(a_animation);
+							animation_navigator.appendChild(li_animation);
+							//==================================================
+						}
+					}
+				}(index_model);
+				li_model.appendChild(a_model);
+				model_navigator.appendChild(li_model);
+
+				wait_overlay.className = 'hidden';
+			}
+		}
+		
+		var cg = new CG.CanvasGadget(document.getElementById('renderCanvas'));
+		cg.load_project(70, project_loaded);
+	</script>
+</body>
+
+</html>

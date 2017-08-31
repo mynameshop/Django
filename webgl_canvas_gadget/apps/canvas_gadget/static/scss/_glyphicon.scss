@@ -1,0 +1,22 @@
+@mixin glyphicon-image-mixin($url) {
+	&:before{
+		content: '';
+		background: url($url);
+		background-size: cover;
+		display: inline-block;
+		width: 14px;
+		height: 14px;
+	}
+}
+
+.glyphicon{
+	&-pintarest{
+		@include glyphicon-image-mixin("/static/img/social/pintarest.png");
+	}
+	&-twitter{
+		@include glyphicon-image-mixin("/static/img/social/twi.png");
+	}
+	&-facebook{
+		@include glyphicon-image-mixin("/static/img/social/fb.png");
+	}
+}

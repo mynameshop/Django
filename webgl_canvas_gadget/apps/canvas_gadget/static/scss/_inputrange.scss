@@ -1,0 +1,187 @@
+$track-color: #424242;
+$track-background: url('/static/img/hue.png');
+$track-lightness-background: url('/static/img/lightness.png');
+
+$thumb-color: transparent;
+$thumb-radius: 8px;
+$thumb-height: 24px;
+$thumb-width: 10px;
+$thumb-shadow-size: 1px;
+$thumb-shadow-blur: 1px;
+$thumb-shadow-color: #111;
+$thumb-border-width: 3px;
+$thumb-border-color: #fff;
+
+$track-width: 100%;
+$track-height: 16px;
+$track-shadow-size: 0;
+$track-shadow-blur: 0;
+$track-shadow-color: transparent;
+$track-border-width: 0;
+$track-border-color: transparent;
+
+$track-radius: 0;
+$contrast: 0%;
+
+@mixin shadow($shadow-size, $shadow-blur, $shadow-color) {
+	box-shadow: $shadow-size $shadow-size $shadow-blur $shadow-color, 0 0 $shadow-size lighten($shadow-color, 5%);
+}
+
+@mixin track($track-width, $track-height) {
+	width: $track-width;
+	height: $track-height;
+	cursor: pointer;
+	transition: all .2s ease;
+}
+
+@mixin thumb($thumb-width, $thumb-height, $thumb-radius, $thumb-color, $thumb-border-width, $thumb-border-color,
+		$thumb-shadow-size, $thumb-shadow-blur, $thumb-shadow-color) {
+	@include shadow($thumb-shadow-size, $thumb-shadow-blur, $thumb-shadow-color);
+	border: $thumb-border-width solid $thumb-border-color;
+	height: $thumb-height;
+	width: $thumb-width;
+	border-radius: $thumb-radius;
+	background: $thumb-color;
+	cursor: pointer;
+}
+
+@mixin test($track-color, $track-background, $thumb-color, $thumb-radius, $thumb-height, 
+$thumb-width, $thumb-shadow-size, $thumb-shadow-blur, $thumb-shadow-color, $thumb-border-width,
+$thumb-border-color, $track-width, $track-height, $track-shadow-size, $track-shadow-blur, 
+$track-shadow-color, $track-border-width, $track-border-color, $track-radius, $contrast){
+	-webkit-appearance: none;
+	margin: $thumb-height / 2 0;
+	width: $track-width;
+
+	&:focus {
+		outline: none;
+	}
+
+	&::-webkit-slider-runnable-track {
+		@include track($track-width, $track-height);
+		@include shadow($track-shadow-size, $track-shadow-blur, $track-shadow-color);
+		background: $track-background;
+		-webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+		border: $track-border-width solid $track-border-color;
+		border-radius: $track-radius;
+	}
+
+	&::-webkit-slider-thumb {
+		@include thumb($thumb-width, $thumb-height, $thumb-radius, $thumb-color, $thumb-border-width, $thumb-border-color,
+			$thumb-shadow-size, $thumb-shadow-blur, $thumb-shadow-color);
+		-webkit-appearance: none;
+		margin-top: ((-$track-border-width * 2 + $track-height) / 2) - ($thumb-height / 2);
+	}
+
+	&:focus::-webkit-slider-runnable-track {
+		background-color: lighten($track-color, $contrast);
+	}
+
+	&::-moz-range-track {
+		@include track($track-width, $track-height);
+		@include shadow($track-shadow-size, $track-shadow-blur, $track-shadow-color);
+		background: $track-background;
+		-webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+		border: $track-border-width solid $track-border-color;
+		border-radius: $track-radius;
+	}
+
+	&::-moz-range-thumb {
+		@include thumb($thumb-width, $thumb-height, $thumb-radius, $thumb-color, $thumb-border-width, $thumb-border-color,
+			$thumb-shadow-size, $thumb-shadow-blur, $thumb-shadow-color);
+	}
+
+	&::-ms-track {
+		@include track($track-width, $track-height);
+		background: transparent;
+		border-color: transparent;
+		border-width: $thumb-width 0;
+		color: transparent;
+	}
+
+	&::-ms-fill-lower {
+		@include shadow($track-shadow-size, $track-shadow-blur, $track-shadow-color);
+		background-color: darken($track-color, $contrast);
+		border: $track-border-width solid $track-border-color;
+		border-radius: $track-radius * 2;
+	}
+
+	&::-ms-fill-upper {
+		@include shadow($track-shadow-size, $track-shadow-blur, $track-shadow-color);
+		background: $track-background;
+		-webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+		border: $track-border-width solid $track-border-color;
+		border-radius: $track-radius * 2;
+	}
+
+	&::-ms-thumb {
+		@include thumb($thumb-width, $thumb-height, $thumb-radius, $thumb-color, $thumb-border-width, $thumb-border-color,
+			$thumb-shadow-size, $thumb-shadow-blur, $thumb-shadow-color);
+	}
+
+	&:focus::-ms-fill-lower {
+		background: $track-background;
+		-webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+	}
+
+	&:focus::-ms-fill-upper {
+		background: lighten($track-color, $contrast);
+	}
+}
+
+.range-hue[type=range],{
+	@include test($track-color, $track-background, $thumb-color, $thumb-radius, $thumb-height, 
+		$thumb-width, $thumb-shadow-size, $thumb-shadow-blur, $thumb-shadow-color, $thumb-border-width,
+		$thumb-border-color, $track-width, $track-height, $track-shadow-size, $track-shadow-blur, 
+		$track-shadow-color, $track-border-width, $track-border-color, $track-radius, $contrast);
+}
+
+.range-lightness[type=range] {
+	@include test($track-color, $track-lightness-background, $thumb-color, $thumb-radius, $thumb-height, 
+		$thumb-width, $thumb-shadow-size, $thumb-shadow-blur, $thumb-shadow-color, $thumb-border-width,
+		$thumb-border-color, $track-width, $track-height, $track-shadow-size, $track-shadow-blur, 
+		$track-shadow-color, $track-border-width, $track-border-color, $track-radius, $contrast);
+}
+
+$thumb-thin-color: #eee;
+$track-thin-color: $thumb-thin-color;
+$track-thin-background: $thumb-thin-color;
+$thumb-thin-height: 10px;
+$thumb-thin-width: $thumb-thin-height;
+$thumb-thin-radius: $thumb-thin-height/2;
+$thumb-thin-shadow-size: 0;
+$thumb-thin-shadow-blur: 0;
+$thumb-thin-shadow-color: transparent;
+$thumb-thin-border-width: 1px;
+$thumb-thin-border-color: #ccc;
+$track-thin-width: $track-width;
+$track-thin-height: 3px;
+$track-thin-shadow-size: $track-shadow-size;
+$track-thin-shadow-blur: $track-shadow-blur;
+$track-thin-shadow-color: $track-shadow-color;
+$track-thin-border-width: $track-border-width;
+$track-thin-border-color: $track-border-color;
+$track-thin-radius: 0;
+
+.range-thin[type=range]{
+	@include test($track-thin-color, $track-thin-background, $thumb-thin-color, $thumb-thin-radius, $thumb-thin-height, 
+		$thumb-thin-width, $thumb-thin-shadow-size, $thumb-thin-shadow-blur, $thumb-thin-shadow-color, $thumb-thin-border-width,
+		$thumb-thin-border-color, $track-thin-width, $track-thin-height, $track-thin-shadow-size, $track-thin-shadow-blur, 
+		$track-thin-shadow-color, $track-thin-border-width, $track-thin-border-color, $track-thin-radius, $contrast);
+}
+
+input[type=range]::-moz-focus-outer {
+    border: 0;
+}

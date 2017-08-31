@@ -1,0 +1,135 @@
+{% extends "canvas_gadget/base.html" %}
+{% import 'canvas_gadget/macro.html' as macro %}
+
+{% block TITLE_PAGE %}Plans and Pricing – {{ super() }}{% endblock %}
+{% block BODY_CLASS %}homepage{% endblock %}
+
+{% block EXTRA_META %}
+	<meta name="description" content="Plans and pricing for Canvas Gadget. Interactive 3d product marketing solutions for online business and e-commerce">
+	<meta name="keywords" content=“content marketing, digital marketing, engaging content, product models">
+{% endblock %}
+
+{% macro PRICING_ITEM(opt) %}
+	<div class="col-xs-12 col-sm-4 text-center" style="padding-left: 4px; padding-right: 4px;">			
+		<div class="pricing-item pricing-item-{{ opt['title'].lower() }}">
+			<div class="pricing-title">{{ opt['title'] }}</div>
+			<div class="pricing-info">
+				<div class="pricing-cost">
+					<p>
+						<span class="invoice-amount">${{ opt['subscription_cost'] }}</span>
+						<span class="subscription-cost"> &nbsp;/mo</span>
+					</p>
+					<p style="margin-top: -16px;">(paid annually)</p>
+				</div>
+				<hr style="margin: 0 7% 16px;">
+				<div class="pricing-description">
+					"{{ opt['description']|safe }}"
+				</div>
+				<hr style="margin: 32px 7% 32px;">
+			</div>
+			<div class="pricing-btn-container">
+				<a href="{{ url('canvas_gadget:submitproject') }}?s={{ opt['slug'] }}" class="btn btn-orange">
+					Get Started
+				</a>
+			</div>
+			<div class="pricing-footer">
+				<ul>
+				{% for item in opt['composition'] %}
+					<li>{{ item or '<br>'|safe}}</li>
+				{% endfor %}
+				</ul>
+			</div>
+		</div>
+	</div>
+{% endmacro %}
+
+{% macro QUESTION_ITEM(col_class, question, answer) %}
+	<div class="{{ col_class }} question-item" fittext="1.6">
+		<div class="question">{{ question }}</div>
+		<div class="answer">{{ answer| safe }}</div>
+	</div>
+{% endmacro %}
+
+{% macro INFO_ITEM(col_class, title, text) %}
+	<div class="{{ col_class }} info-item" fittext="1.6">
+		<div class="title">{{ title }}</div>
+		<div class="info-text">{{ text| safe }}</div>
+	</div>
+{% endmacro %}
+
+{% block BODY %}
+	<div class="container-fluid bg-gray">
+		<div class="row">
+			<div class="col-xs-12 text-center">
+				<h1 class="bg-dark" style="padding: 6px 16px; margin-top: 8px; margin-bottom: 8px; display: inline-block;">
+			 		Pricing for Canvas Gadget 3d Marketing
+				</h1>
+			</div>
+		</div>
+	</div>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-12 text-center">
+				<br>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container-fluid">
+		<div class="row" style="padding-bottom: 8px; padding-top: 24px;">
+			<div class="col-pricing">
+				{% for p in PRICING_TEMPLATES %}
+					{{ PRICING_ITEM(PRICING_TEMPLATES[p]) }}
+				{% endfor %}
+				
+				<div class="col-xs-12 col-sm-8" style="padding: 32px 4px 0 4px; font-size: 2rem;">
+					Why do we charge a monthly fee?
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container-fluid">
+		<div class="row" style="padding-bottom: 32px; padding-top: 15px;">
+			{{ INFO_ITEM('col-sm-5 col-sm-offset-1', 'We Offer the Entire Package', 'From content to hosting, we have you covered. Unlike images or video, 3D Interactive content relies on complex code to display in real time. We host, manage, and update the code needed to ensure that using Canvas Gadget content is easy to run on your site.') }}
+			{{ INFO_ITEM('col-sm-5', 'We Keep It Simple', 'Canvas Gadget runs on the globablly-accepted WebGL technology and does not require any type of plug-in or installation. Canvas Gadget’s 3d marketing content will work on all devices. We also offer a fallback for older platforms so that everyone gets an amazing experience.') }}
+			{{ INFO_ITEM('col-sm-5 col-sm-offset-1', 'Ongoing Support', 'Canvas Gadget projects are continually tested for performance. Whether on mobile or desktop, we continue to keep up with new technologies to make sure your content offers your customers the very best experience. Reach out to us with any questions, anytime.') }}
+			{{ INFO_ITEM('col-sm-5', 'Works in all Common Browsers', '<img src="/static/img/browsers/firefox.png" alt="online marketing on firefox" class="icon-browser"><img src="/static/img/browsers/chrome.png" alt="3d marketing on chrome" class="icon-browser"><img src="/static/img/browsers/safari.png" alt="interactive marketing on safari" class="icon-browser"><img src="/static/img/browsers/ie.png" alt="360 marketing on browsers" class="icon-browser">') }}
+		</div>
+	</div>
+	
+	<div class="container-fluid" style="background: #f4f4f4">
+		<div class="row" style="padding-bottom: 32px; padding-top: 48px;">
+			{{ QUESTION_ITEM('col-sm-5 col-sm-offset-1', 'What’s our refund policy?', 'You can set a project to “private” at any time. Doing so will prevent any additional charges. But you are responsible for any charges that have occurred before you make the project private. Refunds cannot be issued for partial months. In order to treat everyone equally, no exceptions will be made.') }}
+			{{ QUESTION_ITEM('col-sm-5', 'How safe is my data?', 'We work hard to make sure your data is as secure as possible. All passwords are encrypted and protected on our server. All credit card transactions are processed using secure encryption through a secure socket layer connection. Our servers are secure and are constantly updated to prevent unauthorized access. Email addresses are never sold or traded.') }}
+			{{ QUESTION_ITEM('col-sm-5 col-sm-offset-1', 'Are you required to sign a long term contract?', 'You can make a project private at any time. Once a project has been made private, no additional charges will be added.') }}
+			{{ QUESTION_ITEM('col-sm-5', 'How can I redeem a promo code?', 'You can redeem a promo code during the purchase process. Promo codes are made available from time to time to our email subscribers.') }}
+			{{ QUESTION_ITEM('col-sm-5 col-sm-offset-1', 'How does the project submission process work?', 'Once you have submitted your project proposal for review, it will be looked at by our team. Once our team confirms the project you will then be asked to start the project. At that time payment will also be accepted and the project will be started. You will then receive a final email once the project is ready.') }}
+			{{ QUESTION_ITEM('col-sm-5', 'What are my payment options?', 'Once a project is accepted, we accept all payments via MasterCard, American Express, Discover and Diners Club through our online payment system.') }}
+		</div>
+	</div>
+{% endblock %}
+
+{% block JS_TEMPLATE %}
+	{% if SAMPLE %}
+	<div id="modal-iframe" class="modal fade" role="dialog" style="overflow: hidden;">
+		<div class="modal-dialog modal-lg modal-dialog-cg" style="height: 90%;">
+			<div class="modal-content" style="height: 100%;">
+				<a type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<img src="{{ static('img/close.png') }}">
+				</a>
+				<iframe src="{{ url('projects:detail_view', kwargs={'pk': SAMPLE.project_id}) }}" frameborder="0" class="canvasgadget-iframe" style="width:100%; height: 100%;" onload="this.contentWindow.focus()"></iframe>
+			</div>
+		</div>
+	</div>
+	{% endif %}
+{% endblock %}
+
+{% block JS_LIBS %}
+	{{ super() }}
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('#modal-iframe').modal();
+		})
+	</script>
+{% endblock %}

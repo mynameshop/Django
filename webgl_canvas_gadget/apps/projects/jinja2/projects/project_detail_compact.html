@@ -1,0 +1,44 @@
+{% extends "projects/project_detail.html" %}
+
+{% block ANIMATION_SWITCHER %}
+	$('#model-switcher').hide();
+	$('#select-animation-switcher').jView({
+		'delegate': function(i, data){
+			var html = "";
+			if(i === 0){
+				html += "<option value='-1' >-1</option>";
+			}
+			html += "<option value='"+i+"' data-model='" + JSON.stringify(data) + "'>" + i + "</option>";
+			return html;
+		},
+		'refreshed': function(self){
+			self.$element.trigger('optionChanged');
+		},
+	});
+	
+	$(document).on('click touchstart', '.animation-fliper', function(e){
+		e.preventDefault();
+		if(CG.App.Instance.animationManager.isAnimating){
+			return;
+		}
+		var op = $('#select-animation-switcher option:selected');
+		var index = op.val() || -1;
+		if($(this).hasClass('animation-next')){
+			index++;
+			if(index <= $('#select-animation-switcher option').last().val()){
+				$('#select-animation-switcher').val(index);
+				CG.App.Instance.animationManager.animate(index);
+			}
+		}else if($(this).hasClass('animation-prev')){
+			if(index>-1){
+				CG.App.Instance.animationManager.animate(index--);
+				$('#select-animation-switcher').val(index || 0);
+			}
+		}
+	})
+{% endblock %}
+
+{% block COMPACT %}
+	<a href="#" class="animation-fliper animation-prev noselect"></a>
+	<a href="#" class="animation-fliper animation-next noselect"></a>
+{% endblock %}

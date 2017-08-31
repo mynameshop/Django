@@ -1,0 +1,15 @@
+{
+    "version": "0.1.0",
+    "command": "gulp",
+    "options": {
+        "cwd": "${workspaceRoot}/"
+    },
+    "isShellCommand": true,
+    "tasks": [
+        {
+            "taskName": "default",
+            // Make this the default build command.
+            "isBuildCommand": true
+        }
+    ]
+}

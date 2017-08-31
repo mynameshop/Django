@@ -1,0 +1,49 @@
+.panel-tabbed-collapse{
+	border-color: $color-slate-darken;
+	background: none;
+	
+	& a, input, button{
+		&:focus {
+			outline:none;
+		}
+		&::-moz-focus-inner{
+			border:0;
+		}
+	}
+	
+	&>.panel-heading{
+		background: $color-slate-darken;
+		color: #fff;
+		padding: 4px 8px 0; 
+		border-bottom: none;
+		
+		& .nav-tabs{
+			border-bottom: none;
+			
+			& li{
+				& a{
+					color: #fff;
+					&:focus{
+						background: transparent; 
+					}
+					&:hover{
+						color: #555;
+						background: #eee;
+					}
+				}
+				&.active{
+					& a{
+						color: #555;
+						background: #fff;
+					}
+				}
+			}
+		}
+	}
+	&>.panel-body{
+		color: #fff;
+		background: rgba(0, 0, 0, 0.6);
+		overflow: auto;
+		max-height: 300px;
+	}
+}

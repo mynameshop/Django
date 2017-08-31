@@ -1,0 +1,441 @@
+{% extends "projects/project_detail.html" %}
+{% import "projects/macro_editor.html" as macro_editor %}
+
+{% block WRAPPER %}
+	{{ super() }}
+	
+	<div id="editor" style="position: absolute; left: 16px; top: 16px; width: 390px;">
+		<div id="tabbed-collapse" class="panel panel-tabbed-collapse" role="tablist" aria-multiselectable="true">
+			<div class="panel-heading">
+			
+				<ul class="nav nav-tabs">
+					<li>
+						<a href="#models" role="tab">
+							<span class="glyphicon glyphicon-upload"></span>
+						</a>
+					</li>
+					<li>
+						<a href="#environment" role="tab">
+							<span class="glyphicon glyphicon glyphicon-globe"></span>
+						</a>
+					</li>
+					<li>
+						<a href="#materials" role="tab">
+							<span class="glyphicon glyphicon-adjust"></span>
+						</a>
+					</li>
+					<li>
+						<a href="#anchor" role="tab">
+							<span class="glyphicon glyphicon glyphicon-edit"></span>
+						</a>
+					</li>
+					<li>
+						<a href="#lenseflares" role="tab">
+							<span class="glyphicon glyphicon-asterisk"></span>
+						</a>
+					</li>
+					<li>
+						<button id="save-button" class="btn btn-orange" style="padding: 6px 12px;" data-loading-text="<span class='glyphicon glyphicon-floppy-disk'></span>">
+							<span class="glyphicon glyphicon-floppy-disk"></span>
+						</button>
+						
+						<button id="save-screenshot" class="btn btn-orange" style="padding: 6px 12px;" onclick="CG.Editor.Instance.takeScreenshot(3840, 2160);">
+							<span class="glyphicon glyphicon-facetime-video"></span>
+						</button>
+						
+						<button id="save-25d" class="btn btn-orange" style="padding: 6px 12px;" onclick="CG.Editor.Instance.take25D($('#select-model-switcher').val(), 1960, 1080, 45, 1);">
+							<span class="glyphicon glyphicon-play"></span>
+						</button>
+					</li>
+				</ul>
+				
+			</div>
+			<div class="panel-body collapse">
+				<div id="models" class="tab-content hidden">
+					<form id="model3d-upload-form" action="{{ url('projects:model3d_create_view') }}" method="post" enctype="multipart/form-data" class="hidden">
+						{{ csrf_input }}
+						<input type="file" class="uploader" name="files[]" multiple onchange="if(this.files.length === 0){ return;} $(this).closest('form').submit();">
+						<input type="hidden" name="project_id" value="{{ object.id }}">
+					</form>
+					<form id="model3d-update-form" action="{{ url('projects:model3d_edit_view', kwargs={'pk': 0}) }}" method="post" enctype="multipart/form-data" class="hidden">
+			            {{ csrf_input }}
+			            <input class="select-thumb" type="file" name="thumbnail_tmp" accept="image/*" onchange="if(this.files.length === 0){ return;} $(this).closest('form').submit();">
+			            <input type="hidden" name="id" value="0">
+			            <input type="hidden" name="is_deleted" value="">
+			        </form>
+			        <form id="animation-update-form" action="{{ url('projects:animation_edit_view', kwargs={'pk': 0}) }}" method="post" enctype="multipart/form-data" class="hidden">
+			            {{ csrf_input }}
+			            <input class="select-thumb" type="file" name="thumbnail_tmp" accept="image/*" onchange="if(this.files.length === 0){ return;} $(this).closest('form').submit();">
+			            <input type="hidden" name="id" value="0">
+			        </form>
+			        <div id="add-new-version-container" jmodel="#model-3dmodels" janimation="height" class="clearfix">
+						<button type="button" class="btn btn-default col-xs-12" onclick="$('#model3d-upload-form input.uploader').click()">
+							Add New Version +
+						</button>
+					</div>
+					<ul id="model3d-list-view" style="padding: 10px 0 0 0; list-style: none;" jmodel="#model-3dmodels"></ul>
+				</div>
+				
+				<div id="environment" class="tab-content hidden">{{ macro_editor.environmentTab(object, SKYBOXES, GROUNDPLANE) }}</div>
+				<div id="materials" class="tab-content hidden">{{ macro_editor.materialsTab(MATERIALS) }}</div>
+				<div id="anchor" class="tab-content hidden">{{ macro_editor.anchorTab(ANCHOR_STYLE, LINE_STYLE, CALLOUT_STYLE) }}</div>
+				<div id="lenseflares" class="tab-content hidden">{{ macro_editor.lenseflaresTab(LENS_FRAMES) }}</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block EXTRA_CSS %}
+	<style type="text/css">
+		html, body{
+			overflow: hidden;
+		}
+		::-webkit-scrollbar {
+		  width: 8px;
+		  height: 8px;
+		}
+		::-webkit-scrollbar-button {
+		  width: 0px;
+		  height: 0px;
+		}
+		::-webkit-scrollbar-thumb {
+		  background: rgba(200,200,200,.5);
+		  border: 0px none #ffffff;
+		  border-radius: 50px;
+		}
+		::-webkit-scrollbar-thumb:hover {
+		  background: rgba(255,255,255,.5);
+		}
+		::-webkit-scrollbar-thumb:active {
+		  background: #fff;
+		}
+		::-webkit-scrollbar-track {
+		  background: #444;
+		  border: 0px none #ffffff;
+		  border-radius: 50px;
+		}
+		::-webkit-scrollbar-track:hover {
+		  background: #444;
+		}
+		::-webkit-scrollbar-track:active {
+		  background: #444;
+		}
+		::-webkit-scrollbar-corner {
+		  background: transparent;
+		}
+	</style>
+{% endblock %}
+
+{% block BABYLON_JS %}
+	{{ super() }}
+	<script type="text/javascript" src="{{ static('js/appEditor.js') }}"></script>
+{% endblock %}
+
+{% block INIT_PROJECT %}
+	<script type="text/javascript" src="{{ static('js/cg_app.js') }}"></script>
+	<script type="text/javascript">
+		var initProject = function(){
+			var data = $.parseJSON($('#model-project').val())[0]['fields'];
+			data['materials'] = $.parseJSON($('#model-materials').val());
+			
+			var app_cg = new CanvasGadget(data, $select_model_switcher, true);
+			$select_model_switcher.change();
+			
+			// синхронизация данных модели и отображения
+			// реальная реализация для режима редактирования
+			sync_model = function(){
+				var data = $.parseJSON(CG.Editor.Instance.save() || '{}')
+				if(!data.id){
+					return;
+				}
+				
+				var $option = $('#select-model-switcher option[value="' + data.id + '"]');
+				var model_data = $option.data('model');
+				if(!model_data){
+					return;
+				}
+				if(data.camera_pos){
+					model_data['camera_pos'] = data.camera_pos;
+				}
+				if(data.materials){
+					model_data['materials'] = data.materials;
+				}
+				if(data.flares){
+					model_data['flares'] = data.flares;
+				}
+				if(data.callouts){
+					model_data['callouts'] = data.callouts;
+				}
+				$option.data(JSON.stringify(model_data));
+			}
+		}
+	</script>
+{% endblock %}
+
+{% block JS_EXTRA %}
+	{{ super() }}
+	
+	<script type="text/javascript" src="{{ static('js/panel_tabbed_collapse.js') }}"></script>
+	<script type="text/javascript" src="{{ static('js/jquery.jvisible.js') }}"></script>
+	<script type="text/javascript" src="{{ static('js/jquery.uploader.js') }}"></script>
+	<script type="text/javascript" src="{{ static('js/project_editor.js') }}"></script>
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$('#tabbed-collapse').panelTabbedCollapse();
+		$('#model3d-list-view').jView({
+			'delegate': function(i, data){
+				var animations = [];
+				try{
+					animations = data.animation.animations || [];
+				}catch(err){
+					animations = [];
+				}
+				var html = '<li data-pk="'+data.pk+'" style="padding: 2px 0;">' +
+			    	'<div class="btn-group" role="group" style="width: 100%;">' +
+		    		'<button type="button" class="btn btn-default btn-delete col-xs-10">Delete</button>' +
+			    	'<button type="button" class="btn btn-default btn-change-thumb col-xs-2" style="padding: 2px;">' +
+			    		'<img src="'+data.thumbnail.small.url+'" alt="img" style="width: 28px; height: 28px;">' +
+			    	'</button>' +
+		    	'</div>';
+		    	if(animations && animations.length > 0){
+		    		html += '<ul class="animation-list" style="padding-left: 16px;">';
+		    		for(var i=0; i<animations.length; i++){
+		    			html += '<li class="input-group" data-pk="'+animations[i].id+'" style="padding: 2px 0;">'+
+							'<span class="form-control">'+animations[i].name+'</span>'+
+							'<span class="input-group-btn">'+
+								'<button class="btn btn-default btn-animation-thumbnail" type="button" style="padding: 2px 7px;">'+
+									'<img src="'+animations[i].thumbnail.small.url+'" alt="img" style="width: 28px; height: 28px;">'+
+								'</button>'+
+							'</span>'+
+						'</li>';
+		    		}
+			    	html += '</ul>';
+		    	}
+		    	html += '</li>';
+		    	return html;
+			},
+			'refreshed': function(self){
+				var $form = $('#model3d-update-form');
+				var $id = $form.find('input[name="id"]');
+				
+				self.$element.find('li[data-pk] .btn-delete').click(function(e){
+		    		e.preventDefault();
+					$form.find('input[name="is_deleted"]').val(true);
+					
+					var new_id = $(this).closest('li[data-pk]').attr('data-pk');
+					var new_action = $form.attr('action').replace("/" + $id.val() + "/", "/" + new_id + "/");
+					$id.val(new_id);
+					$form.attr('action', new_action);
+					
+					$form.submit();
+				})
+				self.$element.find('li[data-pk] .btn-change-thumb').click(function(e){
+		    		e.preventDefault();
+					$form.find('input[name="is_deleted"]').val(false);
+					
+					var new_id = $(this).closest('li[data-pk]').attr('data-pk');
+					var new_action = $form.attr('action').replace("/" + $id.val() + "/", "/" + new_id + "/");
+					$id.val(new_id);
+					$form.attr('action', new_action);
+					
+					$form.find('input[name="thumbnail_tmp"]').click();
+				})
+				self.$element.find('li[data-pk] .animation-list .btn-animation-thumbnail').click(function(e){
+		    		e.preventDefault();
+		    		var btn = $(this);
+		    		var animation_id = btn.closest('li[data-pk]').attr('data-pk');
+		    		var $a_form = $('#animation-update-form');
+		    		var $a_id = $a_form.find('input[name="id"]');
+		    		var new_action = $a_form.attr('action').replace("/" + $a_id.val() + "/", "/" + animation_id + "/");
+		    		$form.attr('action', new_action);
+		    		$form.find('input[name="thumbnail_tmp"]').click();
+				})
+			},
+		});
+		
+		$('#model3d-upload-form, #model3d-update-form, #animation-update-form').uploader({
+			onSuccess: function(data){
+				$('#model-3dmodels').val(JSON.stringify(data)).change();
+			}
+		});
+		
+		var projectEditor = $('#editor').projectEditor().data('plugin_projectEditor');
+		$('#save-button').click(function(e){
+			e.preventDefault();
+			var $btn = $(this).button('loading');
+			var data = projectEditor.get_json();
+			sync_model();
+			
+			var models3d = [];
+			$select_model_switcher.find('option').each(function(i, option){
+				models3d.push( $(option).data('model') );
+			})
+			data['models'] = JSON.stringify(models3d);
+			$.ajax({
+	            url: "{{ url('projects:edit_view', kwargs={'pk':object.id}) }}",
+	            type: 'POST',
+	            dataType: 'json',
+	            data: data,
+	            success: function( data ) {
+	            	$btn.button('reset');
+	            },
+	        });
+		});
+		$('.jvisible').jVisible();
+		$('#add-new-version-container').jVisible({
+			checkState: function($model){
+				var data = $model.val() ? $.parseJSON($model.val()) : [];
+				try{
+					if(data[0].animation.animations.length > 0){
+						return false
+					}
+				}catch(err){
+					return true
+				}
+				return true;
+			}
+		});
+		
+		function real_width(obj){
+	        var clone = obj.clone();
+	        clone.css("visibility","hidden");
+	        $('body').append(clone);
+	        var width = clone.outerWidth(true);
+	        clone.remove();
+	        return width;
+	    }
+		$('.inline-control').each(function(i, item){
+			var $control = $(item).find('.control-container').first();
+    		var $label = $(item).find('.label-container').first();
+    		$control.css('right', real_width($label) + 16 + 'px');
+		});
+		
+		$('#jselect-anchor-style').jSelect({
+			'delegate': function($option){
+				var model = $option.data('model');
+				var html = '<li style="display: inline-block;">';
+				html += '<a href="#" data-value="' + model.id + '" class="select-item achore-style-draggable" style="padding: 4px;">';
+				html += '<img src="' + model.image + '" style="width: 35px;">';
+				html += '</a>';
+				html += '</li>';
+				return html;
+			},
+		});
+		
+		$('#jselect-callout-style').jSelect({
+			'delegate': function($option){
+				var model = $option.data('model');
+				var html = '<li style="display: inline-block;">';
+				html += '<a href="#" data-value="' + model.id + '" class="select-item" style="padding: 8px 4px;">';
+				html += '<img src="' + model.image + '" style="width: 100%; display: block;">';
+				html += '</a>';
+				html += '</li>';
+				return html;
+			},
+		});
+		
+		$('#jselect-line-style, #jselect-callout-style').jSelect({
+			'delegate': function($option){
+				var model = $option.data('model');
+				var html = '<li>';
+				html += '<a href="#" data-value="' + model.id + '" class="select-item" style="padding: 8px 4px;">';
+				html += '<img src="' + model.thumbnail + '" style="width: 100%; display: block;">';
+				html += '</a>';
+				html += '</li>';
+				return html;
+			},
+		});
+		
+		$('#jselect-skybox, #jselect-groundplane').jSelect({
+			'delegate': function($option){
+				var model = $option.data('model');
+				var html = '<li style="display: inline-block;">';
+				html += '<a href="#" data-value="' + model.id + '" class="select-item" style="padding: 4px;">';
+				html += '<img src="' + model.thumbnail + '" style="width: 75px; height:75px; display: block;">';
+				html += '</a>';
+				html += '</li>';
+				return html;
+			},
+		});
+		
+		$('.draggable').draggable({
+			appendTo: 'body',
+			scroll: false,
+			cursor: 'none',
+			cursorAt: { top: 9, left: 9 },
+			helper: function( event ) {
+				var id_tab_content = $(event.target).closest('.tab-content').attr('id');
+				var glyphicon = $('ul > li > a[href="#' + id_tab_content + '"] > span').attr('class') || 'glyphicon glyphicon-image';
+				return '<span style="color: #fff;" class="' + glyphicon + '"></span>';
+			},
+			stop: function(e) {
+				var id_tab_content = $(e.target).closest('.tab-content').attr('id');
+				var name = $(e.target).find('.item-label').first().text().trim();
+				var model = $.parseJSON( $(e.target).attr('data-model').replace(/'/g, "\"") );
+				var x = e.clientX;
+				var y = e.clientY;
+				
+				var eventType = '';
+				switch(id_tab_content){
+					case 'materials':
+						eventType = 'materialDropped';
+						break;
+					case 'lenseflares':
+						eventType = 'lenseflareDropped';
+						break;
+					default:
+						break;
+				}
+				if(eventType){
+					$('body').trigger({
+						type: eventType,
+						tab: id_tab_content,
+						name: name,
+						model: model,
+						x: x,
+						y: y,
+					});
+				}
+			},
+		});
+		
+		$('.achore-style-draggable').draggable({
+			appendTo: 'body',
+			scroll: false,
+			cursor: 'none',
+			cursorAt: { top: 9, left: 9 },
+			helper: function( event ) {
+				return $(event.target).clone();
+			},
+			stop: function(e) {
+				var x = e.clientX;
+				var y = e.clientY;
+				var anchor = $('#select-anchor-style option:selected').data('model');
+				var line = $('#select-line-style option:selected').data('model');
+				var callout = $('#select-callout-style option:selected').data('model');
+				var model_id = $select_model_switcher.val();
+				var $label = $('#callout-label');
+				var $text = $('#callout-text');
+				var data = {
+					'anchor_style': anchor,
+					'line_style': line,
+					'callout_style': callout,
+					'label': $label.val(),
+					'text': $text.val(),
+					'model3d': model_id,
+					'id': Math.random().toString(36).substr(2, 5),
+					'x': x,
+					'y': y,
+				};
+				CG.Editor.Instance.cardEditor.addCallout(data);
+			},
+		});
+	})
+	</script>
+	
+	<script type="text/javascript">
+		flareSelected = function(data){
+			console.log('Flare Selected\t', data)
+		}
+	</script>
+{% endblock %}
