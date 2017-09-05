@@ -1,0 +1,39 @@
+{
+  "name": "haversine-position",
+  "version": "1.0.3",
+  "description": "Convert GPS coordinates into local coordinate system relative to the origin with output of [x, y] in meter, bearing(degree) and distance(m)",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "prepublish": "npm run tsc",
+    "test": "mocha",
+    "test:cov": "nyc mocha",
+    "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
+    "tsc": "tsc"
+  },
+  "keywords": [
+    "haversine",
+    "gps",
+    "distance",
+    "geolocation",
+    "coordinates"
+  ],
+  "author": "Tim",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sweetim/haversine-position"
+  },
+  "dependencies": {
+    "wgs84": "0.0.0"
+  },
+  "devDependencies": {
+    "@types/mocha": "^2.2.40",
+    "@types/node": "^7.0.12",
+    "codecov": "^2.1.0",
+    "mocha": "^3.2.0",
+    "nyc": "^10.2.0",
+    "ts-node": "^3.0.2",
+    "typescript": "^2.2.2"
+  }
+}

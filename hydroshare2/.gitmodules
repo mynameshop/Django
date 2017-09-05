@@ -1,0 +1,29 @@
+[submodule "hs_core"]
+    path = hs_core
+    url = https://github.com/hydroshare/hs_core.git
+    branch = master
+[submodule "dublincore"]
+    path = dublincore
+    url = https://github.com/hydroshare/django-dublincore.git
+    branch = apponly
+[submodule "theme"]
+    path = theme
+    url = https://github.com/hydroshare/theme.git
+    branch = master
+[submodule "django_irods"]
+    path = django_irods 
+    url = https://github.com/JeffHeard/django_irods.git
+    branch = master
+
+[submodule "hs_party"]
+	path = hs_party
+	url = https://github.com/hydroshare/hs_party
+[submodule "hs_metrics"]
+	path = hs_metrics
+	url = https://github.com/hydroshare/hs_metrics.git
+[submodule "resource_aggregation"]
+	path = resource_aggregation
+	url = https://github.com/hydroshare/resource_aggregation.git
+[submodule "ref_ts"]
+	path = ref_ts
+	url = https://github.com/hydroshare/ref_ts.git

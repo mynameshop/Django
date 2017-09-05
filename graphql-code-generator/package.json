@@ -1,0 +1,112 @@
+{
+  "name": "graphql-code-generator",
+  "version": "0.5.1",
+  "description": "GraphQL types and code generator based on schema",
+  "main": "dist/index.js",
+  "scripts": {
+    "build-tests": "tsc -p tsconfig.test.json",
+    "watch": "tsc --watch",
+    "clean": "rimraf ./dist",
+    "lint": "tslint src/**/*.ts",
+    "prebuild": "npm run clean && npm run lint",
+    "build": "tsc",
+    "prestart": "npm run build",
+    "start": "cd dist && node gql-gen.js",
+    "debug": "cd dist && node --inspect --debug-brk gql-gen.js",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
+    "create-git-tag": "git tag $(cat package.json | $(npm bin)/json version)",
+    "dev": "cd dist/cli && nodemon --ext ts,js,d.ts,template,graphql,json,handlebars gql-gen.js --dev --file ../../dev-test/githunt/schema.json --template ts --out ../../dev-test/githunt/typings.d.ts  ../../dev-test/githunt/**/*.graphql",
+    "prepare": "npm run build && npm run test && npm run create-git-tag && git push && git push --tags",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dotansimha/graphql-codegen.git"
+  },
+  "bin": {
+    "gql-gen": "dist/cli/gql-gen.js"
+  },
+  "keywords": [
+    "gql",
+    "generator",
+    "code",
+    "types",
+    "interfaces",
+    "graphql",
+    "codegen",
+    "apollo",
+    "node",
+    "typescript",
+    "ts",
+    "flow",
+    "types",
+    "d.ts",
+    "typings"
+  ],
+  "author": "Dotan Simha <dotansimha@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dotansimha/graphql-codegen/issues"
+  },
+  "homepage": "https://github.com/dotansimha/graphql-codegen#readme",
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "jest": {
+    "verbose": true,
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "**/src/**/*.ts"
+    ],
+    "coverageDirectory": "./test/coverage",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      ".*?handlebars-helpers.*?"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "transform": {
+      "^.+\\.(ts|tsx)$": "<rootDir>/test/jest.typescript.js"
+    },
+    "testRegex": "/__tests__/.*\\.(ts|tsx|js)$",
+    "testEnvironment": "node"
+  },
+  "dependencies": {
+    "camel-case": "^3.0.0",
+    "commander": "^2.9.0",
+    "common-tags": "^1.4.0",
+    "glob": "^7.1.1",
+    "graphql": "^0.8.2",
+    "handlebars": "^4.0.6",
+    "mkdirp": "^0.5.1",
+    "pascal-case": "^2.0.0",
+    "request": "^2.79.0"
+  },
+  "devDependencies": {
+    "conventional-changelog": "^1.1.0",
+    "cz-conventional-changelog": "^1.2.0",
+    "jest": "^18.1.0",
+    "@types/commander": "^2.3.31",
+    "@types/common-tags": "^1.2.5",
+    "@types/glob": "^5.0.30",
+    "@types/graphql": "^0.8.2",
+    "@types/handlebars": "^4.0.31",
+    "@types/jest": "^16.0.3",
+    "@types/mkdirp": "^0.3.29",
+    "@types/node": "^6.0.56",
+    "@types/request": "^0.0.39",
+    "nodemon": "^1.11.0",
+    "rimraf": "^2.5.4",
+    "tslint": "^4.0.2",
+    "typescript": "^2.1.4"
+  },
+  "typings": "dist/index.d.ts",
+  "typescript": {
+    "definition": "dist/index.d.ts"
+  }
+}
