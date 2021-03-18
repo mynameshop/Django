@@ -19,7 +19,7 @@ gunicorn
 pygments
 #pinax-stripe
 easy_thumbnails
-Pillow==3.1.1
+Pillow==8.1.1
 
 google-api-python-client
 
