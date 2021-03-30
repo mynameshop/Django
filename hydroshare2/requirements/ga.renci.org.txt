@@ -6,7 +6,7 @@ Jinja2==2.6
 Mezzanine==1.4.9
 Orange==2.6
 Pillow==2.0.0
-Pygments==1.5
+Pygments==2.7.4
 Shapely==1.2.17
 South==0.7.6
 Sphinx==1.1.3
