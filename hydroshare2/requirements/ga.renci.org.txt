@@ -23,7 +23,7 @@ django-appconf==0.6
 django-celery==3.0.17
 django-celery-with-redis==3.0
 django-compressor==1.2
-django-debug-toolbar==0.9.4
+django-debug-toolbar==1.11.1
 django-extensions==1.1.1
 django-picklefield==0.3.0
 django-tastypie==0.9.14
